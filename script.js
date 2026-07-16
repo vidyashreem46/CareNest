@@ -4,35 +4,36 @@
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Screen Elements
+    // Target Screens
     const splashScreen = document.getElementById("splash-screen");
-    const authScreen = document.getElementById("auth-screen");
+    const loginScreen = document.getElementById("login-screen");
     
-    // Tab Elements
+    // Auth Mode Toggles
     const tabLogin = document.getElementById("tab-login");
     const tabSignup = document.getElementById("tab-signup");
     
-    // Form Elements
+    // Form Instances
     const loginForm = document.getElementById("login-form");
     const signupForm = document.getElementById("signup-form");
     
     // Password togglers
     const togglePasswordButtons = document.querySelectorAll(".toggle-password-btn");
 
-    // Toast element for gorgeous notifications
+    // Toast Pop-up Notification
     const toast = document.getElementById("toast");
 
-    // 1. Smooth Transition from Splash Screen to Auth Panel
-    // Custom ECG pulse runs for exactly 3.8 seconds
+    // 1. Smooth Automatic Navigation Transition (Splash Screen -> Login Portal)
+    // Runs the custom SVG Heartbeat ECG animation for exactly 3.8 seconds
     setTimeout(() => {
         splashScreen.classList.remove("active");
         
+        // Let splash completely fade out prior to displaying the card
         setTimeout(() => {
-            authScreen.classList.add("active");
-        }, 700); // Wait for splash screen CSS opacity fade
+            loginScreen.classList.add("active");
+        }, 700); 
     }, 3800);
 
-    // 2. Tab switcher between (Login <-> Register)
+    // 2. Tab Navigation Layout (Switches Forms Smoothly)
     tabLogin.addEventListener("click", () => {
         tabLogin.classList.add("active");
         tabSignup.classList.remove("active");
@@ -55,10 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
         loginForm.classList.remove("active-form");
     });
 
-    // 3. Multi-field Password Visibility toggler
+    // 3. Dual-Field Password Mask Toggle (Show/Hide Text)
     togglePasswordButtons.forEach(button => {
         button.addEventListener("click", (e) => {
-            // Find password input adjacent to current toggle button
             const passwordInput = e.target.previousElementSibling;
             const isPassword = passwordInput.type === "password";
             
@@ -68,11 +68,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 4. Custom Elegant Toast Notifications
+    // 4. Custom Application Toast Popup Notification
     function showToast(message) {
         toast.textContent = message;
         toast.classList.remove("hidden");
-        // Force Reflow
+        // Trigger Layout Reflow
         toast.offsetHeight;
         toast.classList.add("show");
 
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 4000);
     }
 
-    // 5. Mock Register authentication event
+    // 5. Simulated Form Submission Authentication
     signupForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const submitBtn = signupForm.querySelector(".submit-btn");
@@ -97,18 +97,17 @@ document.addEventListener("DOMContentLoaded", () => {
         submitBtn.disabled = true;
 
         setTimeout(() => {
-            showToast(`Registration Successful! Welcome to the Nest, ${nameInput}.`);
+            showToast(`Registration Successful! Welcome to CareNest, ${nameInput}.`);
             btnText.classList.remove("hidden");
             btnLoader.classList.add("hidden");
             submitBtn.disabled = false;
             signupForm.reset();
             
-            // Auto switch back to Login screen
+            // Re-route user cleanly back to Login Tab
             tabLogin.click();
         }, 2000);
     });
 
-    // 6. Mock Login authentication event
     loginForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const submitBtn = loginForm.querySelector(".submit-btn");
@@ -128,9 +127,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 2200);
     });
 
-    // 7. Simulated Forgot Password action
+    // 6. Forgot Password Click trigger
     document.getElementById("forgot-password-trigger").addEventListener("click", (e) => {
         e.preventDefault();
-        showToast("A recovery link has been dispatched to your registered workspace email.");
+        showToast("A reset code has been dispatched to your recovery email.");
     });
 });
