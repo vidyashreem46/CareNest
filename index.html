@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CareNest - Your Healthcare Workspace</title>
+    <title>CareNest</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,18 +21,17 @@
         <section id="splash-screen" class="screen active">
             <div class="splash-content">
                 <div class="logo-box">
-                    <img src="logo.png" alt="CareNest Logo" id="logo">
+                    <!-- Pointing to your images folder -->
+                    <img src="images/logo.png" alt="CareNest Logo" id="logo">
                 </div>
                 <h1 class="brand-name">CareNest</h1>
                 <h2 class="kannada" lang="kn">ನಿಮ್ಮ ಆರೋಗ್ಯ, ನಮ್ಮ ಕಾಳಜಿ.</h2>
                 <p class="brand-line">Technology that cares as much as you do.</p>
                 
-                <!-- NEW UNIQUE ECG HEARTBEAT LOADER -->
+                <!-- Brand New Unique Heartbeat SVG Loader -->
                 <div class="heartbeat-loader-container">
                     <svg class="heartbeat-svg" viewBox="0 0 300 100">
-                        <!-- Background faint pulse line -->
                         <path class="heartbeat-bg-track" d="M0,50 L80,50 L95,20 L110,80 L125,50 L140,50 L150,35 L160,65 L170,50 L300,50" />
-                        <!-- Animated glowing pulse line -->
                         <path class="heartbeat-pulse" d="M0,50 L80,50 L95,20 L110,80 L125,50 L140,50 L150,35 L160,65 L170,50 L300,50" />
                     </svg>
                     <p class="loading-text">Connecting to CareNest Network...</p>
@@ -41,35 +40,35 @@
         </section>
 
         <!-- ===================================================
-                        AUTH SCREEN (LOGIN / SIGN UP)
+                        AUTH SCREEN (LOGIN / REGISTER)
         ==================================================== -->
-        <section id="auth-screen" class="screen">
+        <section id="login-screen" class="screen">
             <div class="top-logo">
-                <img src="logo.png" alt="CareNest Logo">
+                <img src="images/logo.png" alt="CareNest Logo">
             </div>
             
             <div class="auth-card">
-                <!-- Toggle Header -->
+                <!-- Toggle Navigation Tabs -->
                 <div class="auth-toggle-headers">
                     <button type="button" id="tab-login" class="tab-btn active">Sign In</button>
                     <button type="button" id="tab-signup" class="tab-btn">Register</button>
                 </div>
 
                 <div class="form-container">
-                    <!-- 1. LOGIN FORM -->
+                    <!-- 1. SIGN IN FORM -->
                     <form id="login-form" class="auth-form active-form">
                         <h3>Welcome Back</h3>
                         <p class="form-sub">Enter your credentials to access your portal.</p>
                         
                         <div class="input-group">
-                            <label for="login-username">Username or Email</label>
-                            <input type="text" id="login-username" autocomplete="username" placeholder="doctor@carenest.org" required>
+                            <label for="login-username">Username</label>
+                            <input type="text" id="login-username" autocomplete="username" placeholder="Enter Username" required>
                         </div>
                         
                         <div class="input-group">
                             <label for="login-password">Password</label>
                             <div class="password-wrapper">
-                                <input type="password" id="login-password" autocomplete="current-password" placeholder="••••••••" required>
+                                <input type="password" id="login-password" autocomplete="current-password" placeholder="Enter Password" required>
                                 <button type="button" class="toggle-password-btn" aria-label="Toggle password visibility">Show</button>
                             </div>
                         </div>
@@ -84,7 +83,7 @@
                         </button>
                     </form>
 
-                    <!-- 2. SIGN UP FORM (For First-Time Users) -->
+                    <!-- 2. REGISTER FORM (For First-Time Users) -->
                     <form id="signup-form" class="auth-form hidden-form">
                         <h3>Create Nest Account</h3>
                         <p class="form-sub">Register as a clinical or administrative staff member.</p>
@@ -108,7 +107,7 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="signup-role">Your Specialization / Role</label>
+                            <label for="signup-role">Your Medical Role</label>
                             <select id="signup-role" required>
                                 <option value="" disabled selected>Select your role...</option>
                                 <option value="doctor">Medical Specialist / Doctor</option>
@@ -127,10 +126,10 @@
         </section>
     </main>
 
-    <!-- Custom Notification/Toast Element -->
+    <!-- Custom Notification/Toast Pop-up -->
     <div id="toast" class="toast hidden"></div>
 
-    <!-- Background Decoration Circles -->
+    <!-- Background Decorative Blobs -->
     <div class="circle one" aria-hidden="true"></div>
     <div class="circle two" aria-hidden="true"></div>
     <div class="circle three" aria-hidden="true"></div>
