@@ -5,43 +5,59 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <title>CareNest</title>
+    <title>CareNest | Healthcare Reimagined</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="style.css">
 
 </head>
 
 <body>
 
-    <!-- ==========================
-         Splash Screen
-    =========================== -->
+<!-- ===========================================================
+                        SPLASH SCREEN
+============================================================ -->
 
-    <section id="splash-screen">
+<section id="splash">
 
-        <div class="splash-content">
+    <div class="splash-container">
 
-            <div class="logo">
+        <img src="images/logo.png"
+             alt="CareNest Logo"
+             class="main-logo">
 
-                🌿
+        <h1>
 
-            </div>
+            CareNest
 
-            <h1>CareNest</h1>
+        </h1>
 
-            <h3>ನಿಮ್ಮ ಆರೋಗ್ಯ, ನಮ್ಮ ಕಾಳಜಿ.</h3>
+        <h2>
 
-            <p class="brand-text">
+            ನಿಮ್ಮ ಆರೋಗ್ಯ, ನಮ್ಮ ಕಾಳಜಿ.
 
-                Technology that cares as much as you do.
+        </h2>
 
-            </p>
+        <p class="quote">
+
+            Technology that cares as much as you do.
+
+        </p>
+
+        <div class="progress-area">
 
             <div class="progress-bar">
 
@@ -49,74 +65,159 @@
 
             </div>
 
-            <p class="loading-text">
+        </div>
 
-                Preparing your healthcare workspace...
+        <p id="loading-text">
 
-            </p>
+            Connecting Care...
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ===========================================================
+                    LANDING PAGE
+============================================================ -->
+
+<section id="landing-page">
+
+    <nav>
+
+        <img src="images/logo.png"
+             class="nav-logo"
+             alt="CareNest">
+
+        <h3>
+
+            CareNest
+
+        </h3>
+
+    </nav>
+
+    <div class="hero">
+
+        <img src="images/logo.png"
+             class="hero-logo"
+             alt="CareNest">
+
+        <h1>
+
+            Welcome to CareNest
+
+        </h1>
+
+        <h2>
+
+            ನಿಮ್ಮ ಆರೋಗ್ಯ, ನಮ್ಮ ಕಾಳಜಿ.
+
+        </h2>
+
+        <p>
+
+            Healthcare Reimagined for Every Family.
+
+        </p>
+
+        <button id="start-btn">
+
+            Get Started
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ===========================================================
+                    LOGIN PAGE
+============================================================ -->
+
+<section id="login-page">
+
+    <div class="login-wrapper">
+
+        <div class="login-logo">
+
+            <img src="images/logo.png"
+                 alt="CareNest">
 
         </div>
 
-    </section>
+        <h1>
 
-    <!-- ==========================
-         Login Screen
-    =========================== -->
+            Welcome Back
 
-    <section id="login-screen">
+        </h1>
 
-        <div class="login-container">
+        <p>
 
-            <!-- Left Side -->
+            Sign in to continue your healthcare journey.
 
-            <div class="login-left">
+        </p>
 
-                <h1>Welcome Back 👋</h1>
+        <form>
 
-                <p>
+            <div class="input-box">
 
-                    Sign in to continue caring for patients.
+                <label>
 
-                </p>
+                    Username
 
-            </div>
+                </label>
 
-            <!-- Right Side -->
-
-            <div class="login-right">
-
-                <form>
-
-                    <label>Username</label>
-
-                    <input
-                        type="text"
-                        placeholder="Enter your username">
-
-                    <label>Password</label>
-
-                    <input
-                        type="password"
-                        placeholder="Enter your password">
-
-                    <button type="submit">
-
-                        Sign In
-
-                    </button>
-
-                </form>
+                <input
+                       type="text"
+                       placeholder="Enter Username">
 
             </div>
 
-        </div>
+            <div class="input-box">
 
-    </section>
+                <label>
 
-    <!-- JavaScript -->
+                    Password
 
-    <script src="script.js"></script>
+                </label>
+
+                <input
+                       type="password"
+                       placeholder="Enter Password">
+
+            </div>
+
+            <button
+                    type="submit">
+
+                    Sign In
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+
+<!-- Floating Background -->
+
+<div class="blur one"></div>
+
+<div class="blur two"></div>
+
+<div class="blur three"></div>
+
+<script src="script.js"></script>
 
 </body>
 
 </html>
+
