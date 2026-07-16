@@ -1,223 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>CareNest | Healthcare Reimagined</title>
-
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-          rel="stylesheet">
-
-    <link rel="stylesheet"
-          href="style.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareNest - Your Healthcare Workspace</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<!-- ===========================================================
-                        SPLASH SCREEN
-============================================================ -->
-
-<section id="splash">
-
-    <div class="splash-container">
-
-        <img src="images/logo.png"
-             alt="CareNest Logo"
-             class="main-logo">
-
-        <h1>
-
-            CareNest
-
-        </h1>
-
-        <h2>
-
-            ನಿಮ್ಮ ಆರೋಗ್ಯ, ನಮ್ಮ ಕಾಳಜಿ.
-
-        </h2>
-
-        <p class="quote">
-
-            Technology that cares as much as you do.
-
-        </p>
-
-        <div class="progress-area">
-
-            <div class="progress-bar">
-
-                <div class="progress"></div>
-
+    <main class="app-container">
+        <!-- ===================================================
+                            SPLASH SCREEN
+        ==================================================== -->
+        <section id="splash-screen" class="screen active">
+            <div class="splash-content">
+                <div class="logo-box">
+                    <img src="logo.png" alt="CareNest Logo" id="logo">
+                </div>
+                <h1 class="brand-name">CareNest</h1>
+                <h2 class="kannada" lang="kn">ನಿಮ್ಮ ಆರೋಗ್ಯ, ನಮ್ಮ ಕಾಳಜಿ.</h2>
+                <p class="brand-line">Technology that cares as much as you do.</p>
+                
+                <!-- NEW UNIQUE ECG HEARTBEAT LOADER -->
+                <div class="heartbeat-loader-container">
+                    <svg class="heartbeat-svg" viewBox="0 0 300 100">
+                        <!-- Background faint pulse line -->
+                        <path class="heartbeat-bg-track" d="M0,50 L80,50 L95,20 L110,80 L125,50 L140,50 L150,35 L160,65 L170,50 L300,50" />
+                        <!-- Animated glowing pulse line -->
+                        <path class="heartbeat-pulse" d="M0,50 L80,50 L95,20 L110,80 L125,50 L140,50 L150,35 L160,65 L170,50 L300,50" />
+                    </svg>
+                    <p class="loading-text">Connecting to CareNest Network...</p>
+                </div>
             </div>
+        </section>
 
-        </div>
-
-        <p id="loading-text">
-
-            Connecting Care...
-
-        </p>
-
-    </div>
-
-</section>
-
-
-
-<!-- ===========================================================
-                    LANDING PAGE
-============================================================ -->
-
-<section id="landing-page">
-
-    <nav>
-
-        <img src="images/logo.png"
-             class="nav-logo"
-             alt="CareNest">
-
-        <h3>
-
-            CareNest
-
-        </h3>
-
-    </nav>
-
-    <div class="hero">
-
-        <img src="images/logo.png"
-             class="hero-logo"
-             alt="CareNest">
-
-        <h1>
-
-            Welcome to CareNest
-
-        </h1>
-
-        <h2>
-
-            ನಿಮ್ಮ ಆರೋಗ್ಯ, ನಮ್ಮ ಕಾಳಜಿ.
-
-        </h2>
-
-        <p>
-
-            Healthcare Reimagined for Every Family.
-
-        </p>
-
-        <button id="start-btn">
-
-            Get Started
-
-        </button>
-
-    </div>
-
-</section>
-
-
-
-<!-- ===========================================================
-                    LOGIN PAGE
-============================================================ -->
-
-<section id="login-page">
-
-    <div class="login-wrapper">
-
-        <div class="login-logo">
-
-            <img src="images/logo.png"
-                 alt="CareNest">
-
-        </div>
-
-        <h1>
-
-            Welcome Back
-
-        </h1>
-
-        <p>
-
-            Sign in to continue your healthcare journey.
-
-        </p>
-
-        <form>
-
-            <div class="input-box">
-
-                <label>
-
-                    Username
-
-                </label>
-
-                <input
-                       type="text"
-                       placeholder="Enter Username">
-
+        <!-- ===================================================
+                        AUTH SCREEN (LOGIN / SIGN UP)
+        ==================================================== -->
+        <section id="auth-screen" class="screen">
+            <div class="top-logo">
+                <img src="logo.png" alt="CareNest Logo">
             </div>
+            
+            <div class="auth-card">
+                <!-- Toggle Header -->
+                <div class="auth-toggle-headers">
+                    <button type="button" id="tab-login" class="tab-btn active">Sign In</button>
+                    <button type="button" id="tab-signup" class="tab-btn">Register</button>
+                </div>
 
-            <div class="input-box">
+                <div class="form-container">
+                    <!-- 1. LOGIN FORM -->
+                    <form id="login-form" class="auth-form active-form">
+                        <h3>Welcome Back</h3>
+                        <p class="form-sub">Enter your credentials to access your portal.</p>
+                        
+                        <div class="input-group">
+                            <label for="login-username">Username or Email</label>
+                            <input type="text" id="login-username" autocomplete="username" placeholder="doctor@carenest.org" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="login-password">Password</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="login-password" autocomplete="current-password" placeholder="••••••••" required>
+                                <button type="button" class="toggle-password-btn" aria-label="Toggle password visibility">Show</button>
+                            </div>
+                        </div>
 
-                <label>
+                        <div class="form-actions">
+                            <a href="#" class="forgot-link" id="forgot-password-trigger">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <span class="btn-text">Sign In</span>
+                            <span class="btn-loader hidden"></span>
+                        </button>
+                    </form>
 
-                    Password
+                    <!-- 2. SIGN UP FORM (For First-Time Users) -->
+                    <form id="signup-form" class="auth-form hidden-form">
+                        <h3>Create Nest Account</h3>
+                        <p class="form-sub">Register as a clinical or administrative staff member.</p>
+                        
+                        <div class="input-group">
+                            <label for="signup-name">Full Name</label>
+                            <input type="text" id="signup-name" placeholder="Dr. Sarah Alva" required>
+                        </div>
 
-                </label>
+                        <div class="input-group">
+                            <label for="signup-email">Official Email</label>
+                            <input type="email" id="signup-email" autocomplete="email" placeholder="sarah.alva@hospital.com" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="signup-password">Create Password</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="signup-password" autocomplete="new-password" placeholder="At least 8 characters" required>
+                                <button type="button" class="toggle-password-btn" aria-label="Toggle password visibility">Show</button>
+                            </div>
+                        </div>
 
-                <input
-                       type="password"
-                       placeholder="Enter Password">
-
+                        <div class="input-group">
+                            <label for="signup-role">Your Specialization / Role</label>
+                            <select id="signup-role" required>
+                                <option value="" disabled selected>Select your role...</option>
+                                <option value="doctor">Medical Specialist / Doctor</option>
+                                <option value="nurse">Nursing Staff</option>
+                                <option value="admin">Desk Administration</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <span class="btn-text">Register Account</span>
+                            <span class="btn-loader hidden"></span>
+                        </button>
+                    </form>
+                </div>
             </div>
+        </section>
+    </main>
 
-            <button
-                    type="submit">
+    <!-- Custom Notification/Toast Element -->
+    <div id="toast" class="toast hidden"></div>
 
-                    Sign In
+    <!-- Background Decoration Circles -->
+    <div class="circle one" aria-hidden="true"></div>
+    <div class="circle two" aria-hidden="true"></div>
+    <div class="circle three" aria-hidden="true"></div>
 
-            </button>
-
-        </form>
-
-    </div>
-
-</section>
-
-
-
-<!-- Floating Background -->
-
-<div class="blur one"></div>
-
-<div class="blur two"></div>
-
-<div class="blur three"></div>
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
-
 </html>
 
