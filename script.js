@@ -1,113 +1,136 @@
-/* ==========================================
-            CareNest v1.0
-========================================== */
+// ==========================================
+// CareNest Smart System Engine v1.2
+// Multi-Screen and Action Authentication Handlers
+// ==========================================
 
-const splash = document.getElementById("splash");
-const landingPage = document.getElementById("landing-page");
-const loginPage = document.getElementById("login-page");
+document.addEventListener("DOMContentLoaded", () => {
+    // Screen Elements
+    const splashScreen = document.getElementById("splash-screen");
+    const authScreen = document.getElementById("auth-screen");
+    
+    // Tab Elements
+    const tabLogin = document.getElementById("tab-login");
+    const tabSignup = document.getElementById("tab-signup");
+    
+    // Form Elements
+    const loginForm = document.getElementById("login-form");
+    const signupForm = document.getElementById("signup-form");
+    
+    // Password togglers
+    const togglePasswordButtons = document.querySelectorAll(".toggle-password-btn");
 
-const loadingText = document.getElementById("loading-text");
-const startButton = document.getElementById("start-btn");
+    // Toast element for gorgeous notifications
+    const toast = document.getElementById("toast");
 
-/* ==========================================
-        Loading Messages
-========================================== */
+    // 1. Smooth Transition from Splash Screen to Auth Panel
+    // Custom ECG pulse runs for exactly 3.8 seconds
+    setTimeout(() => {
+        splashScreen.classList.remove("active");
+        
+        setTimeout(() => {
+            authScreen.classList.add("active");
+        }, 700); // Wait for splash screen CSS opacity fade
+    }, 3800);
 
-const messages = [
+    // 2. Tab switcher between (Login <-> Register)
+    tabLogin.addEventListener("click", () => {
+        tabLogin.classList.add("active");
+        tabSignup.classList.remove("active");
+        
+        loginForm.classList.add("active-form");
+        loginForm.classList.remove("hidden-form");
+        
+        signupForm.classList.add("hidden-form");
+        signupForm.classList.remove("active-form");
+    });
 
-    "Connecting Care...",
+    tabSignup.addEventListener("click", () => {
+        tabSignup.classList.add("active");
+        tabLogin.classList.remove("active");
+        
+        signupForm.classList.add("active-form");
+        signupForm.classList.remove("hidden-form");
+        
+        loginForm.classList.add("hidden-form");
+        loginForm.classList.remove("active-form");
+    });
 
-    "Preparing Patient Space...",
+    // 3. Multi-field Password Visibility toggler
+    togglePasswordButtons.forEach(button => {
+        button.addEventListener("click", (e) => {
+            // Find password input adjacent to current toggle button
+            const passwordInput = e.target.previousElementSibling;
+            const isPassword = passwordInput.type === "password";
+            
+            passwordInput.type = isPassword ? "text" : "password";
+            e.target.textContent = isPassword ? "Hide" : "Show";
+            passwordInput.focus();
+        });
+    });
 
-    "Securing Your Data...",
+    // 4. Custom Elegant Toast Notifications
+    function showToast(message) {
+        toast.textContent = message;
+        toast.classList.remove("hidden");
+        // Force Reflow
+        toast.offsetHeight;
+        toast.classList.add("show");
 
-    "Almost Ready..."
-
-];
-
-let index = 0;
-
-const textInterval = setInterval(() => {
-
-    index++;
-
-    if(index < messages.length){
-
-        loadingText.innerText = messages[index];
-
+        setTimeout(() => {
+            toast.classList.remove("show");
+            setTimeout(() => {
+                toast.classList.add("hidden");
+            }, 400);
+        }, 4000);
     }
 
-},800);
+    // 5. Mock Register authentication event
+    signupForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const submitBtn = signupForm.querySelector(".submit-btn");
+        const btnText = submitBtn.querySelector(".btn-text");
+        const btnLoader = submitBtn.querySelector(".btn-loader");
+        const nameInput = document.getElementById("signup-name").value;
 
+        btnText.classList.add("hidden");
+        btnLoader.classList.remove("hidden");
+        submitBtn.disabled = true;
 
-/* ==========================================
-        Splash → Landing
-========================================== */
+        setTimeout(() => {
+            showToast(`Registration Successful! Welcome to the Nest, ${nameInput}.`);
+            btnText.classList.remove("hidden");
+            btnLoader.classList.add("hidden");
+            submitBtn.disabled = false;
+            signupForm.reset();
+            
+            // Auto switch back to Login screen
+            tabLogin.click();
+        }, 2000);
+    });
 
-window.addEventListener("load",()=>{
+    // 6. Mock Login authentication event
+    loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const submitBtn = loginForm.querySelector(".submit-btn");
+        const btnText = submitBtn.querySelector(".btn-text");
+        const btnLoader = submitBtn.querySelector(".btn-loader");
 
-    setTimeout(()=>{
+        btnText.classList.add("hidden");
+        btnLoader.classList.remove("hidden");
+        submitBtn.disabled = true;
 
-        clearInterval(textInterval);
+        setTimeout(() => {
+            showToast("Login Successful! Preparing workspace dashboard...");
+            btnText.classList.remove("hidden");
+            btnLoader.classList.add("hidden");
+            submitBtn.disabled = false;
+            loginForm.reset();
+        }, 2200);
+    });
 
-        splash.style.opacity="0";
-
-        splash.style.transition="opacity .8s ease";
-
-        setTimeout(()=>{
-
-            splash.style.display="none";
-
-            landingPage.style.display="flex";
-
-        },800);
-
-    },3500);
-
-});
-
-
-/* ==========================================
-        Landing → Login
-========================================== */
-
-startButton.addEventListener("click",()=>{
-
-    landingPage.style.opacity="0";
-
-    landingPage.style.transition=".6s";
-
-    setTimeout(()=>{
-
-        landingPage.style.display="none";
-
-        loginPage.style.display="flex";
-
-        loginPage.style.opacity="0";
-
-        setTimeout(()=>{
-
-            loginPage.style.opacity="1";
-
-            loginPage.style.transition=".8s";
-
-        },50);
-
-    },600);
-
-});
-
-
-/* ==========================================
-        Demo Login
-========================================== */
-
-const form = document.querySelector("form");
-
-form.addEventListener("submit",(event)=>{
-
-    event.preventDefault();
-
-    alert("Welcome to CareNest 🌿\n\nDashboard will be added in Version 2.0");
-
+    // 7. Simulated Forgot Password action
+    document.getElementById("forgot-password-trigger").addEventListener("click", (e) => {
+        e.preventDefault();
+        showToast("A recovery link has been dispatched to your registered workspace email.");
+    });
 });
