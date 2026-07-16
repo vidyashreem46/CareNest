@@ -1,7 +1,6 @@
-/* ===================================
-   CareNest v0.1
-   Developed by: Vidyashree M
-=================================== */
+/* ==========================================
+            CareNest v1.0
+========================================== */
 
 *{
     margin:0;
@@ -12,23 +11,83 @@
 
 body{
 
-    background:#f8fbfc;
+    background:#F9FCFB;
 
     overflow:hidden;
 
+    color:#1E293B;
+
 }
 
-/* ===========================
-        Splash Screen
-=========================== */
+/* =============================
+        Floating Blur
+============================= */
 
-#splash-screen{
+.blur{
 
     position:fixed;
 
-    width:100%;
+    border-radius:50%;
 
-    height:100vh;
+    filter:blur(100px);
+
+    z-index:-1;
+
+    opacity:.55;
+
+}
+
+.blur.one{
+
+    width:320px;
+
+    height:320px;
+
+    background:#DDF8EA;
+
+    top:-120px;
+
+    left:-100px;
+
+}
+
+.blur.two{
+
+    width:280px;
+
+    height:280px;
+
+    background:#D8ECFF;
+
+    right:-80px;
+
+    bottom:-90px;
+
+}
+
+.blur.three{
+
+    width:220px;
+
+    height:220px;
+
+    background:#ECF9E8;
+
+    right:18%;
+
+    top:45%;
+
+}
+
+/* =============================
+        Splash Screen
+============================= */
+
+#splash{
+
+    position:fixed;
+
+    inset:0;
 
     background:white;
 
@@ -38,67 +97,85 @@ body{
 
     align-items:center;
 
-    z-index:9999;
+    z-index:999;
 
 }
 
-.splash-content{
+.splash-container{
 
     text-align:center;
 
+    width:90%;
+
+    max-width:650px;
+
 }
 
-.logo{
+.main-logo{
 
-    font-size:70px;
+    width:180px;
+
+    margin-bottom:25px;
+
+}
+
+#splash h1{
+
+    font-size:60px;
+
+    color:#1565C0;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+#splash h2{
+
+    color:#2E8B57;
+
+    margin-bottom:18px;
+
+    font-weight:500;
+
+}
+
+.quote{
+
+    color:#64748B;
+
+    font-size:18px;
+
+    margin-bottom:40px;
+
+}
+
+/* =============================
+        Progress Bar
+============================= */
+
+.progress-area{
+
+    display:flex;
+
+    justify-content:center;
 
     margin-bottom:15px;
 
 }
 
-.splash-content h1{
-
-    font-size:52px;
-
-    color:#1565C0;
-
-    margin-bottom:8px;
-
-}
-
-.splash-content h3{
-
-    color:#2E8B57;
-
-    font-weight:500;
-
-    margin-bottom:18px;
-
-}
-
-.brand-text{
-
-    color:#666;
-
-    font-size:18px;
-
-    margin-bottom:35px;
-
-}
-
 .progress-bar{
 
-    width:320px;
+    width:340px;
 
     height:8px;
 
-    background:#dfe8e8;
+    background:#E8EEF3;
 
-    border-radius:50px;
+    border-radius:30px;
 
     overflow:hidden;
-
-    margin:auto;
 
 }
 
@@ -108,27 +185,31 @@ body{
 
     height:100%;
 
-    background:#2E8B57;
+    border-radius:30px;
 
-    animation:loading 3s forwards;
+    background:linear-gradient(
+        90deg,
+        #2E8B57,
+        #1565C0
+    );
+
+    animation:loading 3s linear forwards;
 
 }
 
-.loading-text{
+#loading-text{
 
-    margin-top:15px;
-
-    color:#777;
+    color:#6B7280;
 
     font-size:15px;
 
 }
 
-/* ===========================
-      Login Screen
-=========================== */
+/* =============================
+        Landing Page
+============================= */
 
-#login-screen{
+#landing-page{
 
     display:none;
 
@@ -136,141 +217,105 @@ body{
 
     height:100vh;
 
-    background:#f8fbfc;
+    background:white;
 
     justify-content:center;
 
     align-items:center;
-
-}
-
-.login-container{
-
-    width:1050px;
-
-    height:620px;
-
-    background:white;
-
-    border-radius:25px;
-
-    overflow:hidden;
-
-    display:flex;
-
-    box-shadow:0 20px 50px rgba(0,0,0,.12);
-
-}
-
-/* Left */
-
-.login-left{
-
-    width:45%;
-
-    background:linear-gradient(135deg,#1565C0,#2E8B57);
-
-    color:white;
-
-    display:flex;
 
     flex-direction:column;
 
-    justify-content:center;
-
-    align-items:center;
-
-    text-align:center;
-
-    padding:60px;
-
 }
 
-.login-left h1{
+nav{
 
-    font-size:42px;
+    position:absolute;
 
-    margin-bottom:15px;
+    top:30px;
 
-}
-
-.login-left p{
-
-    font-size:18px;
-
-    line-height:1.7;
-
-}
-
-/* Right */
-
-.login-right{
-
-    width:55%;
+    left:45px;
 
     display:flex;
 
-    justify-content:center;
-
     align-items:center;
 
 }
 
-form{
+.nav-logo{
 
-    width:75%;
+    width:55px;
 
-}
-
-label{
-
-    display:block;
-
-    margin-bottom:10px;
-
-    font-weight:600;
-
-    color:#444;
+    margin-right:12px;
 
 }
 
-input{
+nav h3{
 
-    width:100%;
+    color:#1565C0;
 
-    padding:16px;
+    font-size:26px;
+
+}
+
+.hero{
+
+    text-align:center;
+
+}
+
+.hero-logo{
+
+    width:170px;
 
     margin-bottom:25px;
 
-    border:2px solid #e5e5e5;
+}
 
-    border-radius:12px;
+.hero h1{
 
-    outline:none;
+    font-size:56px;
 
-    transition:.3s;
+    color:#1565C0;
 
-    font-size:15px;
+    margin-bottom:10px;
 
 }
 
-input:focus{
+.hero h2{
 
-    border-color:#2E8B57;
+    color:#2E8B57;
+
+    margin-bottom:20px;
 
 }
 
-button{
+.hero p{
 
-    width:100%;
+    color:#64748B;
 
-    padding:17px;
+    font-size:19px;
+
+    margin-bottom:40px;
+
+}
+
+/* =============================
+        Get Started Button
+============================= */
+
+#start-btn{
+
+    padding:18px 42px;
 
     border:none;
 
-    border-radius:12px;
+    border-radius:50px;
 
-    background:#2E8B57;
+    background:linear-gradient(
+        135deg,
+        #2E8B57,
+        #1565C0
+    );
 
     color:white;
 
@@ -282,17 +327,185 @@ button{
 
 }
 
-button:hover{
+#start-btn:hover{
 
-    background:#1565C0;
+    transform:translateY(-4px);
 
-    transform:translateY(-3px);
+    box-shadow:0 18px 35px rgba(21,101,192,.22);
 
 }
 
-/* ===========================
-        Animation
-=========================== */
+/* ==========================================
+            LOGIN PAGE
+========================================== */
+
+#login-page{
+
+    display:none;
+
+    width:100%;
+
+    height:100vh;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.login-wrapper{
+
+    width:460px;
+
+    background:rgba(255,255,255,.82);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.6);
+
+    border-radius:30px;
+
+    padding:45px;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.08);
+
+    animation:cardUp .9s ease;
+
+}
+
+.login-logo{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-bottom:20px;
+
+}
+
+.login-logo img{
+
+    width:90px;
+
+}
+
+.login-wrapper h1{
+
+    text-align:center;
+
+    color:#1565C0;
+
+    margin-bottom:8px;
+
+}
+
+.login-wrapper p{
+
+    text-align:center;
+
+    color:#64748B;
+
+    margin-bottom:35px;
+
+    line-height:1.6;
+
+}
+
+/* =============================
+            Inputs
+============================= */
+
+.input-box{
+
+    margin-bottom:22px;
+
+}
+
+.input-box label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#334155;
+
+    font-weight:600;
+
+}
+
+.input-box input{
+
+    width:100%;
+
+    padding:16px;
+
+    border-radius:15px;
+
+    border:2px solid #E5E7EB;
+
+    outline:none;
+
+    transition:.3s;
+
+    font-size:15px;
+
+}
+
+.input-box input:focus{
+
+    border-color:#2E8B57;
+
+    box-shadow:0 0 0 4px rgba(46,139,87,.12);
+
+}
+
+/* =============================
+            Buttons
+============================= */
+
+.login-wrapper button{
+
+    width:100%;
+
+    margin-top:10px;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:linear-gradient(135deg,#2E8B57,#1565C0);
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.login-wrapper button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 18px 35px rgba(21,101,192,.25);
+
+}
+
+.login-wrapper button:active{
+
+    transform:scale(.98);
+
+}
+
+/* =============================
+        Animations
+============================= */
 
 @keyframes loading{
 
@@ -310,36 +523,158 @@ button:hover{
 
 }
 
-/* ===========================
-       Responsive
-=========================== */
+@keyframes cardUp{
 
-@media(max-width:900px){
+    from{
 
-.login-container{
+        opacity:0;
 
-    flex-direction:column;
+        transform:translateY(60px);
 
-    width:92%;
+    }
 
-    height:auto;
+    to{
 
-}
+        opacity:1;
 
-.login-left{
+        transform:translateY(0);
 
-    width:100%;
-
-    padding:40px;
+    }
 
 }
 
-.login-right{
+@keyframes floatLogo{
 
-    width:100%;
+    0%{
 
-    padding:40px 0;
+        transform:translateY(0px);
+
+    }
+
+    50%{
+
+        transform:translateY(-10px);
+
+    }
+
+    100%{
+
+        transform:translateY(0px);
+
+    }
 
 }
+
+.main-logo{
+
+    animation:floatLogo 3s ease-in-out infinite;
+
+}
+
+.hero-logo{
+
+    animation:floatLogo 4s ease-in-out infinite;
+
+}
+
+/* =============================
+        Responsive
+============================= */
+
+@media(max-width:768px){
+
+    .main-logo,
+    .hero-logo{
+
+        width:130px;
+
+    }
+
+    #splash h1,
+    .hero h1{
+
+        font-size:42px;
+
+    }
+
+    #splash h2,
+    .hero h2{
+
+        font-size:20px;
+
+    }
+
+    .quote,
+    .hero p{
+
+        font-size:16px;
+
+        padding:0 20px;
+
+    }
+
+    .progress-bar{
+
+        width:260px;
+
+    }
+
+    .login-wrapper{
+
+        width:92%;
+
+        padding:30px;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .main-logo,
+    .hero-logo{
+
+        width:110px;
+
+    }
+
+    #splash h1,
+    .hero h1{
+
+        font-size:34px;
+
+    }
+
+    .login-wrapper{
+
+        padding:22px;
+
+    }
+
+}
+
+/* =============================
+        Misc
+============================= */
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+img{
+
+    user-select:none;
+
+    -webkit-user-drag:none;
+
+}
+
+::selection{
+
+    background:#2E8B57;
+
+    color:white;
 
 }
