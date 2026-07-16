@@ -3,7 +3,7 @@
 ===================================================== */
 
 :root {
-    /* Rich Brand Palette matching the Logo */
+    /* Exact colors sampled directly from the Logo */
     --primary-blue: #0b4275;
     --primary-blue-light: #1664a3;
     --accent-green: #1e824c;
@@ -13,11 +13,10 @@
     --bg-light: #f3f7fa;
     --white: #ffffff;
     
-    /* Dynamic Gradients */
+    /* Gradients */
     --brand-gradient: linear-gradient(135deg, var(--accent-green-light), var(--primary-blue));
-    --blue-gradient: linear-gradient(135deg, var(--primary-blue-light), var(--primary-blue));
     
-    /* Transitions & Borders */
+    /* Layout Elements */
     --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     --border-radius-lg: 32px;
     --border-radius-md: 16px;
@@ -208,7 +207,7 @@ body {
 /* ===========================================
                Auth Container
 =========================================== */
-#auth-screen {
+#login-screen {
     background: var(--bg-light);
 }
 
@@ -263,7 +262,7 @@ body {
     box-shadow: 0 4px 15px rgba(11, 66, 117, 0.05);
 }
 
-/* Form Swapping Physics */
+/* Form Swapping Elements */
 .form-container {
     position: relative;
 }
@@ -331,7 +330,6 @@ body {
     transition: var(--transition-smooth);
 }
 
-/* Native select drop-down styling adjustment */
 .input-group select {
     cursor: pointer;
     appearance: none;
