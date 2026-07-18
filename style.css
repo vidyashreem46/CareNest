@@ -1,33 +1,35 @@
 /* ============================================================================
-    CareNest SaaS Enterprise Design System Tokens & Functional Architectures
+    CareNest SaaS Enterprise Core Design System Tokens & Fluid Layout Engine
 ============================================================================ */
 
 :root {
     --primary-blue: #1565C0;
     --primary-green: #2E8B57;
-    --bg-light: #F8FBFD;
+    --bg-light: #F4F8FA;
     --white: #FFFFFF;
-    --text-dark: #1F2937;
-    --text-muted: #6B7280;
-    --light-gray: #E8EEF3;
+    --text-dark: #1E2530;
+    --text-muted: #627285;
+    --light-gray: #E2EAF1;
+    --card-glow-color: rgba(21, 101, 192, 0.08);
     
-    --input-placeholder: #9CA3AF;
     --error-red: #D32F2F;
     --error-bg: #FFEBEE;
+    --notice-orange: #E65100;
+    --notice-bg: #FFF3E0;
     
     --curve-premium: cubic-bezier(0.16, 1, 0.3, 1);
-    --t-fast: 300ms var(--curve-premium);
+    --t-fast: 250ms var(--curve-premium);
     --t-medium: 500ms var(--curve-premium);
     --t-slow: 800ms var(--curve-premium);
     
     --radius-lg: 24px;
-    --radius-md: 12px;
-    --shadow-premium: 0 4px 6px -1px rgba(21, 101, 192, 0.04), 0 10px 30px -3px rgba(21, 101, 192, 0.08);
-    --shadow-button-focus: 0 0 0 4px rgba(21, 101, 192, 0.15);
+    --radius-md: 14px;
+    --shadow-premium: 0 4px 20px -2px rgba(21, 101, 192, 0.03), 0 12px 40px -4px rgba(21, 101, 192, 0.06);
+    --shadow-hover: 0 20px 50px -10px rgba(21, 101, 192, 0.12), 0 0 0 1px var(--primary-blue);
 }
 
 /* ============================================================================
-    Global Element Resets & Normalizations
+    Global Element Architecture Normalization
 ============================================================================ */
 * {
     margin: 0;
@@ -46,8 +48,21 @@ html, body {
     overflow: hidden;
 }
 
+/* Scroll engine architecture for wide views */
+.global-scroll-container {
+    overflow-y: auto !important;
+    padding: 40px 24px !important;
+}
+.global-scroll-container::-webkit-scrollbar {
+    width: 6px;
+}
+.global-scroll-container::-webkit-scrollbar-thumb {
+    background-color: var(--light-gray);
+    border-radius: 10px;
+}
+
 /* ============================================================================
-    Core App Layer Viewport State Engine Layout
+    Application Matrix Layer Viewport Transitions Configurations
 ============================================================================ */
 .app-viewport {
     position: relative;
@@ -67,37 +82,32 @@ html, body {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
+    transform: scale(0.99) translateY(4px);
     z-index: 1;
-    transition: opacity var(--t-slow), visibility var(--t-slow);
+    transition: opacity var(--t-medium), transform var(--t-medium), visibility var(--t-medium);
 }
 
-.app-viewport[data-state="onboarding"] #stage-narrative {
+/* State routing engines rules definitions */
+.app-viewport[data-state="onboarding"] #stage-narrative,
+.app-viewport[data-state="welcome"] #stage-welcome,
+.app-viewport[data-state="signin"] #stage-signin,
+.app-viewport[data-state="register"] #stage-register,
+.app-viewport[data-state="dashboard-guest"] #stage-dashboard-guest {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
+    transform: scale(1) translateY(0);
     z-index: 10;
 }
 
-.app-viewport[data-state="auth"] {
+.app-viewport[data-state="welcome"],
+.app-viewport[data-state="signin"],
+.app-viewport[data-state="register"] {
     background-color: var(--bg-light);
 }
 
-.app-viewport[data-state="auth"] #stage-auth {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    z-index: 10;
-}
-
-.app-viewport[data-state="placeholder"] #stage-placeholder {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    z-index: 10;
-}
-
 /* ============================================================================
-    STAGE 1: Onboarding Typography & Presentation Pipeline Engine
+    STAGE 1: Fluid Onboarding Narrative Pipeline Engine
 ============================================================================ */
 #stage-narrative {
     justify-content: center;
@@ -106,7 +116,7 @@ html, body {
 
 .narrative-centerpiece {
     width: 100%;
-    max-width: 600px;
+    max-width: 650px;
     text-align: center;
     padding: 0 24px;
     display: flex;
@@ -115,16 +125,16 @@ html, body {
 }
 
 .brand-anchor {
-    margin-bottom: 48px;
+    margin-bottom: 56px;
 }
 
 .logo-wrapper {
-    width: 110px;
-    height: 110px;
+    width: 115px;
+    height: 115px;
     margin: 0 auto 24px auto;
     opacity: 0;
-    transform: translateY(15px);
-    animation: logoInitialization var(--t-slow) 500ms ease forwards, logoFloat 5s ease-in-out infinite alternate;
+    transform: translateY(12px);
+    animation: elementInitialization var(--t-slow) 300ms ease forwards, floatingEcosystemLogo 6s ease-in-out infinite alternate;
 }
 
 .logo-wrapper img {
@@ -135,32 +145,30 @@ html, body {
 }
 
 .brand-title {
-    font-size: 42px;
+    font-size: 44px;
     font-weight: 700;
     color: var(--primary-blue);
     letter-spacing: -0.03em;
-    line-height: 1.1;
     margin-bottom: 8px;
     opacity: 0;
-    transform: translateY(15px);
-    animation: textFadeUpInitialization var(--t-slow) 700ms var(--curve-premium) forwards;
+    transform: translateY(12px);
+    animation: elementInitialization var(--t-slow) 500ms var(--curve-premium) forwards;
 }
 
 .brand-kannada {
-    font-size: 20px;
+    font-size: 21px;
     font-weight: 500;
     color: var(--primary-green);
-    letter-spacing: normal;
     opacity: 0;
-    transform: translateY(15px);
-    animation: textFadeUpInitialization var(--t-slow) 900ms var(--curve-premium) forwards;
+    transform: translateY(12px);
+    animation: elementInitialization var(--t-slow) 700ms var(--curve-premium) forwards;
 }
 
 .narrative-window {
     position: relative;
     width: 100%;
-    height: 100px;
-    margin-bottom: 40px;
+    height: 90px;
+    margin-bottom: 48px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -168,13 +176,14 @@ html, body {
 
 .narrative-frame {
     position: absolute;
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 600;
     color: var(--text-dark);
     letter-spacing: -0.02em;
-    line-height: 1.3;
+    line-height: 1.4;
+    text-align: center;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(16px) scale(0.98);
     transition: opacity var(--t-medium), transform var(--t-medium);
     pointer-events: none;
     width: 100%;
@@ -182,12 +191,12 @@ html, body {
 
 .narrative-frame.active-frame {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
 }
 
 .narrative-frame.exit-frame {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-16px) scale(0.98);
 }
 
 .highlight-green {
@@ -196,7 +205,7 @@ html, body {
 
 .action-gate {
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.96);
     transition: opacity var(--t-medium), transform var(--t-medium);
     pointer-events: none;
 }
@@ -208,8 +217,8 @@ html, body {
 }
 
 .cta-premium-btn {
-    height: 54px;
-    padding: 0 40px;
+    height: 56px;
+    padding: 0 44px;
     border: none;
     border-radius: 50px;
     background: var(--primary-blue);
@@ -218,155 +227,222 @@ html, body {
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 4px 6px -1px rgba(21, 101, 192, 0.1), 0 10px 20px -3px rgba(21, 101, 192, 0.15);
+    box-shadow: 0 10px 25px -5px rgba(21, 101, 192, 0.25);
     transition: transform var(--t-fast), box-shadow var(--t-fast), background-color var(--t-fast);
 }
 
 .cta-premium-btn:hover {
     transform: translateY(-2px);
     background-color: #11529C;
-    box-shadow: 0 6px 8px -1px rgba(21, 101, 192, 0.12), 0 12px 24px -3px rgba(21, 101, 192, 0.2);
+    box-shadow: 0 14px 30px -4px rgba(21, 101, 192, 0.35);
 }
 
 /* ============================================================================
-    STAGE 2: Authentication Screen Architecture & Layout Rules
+    STAGE 2: Multi-Choice Greeting Welcome Interactive Workspace Layer
 ============================================================================ */
-.auth-navigation-header {
+.global-stage-header {
     width: 100%;
-    height: 80px;
+    height: 88px;
     padding: 0 48px;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid rgba(21, 101, 192, 0.05);
+    background-color: transparent;
 }
 
 .nav-identity-block {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
 }
 
-.mini-logo-wrapper {
-    width: 36px;
-    height: 36px;
-}
-
-.mini-logo-wrapper img {
-    width: 100%;
-    height: 100%;
+.mini-brand-logo {
+    width: 38px;
+    height: 38px;
     object-fit: contain;
 }
 
 .nav-brand-text {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
     color: var(--primary-blue);
     letter-spacing: -0.02em;
 }
 
+.welcome-workspace-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.welcome-intro-text {
+    text-align: center;
+    margin-bottom: 56px;
+}
+
+.welcome-intro-text h3 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-dark);
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+}
+
+.welcome-intro-text p {
+    font-size: 15px;
+    color: var(--text-muted);
+}
+
+/* Three Large Premium Elevation Portal Cards Grid */
+.portal-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    width: 100%;
+}
+
+.portal-option-card {
+    position: relative;
+    background-color: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--radius-lg);
+    padding: 48px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-premium);
+    overflow: hidden;
+    transition: transform var(--t-medium), box-shadow var(--t-medium), border-color var(--t-medium);
+}
+
+/* Interactive Soft Glow Border & Elevation Lift Effects */
+.portal-card-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, var(--card-glow-color) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity var(--t-medium);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.portal-option-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--primary-blue);
+    box-shadow: var(--shadow-hover);
+}
+
+.portal-option-card:hover .portal-card-glow {
+    opacity: 1;
+}
+
+/* Strategic design highlighting for account creation node */
+.portal-option-card.highlight {
+    background: linear-gradient(180deg, var(--white) 0%, #F5F9FC 100%);
+    border-width: 1.5px;
+}
+
+.card-icon-avatar {
+    font-size: 38px;
+    width: 72px;
+    height: 72px;
+    background-color: var(--bg-light);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 28px;
+    z-index: 2;
+    transition: transform var(--t-medium);
+}
+
+.portal-option-card:hover .card-icon-avatar {
+    transform: scale(1.1);
+}
+
+.card-meta-details h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    z-index: 2;
+}
+
+.card-meta-details p {
+    font-size: 14px;
+    color: var(--text-muted);
+    z-index: 2;
+}
+
+/* ============================================================================
+    STAGES 3 & 4: Unified Premium Core Authentication Cards Architectures
+============================================================================ */
 .auth-workspace-body {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 24px;
+    padding: 32px 24px;
 }
 
 .auth-card {
     width: 100%;
-    max-width: 480px;
+    max-width: 460px;
     background-color: var(--white);
     border: 1px solid var(--light-gray);
     border-radius: var(--radius-lg);
-    padding: 40px;
+    padding: 44px;
     box-shadow: var(--shadow-premium);
-    transform: translateY(30px);
-    opacity: 0;
 }
 
-.app-viewport[data-state="auth"] .auth-card {
-    animation: authCardEntrance var(--t-slow) 100ms var(--curve-premium) forwards;
+.registration-wide-card {
+    max-width: 760px;
+    padding: 48px;
 }
 
-/* Premium Auth Card Tab Switches Layout */
-.auth-tabs {
-    display: flex;
-    background-color: var(--bg-light);
-    padding: 6px;
-    border-radius: var(--radius-md);
-    margin-bottom: 32px;
-    gap: 4px;
-}
-
-.auth-tab-btn {
-    flex: 1;
-    height: 40px;
-    background: none;
-    border: none;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-muted);
-    cursor: pointer;
-    border-radius: 8px;
-    transition: background-color var(--t-fast), color var(--t-fast);
-}
-
-.auth-tab-btn.active {
-    background-color: var(--white);
-    color: var(--primary-blue);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-}
-
-/* Sub-Form Container State Toggle Mechanism */
-.auth-form-view {
-    display: none;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity var(--t-fast), transform var(--t-fast);
-}
-
-.auth-form-view.active {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.auth-card-header {
-    margin-bottom: 24px;
-}
-
-.auth-card-header h3 {
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--text-dark);
-    margin-bottom: 6px;
-}
-
-.auth-card-header p {
-    font-size: 14px;
-    color: var(--text-muted);
-    line-height: 1.5;
-}
-
-.guest-info-box {
-    background-color: var(--bg-light);
-    border: 1px solid var(--light-gray);
-    padding: 18px;
-    border-radius: var(--radius-md);
+.auth-card-top-identity {
+    text-align: center;
     margin-bottom: 32px;
 }
 
-.guest-info-box p {
-    font-size: 14px;
-    color: var(--text-dark);
-    line-height: 1.6;
+.auth-card-logo {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    margin-bottom: 18px;
 }
 
-/* Form Fields */
+.auth-card-top-identity h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.auth-card-top-identity p {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* Premium Form Elements Controls Matrix */
+.form-split-grid-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
 .form-row {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     position: relative;
 }
 
@@ -375,13 +451,15 @@ html, body {
     font-weight: 600;
     color: var(--text-dark);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     margin-bottom: 8px;
 }
 
 .form-row input[type="text"],
 .form-row input[type="email"],
-.form-row input[type="password"] {
+.form-row input[type="password"],
+.form-row input[type="date"],
+.premium-form-select-node {
     width: 100%;
     height: 52px;
     padding: 0 16px;
@@ -389,24 +467,37 @@ html, body {
     border-radius: var(--radius-md);
     background-color: var(--white);
     font-family: inherit;
-    font-size: 15px;
+    font-size: 14.5px;
     color: var(--text-dark);
     outline: none;
     transition: border-color var(--t-fast), box-shadow var(--t-fast);
 }
 
-.form-row input:focus {
-    border-color: var(--primary-blue);
-    box-shadow: 0 0 0 4px rgba(21, 101, 192, 0.06);
+.premium-form-select-node {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23627285' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 16px;
+    padding-right: 40px;
 }
 
-.form-row.invalid-node input {
+.form-row input:focus,
+.premium-form-select-node:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 4px rgba(21, 101, 192, 0.05);
+}
+
+/* Input Data Structural Feedback Loops Validation Nodes */
+.form-row.invalid-node input,
+.form-row.invalid-node select {
     border-color: var(--error-red) !important;
     background-color: var(--error-bg);
 }
 
 .validation-feedback-node {
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 500;
     color: var(--error-red);
     margin-top: 6px;
@@ -445,7 +536,7 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 }
 
 .custom-checkbox-container {
@@ -453,6 +544,7 @@ html, body {
     align-items: center;
     cursor: pointer;
     gap: 8px;
+    user-select: none;
 }
 
 .custom-checkbox-container input {
@@ -468,6 +560,7 @@ html, body {
     border: 2px solid var(--light-gray);
     border-radius: 6px;
     position: relative;
+    transition: background-color var(--t-fast), border-color var(--t-fast);
 }
 
 .custom-checkbox-container input:checked ~ .checkbox-facade {
@@ -481,8 +574,8 @@ html, body {
     display: none;
     left: 6px;
     top: 2px;
-    width: 5px;
-    height: 10px;
+    width: 4px;
+    height: 9px;
     border: solid var(--white);
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
@@ -493,15 +586,22 @@ html, body {
 }
 
 .custom-checkbox-container .label-text {
-    font-size: 14px;
+    font-size: 13.5px;
     color: var(--text-dark);
 }
 
 .recovery-anchor {
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: 500;
     color: var(--primary-blue);
     text-decoration: none;
+}
+
+/* Interactive Clusters Button Systems */
+.auth-action-cluster-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .auth-submit-btn {
@@ -512,139 +612,200 @@ html, body {
     border-radius: var(--radius-md);
     color: var(--white);
     font-family: inherit;
-    font-size: 16px;
+    font-size: 15.5px;
     font-weight: 600;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 12px;
-    box-shadow: 0 4px 12px rgba(21, 101, 192, 0.15);
-    transition: background-color var(--t-fast), transform var(--t-fast);
+    box-shadow: 0 4px 14px rgba(21, 101, 192, 0.15);
+    transition: background-color var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
 }
 
 .auth-submit-btn:hover {
     background-color: #11529C;
     transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(21, 101, 192, 0.25);
 }
 
-.btn-loader {
-    width: 20px;
-    height: 20px;
-    border: 2.5px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    border-top-color: var(--white);
-    animation: hardwareMicroSpin 700ms linear infinite;
+.back-to-portal-btn {
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: 2px solid var(--light-gray);
+    border-radius: var(--radius-md);
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color var(--t-fast), color var(--t-fast), border-color var(--t-fast);
 }
 
-.hidden {
-    display: none !important;
+.back-to-portal-btn:hover {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    border-color: var(--text-muted);
 }
 
 /* ============================================================================
-    STAGE 3: Phase 2 Structural Placeholder Engine Dashboard UI
+    STAGE 5: Sandbox Interactive Client Application Dashboard Ecosystem
 ============================================================================ */
-#stage-placeholder {
-    justify-content: center;
-    align-items: center;
+#stage-dashboard-guest {
     background-color: var(--bg-light);
 }
 
-.placeholder-centerpiece {
+.dashboard-global-navbar {
     width: 100%;
-    max-width: 500px;
-    text-align: center;
-    padding: 24px;
-}
-
-.ui-mockup-skeleton {
-    width: 280px;
-    height: 180px;
+    height: 80px;
+    padding: 0 40px;
     background-color: var(--white);
-    border: 1px solid var(--light-gray);
-    border-radius: 16px;
-    box-shadow: var(--shadow-premium);
-    margin: 0 auto 32px auto;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-.skeleton-header {
-    height: 24px;
-    background-color: var(--bg-light);
     border-bottom: 1px solid var(--light-gray);
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 6px;
-    padding: 0 12px;
 }
 
-.skeleton-dot {
-    width: 6px;
-    height: 6px;
-    background-color: #D1DDE6;
-    border-radius: 50%;
+.dashboard-badge-pill {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    background-color: #E3F2FD;
+    color: var(--primary-blue);
+    padding: 4px 10px;
+    border-radius: 30px;
+    margin-left: 8px;
+    letter-spacing: 0.02em;
+    vertical-align: middle;
 }
 
-.skeleton-body {
+.dashboard-exit-action-btn {
+    height: 44px;
+    padding: 0 20px;
+    background-color: var(--white);
+    border: 2px solid #CFD8DC;
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: background-color var(--t-fast), border-color var(--t-fast);
+}
+
+.dashboard-exit-action-btn:hover {
+    background-color: #FFEBEE;
+    border-color: #FFCDD2;
+    color: var(--error-red);
+}
+
+.dashboard-scrollable-workspace-canvas {
     flex: 1;
-    padding: 16px;
+    overflow-y: auto;
+    padding: 48px 40px;
+}
+
+.dashboard-welcome-banner {
+    margin-bottom: 40px;
+}
+
+.dashboard-welcome-banner h3 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+}
+
+.dashboard-welcome-banner p {
+    font-size: 14.5px;
+    color: var(--text-muted);
+}
+
+/* Modules Grid */
+.dashboard-modules-interactive-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.dashboard-feature-card {
+    background-color: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--radius-md);
+    padding: 32px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    box-shadow: 0 2px 12px rgba(21, 101, 192, 0.02);
+    transition: transform var(--t-medium), box-shadow var(--t-medium);
 }
 
-.skeleton-bar {
-    height: 8px;
-    background-color: var(--bg-light);
-    border-radius: 4px;
+.dashboard-feature-card.functional-node {
+    cursor: pointer;
 }
 
-.skeleton-bar.long { width: 70%; }
-.skeleton-bar.short { width: 40%; }
+.dashboard-feature-card.functional-node:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px -5px rgba(21, 101, 192, 0.08);
+}
 
-.skeleton-grid {
+/* Premium locked state presentation model */
+.dashboard-feature-card.locked-node {
+    background: linear-gradient(180deg, var(--white) 0%, #FAFCFD 100%);
+    border-style: dashed;
+    border-width: 1.5px;
+    opacity: 0.85;
+}
+
+.feature-card-header-icon-row {
     display: flex;
-    gap: 12px;
-    margin-top: 8px;
-    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.skeleton-block {
-    flex: 1;
-    background-color: #F0F4F8;
-    border-radius: 8px;
+.feature-badge-emoji {
+    font-size: 28px;
 }
 
-.placeholder-title {
-    font-size: 24px;
+.active-badge {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.03em;
+}
+
+.active-badge.operational {
+    background-color: #E8F5E9;
+    color: var(--primary-green);
+}
+
+.active-badge.rapid-alert {
+    background-color: #FFEBEE;
+    color: var(--error-red);
+}
+
+.active-badge.roadmap {
+    background-color: var(--notice-bg);
+    color: var(--notice-orange);
+}
+
+.dashboard-feature-card h5 {
+    font-size: 17px;
     font-weight: 600;
     color: var(--text-dark);
     margin-bottom: 8px;
 }
 
-.placeholder-subtitle {
-    font-size: 14px;
+.dashboard-feature-card p {
+    font-size: 13px;
     color: var(--text-muted);
-    line-height: 1.6;
-    margin-bottom: 32px;
+    line-height: 1.5;
 }
 
-.fallback-nav-btn {
-    height: 48px;
-    padding: 0 24px;
-    background-color: var(--white);
-    border: 2px solid var(--light-gray);
-    border-radius: var(--radius-md);
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-dark);
-    cursor: pointer;
-}
-
-/* Global Notification Toast */
+/* Universal Toast Utility System Component */
 .toast-hub {
     position: fixed;
     bottom: 40px;
@@ -654,9 +815,9 @@ html, body {
     color: var(--white);
     padding: 14px 28px;
     border-radius: 50px;
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: 500;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     z-index: 10000;
     opacity: 0;
     transition: transform var(--t-medium), opacity var(--t-fast);
@@ -667,15 +828,38 @@ html, body {
     transform: translateX(-50%) translateY(0);
 }
 
-/* Animations declarations */
-@keyframes hardwareMicroSpin { to { transform: rotate(360deg); } }
-@keyframes logoInitialization { to { opacity: 1; transform: translateY(0); } }
-@keyframes textFadeUpInitialization { to { opacity: 1; transform: translateY(0); } }
-@keyframes logoFloat { 0% { transform: translateY(0); } 100% { transform: translateY(-8px); } }
-@keyframes authCardEntrance { to { opacity: 1; transform: translateY(0); } }
+.btn-loader {
+    width: 20px;
+    height: 20px;
+    border: 2.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--white);
+    animation: MicroHardwareSpin 700ms linear infinite;
+}
+
+.hidden { display: none !important; }
+
+/* ============================================================================
+    Micro Keyframe Animations Declarations Engine
+============================================================================ */
+@keyframes MicroHardwareSpin { to { transform: rotate(360deg); } }
+@keyframes elementInitialization { to { opacity: 1; transform: translateY(0); } }
+@keyframes floatingEcosystemLogo { 0% { transform: translateY(0); } 100% { transform: translateY(-6px); } }
+
+/* ============================================================================
+    Responsive Media Breakpoint Controls Engine
+============================================================================ */
+@media (max-width: 1024px) {
+    .portal-cards-grid, .dashboard-modules-interactive-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+}
 
 @media (max-width: 768px) {
+    .portal-cards-grid, .dashboard-modules-interactive-grid { grid-template-columns: 1fr; }
+    .form-split-grid-row { grid-template-columns: 1fr; gap: 0; }
+    .global-stage-header, .dashboard-global-navbar { padding: 0 24px; }
+    .dashboard-scrollable-workspace-canvas { padding: 32px 24px; }
+    .brand-title { font-size: 38px; }
+    .narrative-frame { font-size: 20px; }
     .auth-card { padding: 32px 24px; border: none; box-shadow: none; background: transparent; }
-    .brand-title { font-size: 36px; }
-    .narrative-frame { font-size: 22px; }
+    .welcome-intro-text h3 { font-size: 26px; }
 }
