@@ -1,78 +1,93 @@
 /* ============================================================================
-    CareNest SaaS Enterprise Core Design System Tokens & Fluid Layout Engine
+    CareNest Premium StartUp Interface Structural Architecture Token Set
 ============================================================================ */
 
 :root {
     --primary-blue: #1565C0;
     --primary-green: #2E8B57;
-    --bg-light: #F4F8FA;
+    --bg-surface-canvas: #FFFFFF;
+    --bg-workspace-shaded: #F4F8FA;
+    --text-primary: #1C222B;
+    --text-muted: #5A6A7E;
+    --border-clean: #E2EAF1;
     --white: #FFFFFF;
-    --text-dark: #1E2530;
-    --text-muted: #627285;
-    --light-gray: #E2EAF1;
-    --card-glow-color: rgba(21, 101, 192, 0.08);
     
-    --error-red: #D32F2F;
-    --error-bg: #FFEBEE;
-    --notice-orange: #E65100;
-    --notice-bg: #FFF3E0;
+    /* Strict Color Semantics Metric Controls */
+    --accent-red: #C62828;
+    --accent-red-bg: #FFEBEE;
+    --accent-orange: #E65100;
+    --accent-orange-bg: #FFF3E0;
     
+    /* Timing & Curve Physics Interpolation */
     --curve-premium: cubic-bezier(0.16, 1, 0.3, 1);
-    --t-fast: 250ms var(--curve-premium);
-    --t-medium: 500ms var(--curve-premium);
+    --t-fast: 200ms var(--curve-premium);
+    --t-normal: 450ms var(--curve-premium);
     --t-slow: 800ms var(--curve-premium);
     
-    --radius-lg: 24px;
-    --radius-md: 14px;
-    --shadow-premium: 0 4px 20px -2px rgba(21, 101, 192, 0.03), 0 12px 40px -4px rgba(21, 101, 192, 0.06);
-    --shadow-hover: 0 20px 50px -10px rgba(21, 101, 192, 0.12), 0 0 0 1px var(--primary-blue);
+    /* Micro Elevated Environmental Depth Tokens */
+    --radius-lg: 20px;
+    --radius-md: 12px;
+    --shadow-premium: 0 4px 20px -2px rgba(21, 101, 192, 0.04), 0 12px 40px -4px rgba(21, 101, 192, 0.08);
+    --shadow-hover: 0 24px 60px -8px rgba(21, 101, 192, 0.15), 0 0 0 2px var(--primary-blue);
+    --focus-ring: 0 0 0 3px rgba(21, 101, 192, 0.45);
 }
 
-/* ============================================================================
-    Global Element Architecture Normalization
-============================================================================ */
+/* Base Viewport Space Resets */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
-html, body {
-    width: 100%;
-    height: 100%;
-    background-color: var(--white);
-    color: var(--text-dark);
+body {
+    width: 100vw;
+    height: 100vh;
     font-family: 'Poppins', sans-serif;
+    color: var(--text-primary);
+    background-color: var(--bg-surface-canvas);
     overflow: hidden;
 }
 
-/* Scroll engine architecture for wide views */
-.global-scroll-container {
-    overflow-y: auto !important;
-    padding: 40px 24px !important;
-}
-.global-scroll-container::-webkit-scrollbar {
-    width: 6px;
-}
-.global-scroll-container::-webkit-scrollbar-thumb {
-    background-color: var(--light-gray);
-    border-radius: 10px;
+/* Accessibility Focus Ring Engine Rules */
+*:focus-visible {
+    outline: none !important;
+    box-shadow: var(--focus-ring) !important;
 }
 
-/* ============================================================================
-    Application Matrix Layer Viewport Transitions Configurations
-============================================================================ */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.skip-link {
+    position: absolute;
+    top: -60px;
+    left: 20px;
+    background: var(--primary-blue);
+    color: var(--white);
+    padding: 10px 20px;
+    z-index: 99999;
+    border-radius: 0 0 8px 8px;
+    text-decoration: none;
+    transition: top var(--t-fast);
+}
+.skip-link:focus { top: 0; }
+
+/* View Container Layout Structural Switcher Logic Matrix */
 .app-viewport {
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: var(--white);
-    transition: background-color var(--t-slow);
 }
 
-.experience-stage {
+.view-panel {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -82,194 +97,196 @@ html, body {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transform: scale(0.99) translateY(4px);
-    z-index: 1;
-    transition: opacity var(--t-medium), transform var(--t-medium), visibility var(--t-medium);
+    transform: scale(0.98) translateY(8px);
+    background-color: var(--bg-surface-canvas);
+    transition: opacity var(--t-normal), transform var(--t-normal), visibility var(--t-normal);
 }
 
-/* State routing engines rules definitions */
-.app-viewport[data-state="onboarding"] #stage-narrative,
-.app-viewport[data-state="welcome"] #stage-welcome,
-.app-viewport[data-state="signin"] #stage-signin,
-.app-viewport[data-state="register"] #stage-register,
-.app-viewport[data-state="dashboard-guest"] #stage-dashboard-guest {
+.panel-scrollable {
+    overflow-y: auto;
+}
+
+/* State-driven view controllers rendering */
+.app-viewport[data-view="story-onboarding"] #view-story,
+.app-viewport[data-view="welcome"] #view-welcome,
+.app-viewport[data-view="signin"] #view-signin,
+.app-viewport[data-view="register"] #view-register,
+.app-viewport[data-view="forgot"] #view-forgot,
+.app-viewport[data-view="dashboard"] #view-dashboard {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
     transform: scale(1) translateY(0);
-    z-index: 10;
 }
 
-.app-viewport[data-state="welcome"],
-.app-viewport[data-state="signin"],
-.app-viewport[data-state="register"] {
-    background-color: var(--bg-light);
+.app-viewport[data-view="welcome"],
+.app-viewport[data-view="signin"],
+.app-viewport[data-view="register"],
+.app-viewport[data-view="forgot"],
+.app-viewport[data-view="dashboard"] {
+    background-color: var(--bg-workspace-shaded);
 }
 
 /* ============================================================================
-    STAGE 1: Fluid Onboarding Narrative Pipeline Engine
+    STATE 1: Brand Launch Story Orchestrator Component Architecture
 ============================================================================ */
-#stage-narrative {
+#view-story {
     justify-content: center;
     align-items: center;
+    background-color: var(--bg-surface-canvas);
 }
 
-.narrative-centerpiece {
+.story-centerpiece {
     width: 100%;
-    max-width: 650px;
+    max-width: 700px;
     text-align: center;
-    padding: 0 24px;
+    padding: 0 32px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.brand-anchor {
-    margin-bottom: 56px;
+.story-brand-anchor {
+    margin-bottom: 48px;
 }
 
-.logo-wrapper {
-    width: 115px;
-    height: 115px;
-    margin: 0 auto 24px auto;
-    opacity: 0;
-    transform: translateY(12px);
-    animation: elementInitialization var(--t-slow) 300ms ease forwards, floatingEcosystemLogo 6s ease-in-out infinite alternate;
-}
-
-.logo-wrapper img {
-    width: 100%;
-    height: 100%;
+.story-logo {
+    width: 110px;
+    height: 110px;
     object-fit: contain;
-    user-select: none;
+    margin-bottom: 16px;
+    animation: floatingBrandNode 6s ease-in-out infinite alternate;
 }
 
-.brand-title {
-    font-size: 44px;
+.brand-title-text {
+    font-size: 40px;
     font-weight: 700;
     color: var(--primary-blue);
     letter-spacing: -0.03em;
-    margin-bottom: 8px;
-    opacity: 0;
-    transform: translateY(12px);
-    animation: elementInitialization var(--t-slow) 500ms var(--curve-premium) forwards;
+    margin-bottom: 4px;
 }
 
-.brand-kannada {
-    font-size: 21px;
+.brand-tagline-kannada {
+    font-size: 20px;
     font-weight: 500;
     color: var(--primary-green);
-    opacity: 0;
-    transform: translateY(12px);
-    animation: elementInitialization var(--t-slow) 700ms var(--curve-premium) forwards;
 }
 
-.narrative-window {
+.story-sequence-window {
     position: relative;
     width: 100%;
-    height: 90px;
-    margin-bottom: 48px;
+    height: 96px;
+    margin-bottom: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.narrative-frame {
+.story-node {
     position: absolute;
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 600;
-    color: var(--text-dark);
-    letter-spacing: -0.02em;
+    color: var(--text-primary);
     line-height: 1.4;
     text-align: center;
     opacity: 0;
-    transform: translateY(16px) scale(0.98);
-    transition: opacity var(--t-medium), transform var(--t-medium);
+    transform: translateY(14px) scale(0.97);
+    transition: opacity 400ms var(--curve-premium), transform 400ms var(--curve-premium);
     pointer-events: none;
     width: 100%;
 }
 
-.narrative-frame.active-frame {
+.story-node.active {
     opacity: 1;
     transform: translateY(0) scale(1);
 }
 
-.narrative-frame.exit-frame {
+.story-node.passed {
     opacity: 0;
-    transform: translateY(-16px) scale(0.98);
+    transform: translateY(-14px) scale(0.97);
 }
 
-.highlight-green {
-    color: var(--primary-green);
-}
-
-.action-gate {
+.story-gate-action {
     opacity: 0;
-    transform: scale(0.96);
-    transition: opacity var(--t-medium), transform var(--t-medium);
+    transform: scale(0.95);
     pointer-events: none;
+    transition: opacity var(--t-normal), transform var(--t-normal);
 }
 
-.action-gate.visible-gate {
+.story-gate-action.active-gate {
     opacity: 1;
     transform: scale(1);
     pointer-events: auto;
 }
 
-.cta-premium-btn {
-    height: 56px;
-    padding: 0 44px;
-    border: none;
-    border-radius: 50px;
-    background: var(--primary-blue);
-    color: var(--white);
-    font-family: inherit;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 10px 25px -5px rgba(21, 101, 192, 0.25);
-    transition: transform var(--t-fast), box-shadow var(--t-fast), background-color var(--t-fast);
-}
-
-.cta-premium-btn:hover {
-    transform: translateY(-2px);
-    background-color: #11529C;
-    box-shadow: 0 14px 30px -4px rgba(21, 101, 192, 0.35);
-}
-
 /* ============================================================================
-    STAGE 2: Multi-Choice Greeting Welcome Interactive Workspace Layer
+    Persistent Shared Navigation Architecture Elements
 ============================================================================ */
-.global-stage-header {
+.app-global-navbar {
     width: 100%;
-    height: 88px;
+    height: 90px;
+    background-color: var(--bg-surface-canvas);
+    border-bottom: 1px solid var(--border-clean);
     padding: 0 48px;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid rgba(21, 101, 192, 0.05);
-    background-color: transparent;
+    justify-content: space-between;
+    flex-shrink: 0;
 }
 
-.nav-identity-block {
+.navbar-brand-block {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 16px;
 }
 
-.mini-brand-logo {
-    width: 38px;
-    height: 38px;
+.nav-logo {
+    width: 48px;
+    height: 48px;
     object-fit: contain;
+    animation: initializationSlide var(--t-slow) var(--curve-premium);
 }
 
-.nav-brand-text {
-    font-size: 20px;
+.nav-text-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-title {
+    font-size: 22px;
     font-weight: 700;
     color: var(--primary-blue);
     letter-spacing: -0.02em;
+    line-height: 1.1;
 }
 
-.welcome-workspace-body {
+.nav-tagline {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--primary-green);
+    margin-top: 2px;
+}
+
+.navbar-actions-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.user-identity-badge {
+    font-size: 12px;
+    font-weight: 600;
+    background: #E3F2FD;
+    color: var(--primary-blue);
+    padding: 6px 14px;
+    border-radius: 30px;
+    text-transform: uppercase;
+}
+
+/* ============================================================================
+    STATE 2: Pathways Welcome Body Interface Components Grid Layout
+============================================================================ */
+.welcome-content-body {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -281,38 +298,59 @@ html, body {
     width: 100%;
 }
 
-.welcome-intro-text {
+.welcome-intro-block {
     text-align: center;
-    margin-bottom: 56px;
+    margin-bottom: 32px;
 }
 
-.welcome-intro-text h3 {
-    font-size: 32px;
+.welcome-intro-block h2 {
+    font-size: 30px;
     font-weight: 700;
-    color: var(--text-dark);
     letter-spacing: -0.02em;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
-.welcome-intro-text p {
-    font-size: 15px;
+.welcome-intro-block p {
     color: var(--text-muted);
+    font-size: 15px;
 }
 
-/* Three Large Premium Elevation Portal Cards Grid */
-.portal-cards-grid {
+.brand-pillars-row {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pillar-item {
+    background-color: var(--white);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 13px;
+    border: 1px solid var(--border-clean);
+    color: var(--text-primary);
+}
+
+.pillar-item span {
+    font-weight: 600;
+    color: var(--primary-blue);
+}
+
+/* Three Large Premium Elevation Portal Cards Framework */
+.welcome-cards-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 32px;
     width: 100%;
 }
 
-.portal-option-card {
+.portal-choice-card {
     position: relative;
     background-color: var(--white);
-    border: 1px solid var(--light-gray);
+    border: 1px solid var(--border-clean);
     border-radius: var(--radius-lg);
-    padding: 48px 32px;
+    padding: 44px 32px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -320,204 +358,190 @@ html, body {
     cursor: pointer;
     box-shadow: var(--shadow-premium);
     overflow: hidden;
-    transition: transform var(--t-medium), box-shadow var(--t-medium), border-color var(--t-medium);
+    font-family: inherit;
+    transition: transform var(--t-normal), box-shadow var(--t-normal), border-color var(--t-normal);
 }
 
-/* Interactive Soft Glow Border & Elevation Lift Effects */
-.portal-card-glow {
+.card-glow-overlay {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, var(--card-glow-color) 0%, transparent 70%);
+    background: radial-gradient(circle at center, rgba(21, 101, 192, 0.06) 0%, transparent 70%);
     opacity: 0;
-    transition: opacity var(--t-medium);
+    transition: opacity var(--t-normal);
     pointer-events: none;
-    z-index: 1;
 }
 
-.portal-option-card:hover {
+.portal-choice-card:hover {
     transform: translateY(-8px);
     border-color: var(--primary-blue);
     box-shadow: var(--shadow-hover);
 }
 
-.portal-option-card:hover .portal-card-glow {
+.portal-choice-card:hover .card-glow-overlay {
     opacity: 1;
 }
 
-/* Strategic design highlighting for account creation node */
-.portal-option-card.highlight {
+.portal-choice-card.highlight {
     background: linear-gradient(180deg, var(--white) 0%, #F5F9FC 100%);
     border-width: 1.5px;
 }
 
-.card-icon-avatar {
-    font-size: 38px;
+.card-avatar-icon {
+    font-size: 36px;
     width: 72px;
     height: 72px;
-    background-color: var(--bg-light);
+    background-color: var(--bg-workspace-shaded);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 28px;
-    z-index: 2;
-    transition: transform var(--t-medium);
+    margin-bottom: 24px;
+    transition: transform var(--t-normal);
 }
 
-.portal-option-card:hover .card-icon-avatar {
+.portal-choice-card:hover .card-avatar-icon {
     transform: scale(1.1);
 }
 
-.card-meta-details h4 {
+.portal-choice-card h3 {
     font-size: 20px;
     font-weight: 600;
-    color: var(--text-dark);
+    color: var(--text-primary);
     margin-bottom: 8px;
-    z-index: 2;
 }
 
-.card-meta-details p {
-    font-size: 14px;
+.portal-choice-card p {
+    font-size: 13.5px;
     color: var(--text-muted);
-    z-index: 2;
+    line-height: 1.5;
 }
 
 /* ============================================================================
-    STAGES 3 & 4: Unified Premium Core Authentication Cards Architectures
+    STAGES 3, 4 & 5: Central Unified Profile Forms Card Engine
 ============================================================================ */
-.auth-workspace-body {
+.auth-center-container {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 32px 24px;
+    padding: 40px 24px;
+    overflow-y: auto;
 }
 
-.auth-card {
+.auth-workspace-card {
     width: 100%;
-    max-width: 460px;
+    max-width: 480px;
     background-color: var(--white);
-    border: 1px solid var(--light-gray);
+    border: 1px solid var(--border-clean);
     border-radius: var(--radius-lg);
     padding: 44px;
     box-shadow: var(--shadow-premium);
 }
 
-.registration-wide-card {
-    max-width: 760px;
-    padding: 48px;
+.auth-workspace-card.wide-format {
+    max-width: 800px;
 }
 
-.auth-card-top-identity {
+.auth-card-header {
     text-align: center;
     margin-bottom: 32px;
 }
 
-.auth-card-logo {
-    width: 64px;
-    height: 64px;
-    object-fit: contain;
-    margin-bottom: 18px;
+.auth-card-header h2 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
 }
 
-.auth-card-top-identity h3 {
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--text-dark);
-    margin-bottom: 8px;
-}
-
-.auth-card-top-identity p {
+.auth-card-header p {
     font-size: 14px;
     color: var(--text-muted);
 }
 
-/* Premium Form Elements Controls Matrix */
-.form-split-grid-row {
+.caps-warning-banner {
+    background-color: var(--accent-orange-bg);
+    color: var(--accent-orange);
+    border: 1px solid #FFE0B2;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.form-split-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
 }
 
-.form-row {
+.form-group-row {
     display: flex;
     flex-direction: column;
     margin-bottom: 22px;
     position: relative;
 }
 
-.form-row label {
+.form-group-row label {
     font-size: 12px;
     font-weight: 600;
-    color: var(--text-dark);
+    color: var(--text-primary);
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
     margin-bottom: 8px;
 }
 
-.form-row input[type="text"],
-.form-row input[type="email"],
-.form-row input[type="password"],
-.form-row input[type="date"],
-.premium-form-select-node {
+.form-group-row input[type="text"],
+.form-group-row input[type="email"],
+.form-group-row input[type="tel"],
+.form-group-row input[type="password"],
+.form-group-row input[type="date"],
+.form-group-row select {
     width: 100%;
-    height: 52px;
+    height: 50px;
     padding: 0 16px;
-    border: 2px solid var(--light-gray);
+    border: 2px solid var(--border-clean);
     border-radius: var(--radius-md);
     background-color: var(--white);
     font-family: inherit;
     font-size: 14.5px;
-    color: var(--text-dark);
+    color: var(--text-primary);
     outline: none;
-    transition: border-color var(--t-fast), box-shadow var(--t-fast);
+    transition: border-color var(--t-fast);
 }
 
-.premium-form-select-node {
-    cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23627285' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-    background-size: 16px;
-    padding-right: 40px;
-}
-
-.form-row input:focus,
-.premium-form-select-node:focus {
+.form-group-row input:focus,
+.form-group-row select:focus {
     border-color: var(--primary-blue);
-    box-shadow: 0 0 0 4px rgba(21, 101, 192, 0.05);
 }
 
-/* Input Data Structural Feedback Loops Validation Nodes */
-.form-row.invalid-node input,
-.form-row.invalid-node select {
-    border-color: var(--error-red) !important;
-    background-color: var(--error-bg);
+/* Validation System Visual Overrides */
+.form-group-row.has-error input,
+.form-group-row.has-error select {
+    border-color: var(--accent-red) !important;
+    background-color: var(--accent-red-bg);
 }
 
-.validation-feedback-node {
+.field-error-message {
     font-size: 11.5px;
     font-weight: 500;
-    color: var(--error-red);
+    color: var(--accent-red);
     margin-top: 6px;
-    display: none;
-}
-
-.form-row.invalid-node .validation-feedback-node {
     display: block;
 }
 
-.field-mask-wrapper {
+.password-field-wrapper {
     position: relative;
     width: 100%;
 }
 
-.field-mask-wrapper input {
+.password-field-wrapper input {
     padding-right: 64px !important;
 }
 
-.mask-toggle-action {
+.btn-mask-toggle {
     position: absolute;
     right: 16px;
     top: 50%;
@@ -525,341 +549,386 @@ html, body {
     background: none;
     border: none;
     font-family: inherit;
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 600;
     color: var(--primary-blue);
     cursor: pointer;
     padding: 4px;
 }
 
-.form-utilities-row {
+/* Password Strength Meter Decorator Styles */
+.strength-meter-container {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.strength-meter-bar {
+    width: 100%;
+    height: 4px;
+    background-color: var(--border-clean);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.strength-meter-bar::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 0%;
+    transition: width var(--t-fast), background-color var(--t-fast);
+}
+
+.strength-meter-bar[data-strength="weak"]::before { width: 33.3%; background-color: var(--accent-red); }
+.strength-meter-bar[data-strength="medium"]::before { width: 66.6%; background-color: var(--accent-orange); }
+.strength-meter-bar[data-strength="strong"]::before { width: 100%; background-color: var(--primary-green); }
+
+.strength-meter-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-top: 4px;
+    display: block;
+}
+
+.form-utility-flex-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 28px;
 }
 
-.custom-checkbox-container {
+.custom-checkbox-lbl {
     display: flex;
     align-items: center;
-    cursor: pointer;
     gap: 8px;
+    cursor: pointer;
     user-select: none;
 }
 
-.custom-checkbox-container input {
+.custom-checkbox-lbl input {
     position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
+    opacity: 0; width: 0; height: 0;
 }
 
-.checkbox-facade {
+.checkbox-box-facade {
     width: 20px;
     height: 20px;
-    border: 2px solid var(--light-gray);
+    border: 2px solid var(--border-clean);
     border-radius: 6px;
+    background-color: var(--white);
     position: relative;
-    transition: background-color var(--t-fast), border-color var(--t-fast);
 }
 
-.custom-checkbox-container input:checked ~ .checkbox-facade {
+.custom-checkbox-lbl input:checked ~ .checkbox-box-facade {
     background-color: var(--primary-blue);
     border-color: var(--primary-blue);
 }
 
-.checkbox-facade::after {
+.checkbox-box-facade::after {
     content: "";
     position: absolute;
     display: none;
-    left: 6px;
-    top: 2px;
-    width: 4px;
-    height: 9px;
+    left: 6px; top: 2px;
+    width: 5px; height: 10px;
     border: solid var(--white);
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
 
-.custom-checkbox-container input:checked ~ .checkbox-facade::after {
+.custom-checkbox-lbl input:checked ~ .checkbox-box-facade::after {
     display: block;
 }
 
-.custom-checkbox-container .label-text {
-    font-size: 13.5px;
-    color: var(--text-dark);
-}
+.checkbox-text { font-size: 13.5px; }
 
-.recovery-anchor {
+.btn-text-link {
+    background: none;
+    border: none;
+    font-family: inherit;
     font-size: 13.5px;
     font-weight: 500;
     color: var(--primary-blue);
-    text-decoration: none;
+    cursor: pointer;
 }
 
-/* Interactive Clusters Button Systems */
 .auth-action-cluster-buttons {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-.auth-submit-btn {
+/* Custom UI Components for Recover State Pipeline */
+.forgot-step-module {
     width: 100%;
-    height: 54px;
-    background: var(--primary-blue);
-    border: none;
-    border-radius: var(--radius-md);
-    color: var(--white);
-    font-family: inherit;
-    font-size: 15.5px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 14px rgba(21, 101, 192, 0.15);
-    transition: background-color var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
 }
 
-.auth-submit-btn:hover {
-    background-color: #11529C;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 18px rgba(21, 101, 192, 0.25);
-}
-
-.back-to-portal-btn {
-    width: 100%;
-    height: 50px;
-    background: transparent;
-    border: 2px solid var(--light-gray);
-    border-radius: var(--radius-md);
-    color: var(--text-muted);
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color var(--t-fast), color var(--t-fast), border-color var(--t-fast);
-}
-
-.back-to-portal-btn:hover {
-    background-color: var(--bg-light);
-    color: var(--text-dark);
-    border-color: var(--text-muted);
-}
-
-/* ============================================================================
-    STAGE 5: Sandbox Interactive Client Application Dashboard Ecosystem
-============================================================================ */
-#stage-dashboard-guest {
-    background-color: var(--bg-light);
-}
-
-.dashboard-global-navbar {
-    width: 100%;
-    height: 80px;
-    padding: 0 40px;
-    background-color: var(--white);
-    border-bottom: 1px solid var(--light-gray);
+.otp-timer-meta-block {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
 }
 
-.dashboard-badge-pill {
-    font-size: 11px;
+.mock-alert-hint {
+    margin-top: 12px;
+    background-color: #E8F5E9;
+    color: var(--primary-green);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12.5px;
     font-weight: 600;
-    text-transform: uppercase;
-    background-color: #E3F2FD;
-    color: var(--primary-blue);
-    padding: 4px 10px;
-    border-radius: 30px;
-    margin-left: 8px;
-    letter-spacing: 0.02em;
-    vertical-align: middle;
 }
 
-.dashboard-exit-action-btn {
-    height: 44px;
-    padding: 0 20px;
-    background-color: var(--white);
-    border: 2px solid #CFD8DC;
-    border-radius: var(--radius-md);
-    font-family: inherit;
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--text-dark);
-    cursor: pointer;
-    transition: background-color var(--t-fast), border-color var(--t-fast);
-}
-
-.dashboard-exit-action-btn:hover {
-    background-color: #FFEBEE;
-    border-color: #FFCDD2;
-    color: var(--error-red);
-}
-
-.dashboard-scrollable-workspace-canvas {
+/* ============================================================================
+    STATE 6: Interactive Functional Sandbox Client Dashboard Ecosystem
+============================================================================ */
+.dashboard-workspace-canvas {
     flex: 1;
-    overflow-y: auto;
-    padding: 48px 40px;
+    padding: 48px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
 }
 
-.dashboard-welcome-banner {
+.dashboard-intro-billboard {
     margin-bottom: 40px;
 }
 
-.dashboard-welcome-banner h3 {
+.dashboard-intro-billboard h2 {
     font-size: 28px;
     font-weight: 700;
-    color: var(--text-dark);
-    margin-bottom: 6px;
     letter-spacing: -0.02em;
+    margin-bottom: 4px;
 }
 
-.dashboard-welcome-banner p {
-    font-size: 14.5px;
+.dashboard-intro-billboard p {
     color: var(--text-muted);
+    font-size: 15px;
 }
 
-/* Modules Grid */
-.dashboard-modules-interactive-grid {
+.dashboard-features-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 28px;
 }
 
-.dashboard-feature-card {
+.dashboard-node-card {
     background-color: var(--white);
-    border: 1px solid var(--light-gray);
+    border: 1px solid var(--border-clean);
     border-radius: var(--radius-md);
     padding: 32px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 2px 12px rgba(21, 101, 192, 0.02);
-    transition: transform var(--t-medium), box-shadow var(--t-medium);
-}
-
-.dashboard-feature-card.functional-node {
     cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+    transition: transform var(--t-normal), box-shadow var(--t-normal);
 }
 
-.dashboard-feature-card.functional-node:hover {
+.dashboard-node-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 30px -5px rgba(21, 101, 192, 0.08);
+    box-shadow: 0 16px 36px -6px rgba(21, 101, 192, 0.08);
 }
 
-/* Premium locked state presentation model */
-.dashboard-feature-card.locked-node {
-    background: linear-gradient(180deg, var(--white) 0%, #FAFCFD 100%);
-    border-style: dashed;
-    border-width: 1.5px;
-    opacity: 0.85;
-}
-
-.feature-card-header-icon-row {
+.node-icon-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.feature-badge-emoji {
-    font-size: 28px;
-}
+.node-emoji { font-size: 28px; }
 
-.active-badge {
+.node-status-pill {
     font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
     padding: 4px 10px;
     border-radius: 6px;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.02em;
 }
 
-.active-badge.operational {
-    background-color: #E8F5E9;
-    color: var(--primary-green);
-}
+.node-status-pill.verified { background-color: #E8F5E9; color: var(--primary-green); }
+.node-status-pill.danger { background-color: var(--accent-red-bg); color: var(--accent-red); }
+.node-status-pill.locked { background-color: var(--accent-orange-bg); color: var(--accent-orange); }
 
-.active-badge.rapid-alert {
-    background-color: #FFEBEE;
-    color: var(--error-red);
-}
-
-.active-badge.roadmap {
-    background-color: var(--notice-bg);
-    color: var(--notice-orange);
-}
-
-.dashboard-feature-card h5 {
-    font-size: 17px;
+.dashboard-node-card h3 {
+    font-size: 18px;
     font-weight: 600;
-    color: var(--text-dark);
     margin-bottom: 8px;
 }
 
-.dashboard-feature-card p {
-    font-size: 13px;
+.dashboard-node-card p {
+    font-size: 13.5px;
     color: var(--text-muted);
     line-height: 1.5;
 }
 
-/* Universal Toast Utility System Component */
+/* ============================================================================
+    Universal Premium Micro-Mechanic Button Foundations
+============================================================================ */
+.btn-premium {
+    height: 52px;
+    padding: 0 36px;
+    border-radius: 50px;
+    font-family: inherit;
+    font-size: 14.5px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    gap: 10px;
+    transition: transform var(--t-fast), box-shadow var(--t-fast), background-color var(--t-fast);
+}
+
+.btn-premium.primary {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    box-shadow: 0 8px 24px -6px rgba(21, 101, 192, 0.3);
+}
+.btn-premium.primary:hover {
+    background-color: #11529C;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px -4px rgba(21, 101, 192, 0.4);
+}
+
+.btn-premium.secondary {
+    background-color: var(--white);
+    border: 2px solid var(--border-clean);
+    color: var(--text-muted);
+}
+.btn-premium.secondary:hover {
+    background-color: var(--bg-workspace-shaded);
+    color: var(--text-primary);
+    border-color: var(--text-muted);
+}
+
+.btn-premium.full-width { width: 100%; }
+
+.btn-spinner {
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    border-top-color: var(--white);
+    animation: layoutMicroSpin 650ms linear infinite;
+}
+
+/* ============================================================================
+    STATE 7: Modern Premium Notification Toast Component Infrastructure
+============================================================================ */
 .toast-hub {
     position: fixed;
-    bottom: 40px;
+    bottom: 32px;
     left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background-color: var(--text-dark);
+    transform: translateX(-50%) translateY(24px);
+    background-color: #1E2530;
     color: var(--white);
-    padding: 14px 28px;
+    padding: 12px 28px;
     border-radius: 50px;
     font-size: 13.5px;
     font-weight: 500;
     box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     z-index: 10000;
     opacity: 0;
-    transition: transform var(--t-medium), opacity var(--t-fast);
+    pointer-events: none;
+    transition: transform var(--t-normal), opacity var(--t-fast);
 }
 
-.toast-hub.toast-active {
+.toast-hub.active {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
 }
 
-.btn-loader {
-    width: 20px;
-    height: 20px;
-    border: 2.5px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    border-top-color: var(--white);
-    animation: MicroHardwareSpin 700ms linear infinite;
+/* ============================================================================
+    Modals Dimensional Interceptor Container Nodes Sheets
+============================================================================ */
+.modal-dimmer {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(28, 34, 43, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    opacity: 1;
+    transition: opacity var(--t-fast);
+}
+
+.modal-surface-container {
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    width: 100%;
+    max-width: 440px;
+    text-align: center;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.15);
+    transform: scale(1) translateY(0);
+    transition: transform var(--t-normal);
+}
+
+.modal-surface-container.large-view {
+    max-width: 700px;
+    text-align: left;
+}
+
+.modal-badge-icon {
+    font-size: 40px;
+    margin-bottom: 16px;
+}
+
+.modal-surface-container h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.modal-surface-container p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.modal-actions-cluster {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.dynamic-injected-workspace-pane {
+    max-height: 400px;
+    overflow-y: auto;
+    font-size: 14px;
+    color: var(--text-primary);
+    line-height: 1.6;
 }
 
 .hidden { display: none !important; }
 
 /* ============================================================================
-    Micro Keyframe Animations Declarations Engine
+    System Kinetic Animations Declarations
 ============================================================================ */
-@keyframes MicroHardwareSpin { to { transform: rotate(360deg); } }
-@keyframes elementInitialization { to { opacity: 1; transform: translateY(0); } }
-@keyframes floatingEcosystemLogo { 0% { transform: translateY(0); } 100% { transform: translateY(-6px); } }
+@keyframes layoutMicroSpin { to { transform: rotate(360deg); } }
+@keyframes initializationSlide { from { opacity: 0; transform: scale(0.9) translateX(-8px); } to { opacity: 1; transform: scale(1) translateX(0); } }
+@keyframes floatingBrandNode { 0% { transform: translateY(0); } 100% { transform: translateY(-6px); } }
 
 /* ============================================================================
-    Responsive Media Breakpoint Controls Engine
+    Responsive Breakpoints Execution Matrix
 ============================================================================ */
 @media (max-width: 1024px) {
-    .portal-cards-grid, .dashboard-modules-interactive-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .welcome-cards-grid, .dashboard-features-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
 }
-
 @media (max-width: 768px) {
-    .portal-cards-grid, .dashboard-modules-interactive-grid { grid-template-columns: 1fr; }
-    .form-split-grid-row { grid-template-columns: 1fr; gap: 0; }
-    .global-stage-header, .dashboard-global-navbar { padding: 0 24px; }
-    .dashboard-scrollable-workspace-canvas { padding: 32px 24px; }
-    .brand-title { font-size: 38px; }
-    .narrative-frame { font-size: 20px; }
-    .auth-card { padding: 32px 24px; border: none; box-shadow: none; background: transparent; }
-    .welcome-intro-text h3 { font-size: 26px; }
+    .welcome-cards-grid, .dashboard-features-grid, .form-split-grid { grid-template-columns: 1fr; }
+    .app-global-navbar { padding: 0 24px; height: 80px; }
+    .nav-title { font-size: 18px; }
+    .nav-tagline { font-size: 12px; }
+    .dashboard-workspace-canvas { padding: 24px; }
+    .auth-workspace-card { padding: 32px 20px; border: none; box-shadow: none; background: transparent; }
+    .view-panel { background-color: var(--white); }
 }
