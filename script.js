@@ -1,135 +1,189 @@
-// ==========================================
-// CareNest Smart System Engine v1.2
-// Multi-Screen and Action Authentication Handlers
-// ==========================================
+/* ==============================================================
+   CareNest — Application Script
+   No inline JS, no inline CSS — everything lives here.
+   ============================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Target Screens
-    const splashScreen = document.getElementById("splash-screen");
-    const loginScreen = document.getElementById("login-screen");
-    
-    // Auth Mode Toggles
-    const tabLogin = document.getElementById("tab-login");
-    const tabSignup = document.getElementById("tab-signup");
-    
-    // Form Instances
-    const loginForm = document.getElementById("login-form");
-    const signupForm = document.getElementById("signup-form");
-    
-    // Password togglers
-    const togglePasswordButtons = document.querySelectorAll(".toggle-password-btn");
 
-    // Toast Pop-up Notification
-    const toast = document.getElementById("toast");
+  /* ------------------------------------------------------------
+     Element references
+  ------------------------------------------------------------ */
+  const body           = document.body;
 
-    // 1. Smooth Automatic Navigation Transition (Splash Screen -> Login Portal)
-    // Runs the custom SVG Heartbeat ECG animation for exactly 3.8 seconds
-    setTimeout(() => {
-        splashScreen.classList.remove("active");
-        
-        // Let splash completely fade out prior to displaying the card
-        setTimeout(() => {
-            loginScreen.classList.add("active");
-        }, 700); 
-    }, 3800);
+  const introStage      = document.getElementById("intro");
+  const authStage       = document.getElementById("auth");
+  const comingSoonStage = document.getElementById("coming-soon");
 
-    // 2. Tab Navigation Layout (Switches Forms Smoothly)
-    tabLogin.addEventListener("click", () => {
-        tabLogin.classList.add("active");
-        tabSignup.classList.remove("active");
-        
-        loginForm.classList.add("active-form");
-        loginForm.classList.remove("hidden-form");
-        
-        signupForm.classList.add("hidden-form");
-        signupForm.classList.remove("active-form");
+  const brandLogo      = document.getElementById("brand-logo");
+  const revealWord      = document.getElementById("reveal-word");
+  const revealKn        = document.getElementById("reveal-kn");
+  const introLine       = document.getElementById("intro-line");
+  const getStartedBtn   = document.getElementById("get-started-btn");
+
+  const tabSignIn       = document.getElementById("tab-signin");
+  const tabSignUp       = document.getElementById("tab-signup");
+  const tabIndicator    = document.getElementById("tab-indicator");
+  const signInForm      = document.getElementById("signin-form");
+  const signUpForm      = document.getElementById("signup-form");
+
+  const forgotPasswordBtn = document.getElementById("forgot-password");
+  const guestBtn        = document.getElementById("guest-btn");
+  const backHomeBtn      = document.getElementById("back-home-btn");
+  const socialButtons   = document.querySelectorAll(".social-btn");
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ------------------------------------------------------------
+     Stage switching helper
+  ------------------------------------------------------------ */
+  function showStage(stageEl, bodyClass){
+    [introStage, authStage, comingSoonStage].forEach(section => {
+      section.classList.remove("stage--active", "stage--enter");
     });
 
-    tabSignup.addEventListener("click", () => {
-        tabSignup.classList.add("active");
-        tabLogin.classList.remove("active");
-        
-        signupForm.classList.add("active-form");
-        signupForm.classList.remove("hidden-form");
-        
-        loginForm.classList.add("hidden-form");
-        loginForm.classList.remove("active-form");
-    });
+    body.classList.remove("body--auth", "body--coming-soon");
+    if (bodyClass) body.classList.add(bodyClass);
 
-    // 3. Dual-Field Password Mask Toggle (Show/Hide Text)
-    togglePasswordButtons.forEach(button => {
-        button.addEventListener("click", (e) => {
-            const passwordInput = e.target.previousElementSibling;
-            const isPassword = passwordInput.type === "password";
-            
-            passwordInput.type = isPassword ? "text" : "password";
-            e.target.textContent = isPassword ? "Hide" : "Show";
-            passwordInput.focus();
-        });
-    });
+    stageEl.classList.add("stage--active");
+    // trigger enter animation on next frame
+    requestAnimationFrame(() => stageEl.classList.add("stage--enter"));
+  }
 
-    // 4. Custom Application Toast Popup Notification
-    function showToast(message) {
-        toast.textContent = message;
-        toast.classList.remove("hidden");
-        // Trigger Layout Reflow
-        toast.offsetHeight;
-        toast.classList.add("show");
+  /* ------------------------------------------------------------
+     Stage 1 — Intro reveal sequence
+  ------------------------------------------------------------ */
+  const sentences = [
+    "Every family deserves better healthcare.",
+    "Technology that cares as much as you do.",
+    "Built for families. Designed for care."
+  ];
 
-        setTimeout(() => {
-            toast.classList.remove("show");
-            setTimeout(() => {
-                toast.classList.add("hidden");
-            }, 400);
-        }, 4000);
+  function runIntroSequence(){
+    if (prefersReducedMotion){
+      revealWord.classList.add("reveal--shown");
+      revealKn.classList.add("reveal--shown");
+      introLine.textContent = sentences[sentences.length - 1];
+      introLine.classList.add("intro-line--shown");
+      getStartedBtn.classList.add("reveal--shown");
+      brandLogo.classList.add("nest-wrap--floating");
+      return;
     }
 
-    // 5. Simulated Form Submission Authentication
-    signupForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const submitBtn = signupForm.querySelector(".submit-btn");
-        const btnText = submitBtn.querySelector(".btn-text");
-        const btnLoader = submitBtn.querySelector(".btn-loader");
-        const nameInput = document.getElementById("signup-name").value;
+    const timers = [];
 
-        btnText.classList.add("hidden");
-        btnLoader.classList.remove("hidden");
-        submitBtn.disabled = true;
+    timers.push(setTimeout(() => revealWord.classList.add("reveal--shown"), 600));
+    timers.push(setTimeout(() => revealKn.classList.add("reveal--shown"), 1200));
+    timers.push(setTimeout(() => brandLogo.classList.add("nest-wrap--floating"), 1200));
 
-        setTimeout(() => {
-            showToast(`Registration Successful! Welcome to CareNest, ${nameInput}.`);
-            btnText.classList.remove("hidden");
-            btnLoader.classList.add("hidden");
-            submitBtn.disabled = false;
-            signupForm.reset();
-            
-            // Re-route user cleanly back to Login Tab
-            tabLogin.click();
-        }, 2000);
+    let cursor = 2400;
+    const holdTime = 1500;
+    const fadeTime = 600;
+
+    sentences.forEach((sentence) => {
+      const showAt = cursor;
+      const hideAt = showAt + fadeTime + holdTime;
+
+      timers.push(setTimeout(() => {
+        introLine.textContent = sentence;
+        introLine.classList.add("intro-line--shown");
+      }, showAt));
+
+      timers.push(setTimeout(() => {
+        introLine.classList.remove("intro-line--shown");
+      }, hideAt));
+
+      cursor = hideAt + fadeTime;
     });
 
-    loginForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const submitBtn = loginForm.querySelector(".submit-btn");
-        const btnText = submitBtn.querySelector(".btn-text");
-        const btnLoader = submitBtn.querySelector(".btn-loader");
+    timers.push(setTimeout(() => {
+      getStartedBtn.classList.add("reveal--shown");
+    }, cursor + 200));
+  }
 
-        btnText.classList.add("hidden");
-        btnLoader.classList.remove("hidden");
-        submitBtn.disabled = true;
+  runIntroSequence();
 
-        setTimeout(() => {
-            showToast("Login Successful! Preparing workspace dashboard...");
-            btnText.classList.remove("hidden");
-            btnLoader.classList.add("hidden");
-            submitBtn.disabled = false;
-            loginForm.reset();
-        }, 2200);
+  /* ------------------------------------------------------------
+     Intro → Auth (logo docks into nav position, card slides up)
+  ------------------------------------------------------------ */
+  getStartedBtn.addEventListener("click", () => {
+    brandLogo.classList.remove("nest-wrap--floating");
+    brandLogo.classList.add("logo--dock");
+
+    const dockDelay = prefersReducedMotion ? 0 : 550;
+
+    setTimeout(() => {
+      showStage(authStage, "body--auth");
+      brandLogo.classList.remove("logo--dock");
+    }, dockDelay);
+  });
+
+  /* ------------------------------------------------------------
+     Auth tabs — Sign In / Sign Up with sliding indicator
+  ------------------------------------------------------------ */
+  function positionIndicator(tabEl){
+    tabIndicator.style.width = `${tabEl.offsetWidth}px`;
+    tabIndicator.style.left  = `${tabEl.offsetLeft}px`;
+  }
+
+  function activateTab(name){
+    const isSignIn = name === "signin";
+
+    tabSignIn.classList.toggle("tab-btn--active", isSignIn);
+    tabSignUp.classList.toggle("tab-btn--active", !isSignIn);
+    tabSignIn.setAttribute("aria-selected", String(isSignIn));
+    tabSignUp.setAttribute("aria-selected", String(!isSignIn));
+
+    signInForm.classList.toggle("auth-form--active", isSignIn);
+    signUpForm.classList.toggle("auth-form--active", !isSignIn);
+
+    positionIndicator(isSignIn ? tabSignIn : tabSignUp);
+  }
+
+  tabSignIn.addEventListener("click", () => activateTab("signin"));
+  tabSignUp.addEventListener("click", () => activateTab("signup"));
+
+  // position indicator once layout is ready and on resize
+  window.addEventListener("load", () => positionIndicator(tabSignIn));
+  window.addEventListener("resize", () => {
+    const active = tabSignIn.classList.contains("tab-btn--active") ? tabSignIn : tabSignUp;
+    positionIndicator(active);
+  });
+
+  /* ------------------------------------------------------------
+     Auth → Coming Soon
+  ------------------------------------------------------------ */
+  function goToComingSoon(){
+    showStage(comingSoonStage, "body--coming-soon");
+  }
+
+  signInForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    goToComingSoon();
+  });
+
+  signUpForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    goToComingSoon();
+  });
+
+  guestBtn.addEventListener("click", goToComingSoon);
+
+  socialButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const provider = btn.dataset.provider;
+      window.alert(`${provider} sign-in will be available in a future update.`);
     });
+  });
 
-    // 6. Forgot Password Click trigger
-    document.getElementById("forgot-password-trigger").addEventListener("click", (e) => {
-        e.preventDefault();
-        showToast("A reset code has been dispatched to your recovery email.");
-    });
+  forgotPasswordBtn.addEventListener("click", () => {
+    window.alert("Password recovery is coming soon. Please contact your clinic administrator for now.");
+  });
+
+  /* ------------------------------------------------------------
+     Coming Soon → back to Intro
+  ------------------------------------------------------------ */
+  backHomeBtn.addEventListener("click", () => {
+    showStage(introStage, null);
+  });
+
 });
