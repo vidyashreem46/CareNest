@@ -1,590 +1,776 @@
-/* ==============================================================
-   CareNest — Design System
-   Fonts: Fraunces (display) / Work Sans (body) / Noto Sans Kannada
-   ============================================================== */
+/* ============================================================================
+    CareNest SaaS Enterprise Design System Tokens & Functional Architectures
+============================================================================ */
 
-:root{
-  --ink:          #1E2E29;
-  --ink-soft:     #4B5D57;
-  --parchment:    #FBF7EF;
-  --parchment-2:  #F3EDE0;
-  --hairline:     #E4DCC8;
-  --marigold:     #C97A3D;
-  --marigold-d:   #A85F2A;
-  --sage:         #4F7869;
-  --sage-light:   #A9C7B8;
-
-  --font-display: 'Fraunces', serif;
-  --font-body:    'Work Sans', sans-serif;
-  --font-kn:      'Noto Sans Kannada', sans-serif;
-
-  --ease: cubic-bezier(.22,.68,.32,1);
-  --t-fast: .25s;
-  --t-med:  .5s;
-  --t-slow: .65s;
+:root {
+    /* Precise Mathematical Color Specifications */
+    --primary-blue: #1565C0;
+    --primary-green: #2E8B57;
+    --bg-light: #F8FBFD;
+    --white: #FFFFFF;
+    --text-dark: #1F2937;
+    --light-gray: #E8EEF3;
+    
+    /* Functional Semantic Context Mappings */
+    --input-placeholder: #9CA3AF;
+    --error-red: #D32F2F;
+    --error-bg: #FFEBEE;
+    
+    /* Micro Interaction Physics Mechanics */
+    --curve-premium: cubic-bezier(0.16, 1, 0.3, 1);
+    --t-fast: 300ms var(--curve-premium);
+    --t-medium: 500ms var(--curve-premium);
+    --t-slow: 800ms var(--curve-premium);
+    
+    /* Layout Geometric Sizing Rules */
+    --radius-lg: 24px;
+    --radius-md: 12px;
+    --shadow-premium: 0 4px 6px -1px rgba(21, 101, 192, 0.04), 0 10px 30px -3px rgba(21, 101, 192, 0.08);
+    --shadow-button-focus: 0 0 0 4px rgba(21, 101, 192, 0.15);
 }
 
-*{ margin:0; padding:0; box-sizing:border-box; }
-
-html{ scroll-behavior:smooth; }
-
-body{
-  font-family: var(--font-body);
-  background: var(--parchment);
-  color: var(--ink);
-  min-height:100vh;
-  overflow:hidden;
-  -webkit-font-smoothing:antialiased;
-  transition: background var(--t-slow) var(--ease);
+/* ============================================================================
+    Global Element Resets & Normalizations
+============================================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-body.body--auth,
-body.body--coming-soon{ background: var(--parchment-2); }
-
-img{ user-select:none; -webkit-user-drag:none; }
-::selection{ background:var(--marigold); color:var(--parchment); }
-button{ font-family:inherit; }
-
-:focus-visible{ outline:2px solid var(--marigold); outline-offset:3px; }
-
-/* ==============================================================
-   Stage system — one active full-viewport section at a time
-   ============================================================== */
-
-#app{ position:relative; width:100%; height:100vh; }
-
-.stage{
-  position:absolute;
-  inset:0;
-  display:none;
-  width:100%;
-  height:100%;
-}
-.stage--active{ display:flex; }
-
-.stage--enter{
-  animation: stage-in var(--t-slow) var(--ease) both;
-}
-@keyframes stage-in{
-  from{ opacity:0; transform:translateY(14px); }
-  to{ opacity:1; transform:translateY(0); }
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: var(--white);
+    color: var(--text-dark);
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
 }
 
-/* ==============================================================
-   Nest mark (signature brand element)
-   ============================================================== */
-
-.nest-wrap{
-  position:relative;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  transition: width var(--t-slow) var(--ease), height var(--t-slow) var(--ease);
-}
-.nest-wrap--lg{ width:150px; height:150px; }
-.nest-wrap--sm{ width:56px; height:56px; }
-
-.nest-wrap--floating{ animation: float-y 4s ease-in-out infinite; }
-@keyframes float-y{
-  0%,100%{ transform:translateY(0); }
-  50%{ transform:translateY(-6px); }
+/* ============================================================================
+    Core App Layer Viewport State Engine Layout
+============================================================================ */
+.app-viewport {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: var(--white);
+    transition: background-color var(--t-slow);
 }
 
-.nest-svg{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  transform: rotate(-8deg);
+.experience-stage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity var(--t-slow), visibility var(--t-slow);
 }
 
-.nest-logo{
-  position:relative;
-  width:44%;
-  border-radius:50%;
-  z-index:1;
+/* State Engine Conditional Pipeline Maps */
+.app-viewport[data-state="onboarding"] #stage-narrative {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 10;
 }
 
-.nest-ring{
-  fill:none;
-  stroke-linecap:round;
-  stroke-dashoffset: 100;
-  animation: draw-ring 1.4s var(--ease) forwards;
-}
-.nest-ring--ink{       stroke:var(--ink);        stroke-width:1.4; stroke-dasharray:6 3;  opacity:.55; animation-delay:.5s; }
-.nest-ring--sage{      stroke:var(--sage);       stroke-width:2;   stroke-dasharray:10 4; opacity:.8;  animation-delay:.65s; }
-.nest-ring--marigold{  stroke:var(--marigold);   stroke-width:2.4; stroke-dasharray:100;  opacity:1;   animation-delay:.8s; }
-.nest-ring--parchment{ stroke:var(--parchment);  stroke-width:1.4; stroke-dasharray:6 3;  opacity:.6;  animation-delay:.1s; }
-.nest-ring--sage-light{stroke:var(--sage-light); stroke-width:2;   stroke-dasharray:10 4; opacity:.85; animation-delay:.25s; }
-
-@keyframes draw-ring{ to{ stroke-dashoffset:0; } }
-
-/* Brand logo shrinking + gliding into nav position on Get Started */
-#brand-logo.logo--dock{
-  position:fixed;
-  top:28px;
-  left:44px;
-  width:56px;
-  height:56px;
-  transform:none;
-  z-index:1200;
+.app-viewport[data-state="auth"] {
+    background-color: var(--bg-light);
 }
 
-/* ==============================================================
-   Type
-   ============================================================== */
-
-.wordmark{
-  font-family: var(--font-display);
-  font-weight:600;
-  font-optical-sizing:auto;
-  color: var(--ink);
-  letter-spacing:-0.01em;
-  font-size:2.75rem;
-  text-align:center;
+.app-viewport[data-state="auth"] #stage-auth {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 10;
 }
 
-.tagline-kn{
-  font-family: var(--font-kn);
-  font-weight:500;
-  color: var(--sage);
-  font-size:1.15rem;
-  text-align:center;
-  margin-top:.4rem;
+.app-viewport[data-state="placeholder"] #stage-placeholder {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 10;
 }
 
-/* ==============================================================
-   Reveal sequence utility (fade + rise in, one at a time via JS)
-   ============================================================== */
-
-.reveal{
-  opacity:0;
-  transform:translateY(10px);
-  transition: opacity var(--t-med) var(--ease), transform var(--t-med) var(--ease);
-}
-.reveal--shown{ opacity:1; transform:translateY(0); }
-
-/* ==============================================================
-   Stage 1 — Intro
-   ============================================================== */
-
-#intro{
-  justify-content:center;
-  align-items:center;
+/* ============================================================================
+    STAGE 1: Onboarding Typography & Presentation Pipeline Engine
+============================================================================ */
+#stage-narrative {
+    justify-content: center;
+    align-items: center;
 }
 
-.intro-center{
-  text-align:center;
-  width:90%;
-  max-width:560px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+.narrative-centerpiece {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.intro-center .nest-wrap{ margin-bottom:1.75rem; }
-
-.intro-line{
-  font-size:1.15rem;
-  color: var(--ink-soft);
-  min-height:2.6rem;
-  max-width:440px;
-  line-height:1.5;
-  margin:2rem 0 2.25rem;
-  opacity:0;
-  transition: opacity .6s var(--ease);
-}
-.intro-line.intro-line--shown{ opacity:1; }
-
-.primary-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:.6rem;
-  padding:16px 32px;
-  border:none;
-  border-radius:100px;
-  background: var(--ink);
-  color: var(--parchment);
-  font-size:1rem;
-  font-weight:600;
-  cursor:pointer;
-  transition: transform var(--t-fast) var(--ease), background var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
-}
-.primary-btn svg{ transition: transform var(--t-fast) var(--ease); }
-
-.primary-btn:hover{
-  background: var(--marigold-d);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 24px -10px rgba(169,95,42,.45);
-}
-.primary-btn:hover svg{ transform: translateX(3px); }
-.primary-btn:active{ transform: translateY(0) scale(.98); }
-
-/* ==============================================================
-   Stage 2 — Auth
-   ============================================================== */
-
-#auth{
-  justify-content:center;
-  align-items:center;
+.brand-anchor {
+    margin-bottom: 48px;
 }
 
-.app-nav{
-  position:absolute;
-  top:24px;
-  left:44px;
-  display:flex;
-  align-items:center;
-  gap:.65rem;
-  z-index:5;
-}
-.nav-word{
-  font-family:var(--font-display);
-  font-weight:600;
-  font-size:1.1rem;
-  color:var(--ink);
+.logo-wrapper {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 24px auto;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: logoInitialization var(--t-slow) 500ms ease forwards, logoFloat 5s ease-in-out infinite alternate;
 }
 
-.auth-shell{
-  display:flex;
-  width:min(920px, 92vw);
-  height:min(600px, 84vh);
-  background: var(--parchment);
-  border:1px solid var(--hairline);
-  border-radius:24px;
-  overflow:hidden;
-  box-shadow: 0 40px 80px -30px rgba(30,46,41,.2);
+.logo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
-.auth-visual{
-  position:relative;
-  flex:0 0 38%;
-  background: var(--ink);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:2rem;
-  padding:2.5rem;
-  overflow:hidden;
+.brand-title {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--primary-blue);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: textFadeUpInitialization var(--t-slow) 700ms var(--curve-premium) forwards;
 }
 
-.auth-watermark{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  font-family: var(--font-kn);
-  font-weight:600;
-  font-size:9rem;
-  color: rgba(251,247,239,.05);
-  white-space:nowrap;
-  pointer-events:none;
-  user-select:none;
+.brand-kannada {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--primary-green);
+    letter-spacing: normal;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: textFadeUpInitialization var(--t-slow) 900ms var(--curve-premium) forwards;
 }
 
-.auth-visual blockquote{
-  position:relative;
-  text-align:center;
-  max-width:260px;
-}
-.auth-visual blockquote p{
-  font-family: var(--font-display);
-  font-style:italic;
-  font-weight:500;
-  font-size:1.2rem;
-  line-height:1.5;
-  color: var(--parchment);
-}
-.auth-visual blockquote cite{
-  display:block;
-  margin-top:.75rem;
-  font-style:normal;
-  font-size:.8rem;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color: var(--sage-light);
+/* Typographic Narrative Window Frame Stack */
+.narrative-window {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.auth-form-panel{
-  position:relative;
-  flex:1;
-  padding:3rem 3.25rem;
-  overflow-y:auto;
-  display:flex;
-  flex-direction:column;
+.narrative-frame {
+    position: absolute;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text-dark);
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--t-medium), transform var(--t-medium);
+    pointer-events: none;
+    width: 100%;
 }
 
-/* Tabs */
-
-.auth-tabs{
-  position:relative;
-  display:flex;
-  gap:1.75rem;
-  border-bottom:1.5px solid var(--hairline);
-  margin-bottom:2rem;
+.narrative-frame.active-frame {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.tab-btn{
-  background:none;
-  border:none;
-  padding:0 0 .85rem;
-  font-size:.98rem;
-  font-weight:600;
-  color: var(--ink-soft);
-  cursor:pointer;
-  transition: color var(--t-fast);
-}
-.tab-btn--active{ color: var(--ink); }
-
-.tab-indicator{
-  position:absolute;
-  bottom:-1.5px;
-  height:2px;
-  background: var(--marigold);
-  border-radius:2px;
-  transition: left var(--t-fast) var(--ease), width var(--t-fast) var(--ease);
+.narrative-frame.exit-frame {
+    opacity: 0;
+    transform: translateY(-20px);
 }
 
-/* Forms */
-
-.auth-form{
-  display:none;
-  flex-direction:column;
-}
-.auth-form--active{
-  display:flex;
-  animation: form-fade var(--t-fast) var(--ease);
-}
-@keyframes form-fade{
-  from{ opacity:0; transform:translateY(6px); }
-  to{ opacity:1; transform:translateY(0); }
+.highlight-green {
+    color: var(--primary-green);
 }
 
-.input-box{ margin-bottom:1.35rem; }
-
-.input-box label{
-  display:block;
-  font-size:.72rem;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color: var(--sage);
-  font-weight:600;
-  margin-bottom:.5rem;
+/* Premium Get Started Button Component */
+.action-gate {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity var(--t-medium), transform var(--t-medium);
+    pointer-events: none;
 }
 
-.input-box input{
-  width:100%;
-  padding:.5rem 2px .65rem;
-  border:none;
-  border-bottom:1.5px solid var(--hairline);
-  outline:none;
-  background:transparent;
-  font-size:1rem;
-  font-family:inherit;
-  color: var(--ink);
-  transition: border-color var(--t-fast);
-}
-.input-box input::placeholder{ color:transparent; }
-.input-box input:focus{ border-bottom-color: var(--marigold); }
-
-.form-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:1.5rem;
-  font-size:.85rem;
+.action-gate.visible-gate {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
 }
 
-.checkbox-label{
-  display:inline-flex;
-  align-items:center;
-  gap:.5rem;
-  color: var(--ink-soft);
-  cursor:pointer;
-  user-select:none;
-}
-.checkbox-label input{ position:absolute; opacity:0; width:0; height:0; }
-
-.checkbox-box{
-  width:16px;
-  height:16px;
-  border:1.5px solid var(--hairline);
-  border-radius:5px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  transition: background var(--t-fast), border-color var(--t-fast);
-  flex-shrink:0;
-}
-.checkbox-label input:checked + .checkbox-box{
-  background: var(--marigold);
-  border-color: var(--marigold);
-}
-.checkbox-label input:checked + .checkbox-box::after{
-  content:"";
-  width:4px;
-  height:8px;
-  border:solid var(--parchment);
-  border-width:0 2px 2px 0;
-  transform: rotate(45deg) translate(-1px,-1px);
+.cta-premium-btn {
+    height: 54px;
+    padding: 0 40px;
+    border: none;
+    border-radius: 50px;
+    background: var(--primary-blue);
+    color: var(--white);
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(21, 101, 192, 0.1), 0 10px 20px -3px rgba(21, 101, 192, 0.15);
+    transition: transform var(--t-fast), box-shadow var(--t-fast), background-color var(--t-fast);
 }
 
-.text-link{
-  background:none;
-  border:none;
-  color: var(--marigold-d);
-  font-weight:600;
-  font-size:.9rem;
-  cursor:pointer;
-  padding:0;
-}
-.text-link:hover{ text-decoration:underline; }
-.text-link--small{ font-size:.85rem; }
-
-.submit-btn{
-  width:100%;
-  margin-top:.4rem;
-  padding:15px;
-  border:none;
-  border-radius:12px;
-  background: var(--ink);
-  color: var(--parchment);
-  font-size:1rem;
-  font-weight:600;
-  cursor:pointer;
-  transition: background var(--t-fast), transform var(--t-fast);
-}
-.submit-btn:hover{ background: var(--marigold-d); }
-.submit-btn:active{ transform: scale(.98); }
-
-/* Divider + social + guest */
-
-.divider{
-  display:flex;
-  align-items:center;
-  gap:.85rem;
-  margin:1.75rem 0 1.25rem;
-  color: var(--ink-soft);
-  font-size:.78rem;
-  text-transform:uppercase;
-  letter-spacing:.06em;
-}
-.divider::before,
-.divider::after{
-  content:"";
-  flex:1;
-  height:1px;
-  background: var(--hairline);
+.cta-premium-btn:hover {
+    transform: translateY(-2px);
+    background-color: #11529C;
+    box-shadow: 0 6px 8px -1px rgba(21, 101, 192, 0.12), 0 12px 24px -3px rgba(21, 101, 192, 0.2);
 }
 
-.social-row{
-  display:flex;
-  gap:.85rem;
-  margin-bottom:1.5rem;
+.cta-premium-btn:active {
+    transform: translateY(0) scale(0.98);
 }
 
-.social-btn{
-  flex:1;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:.5rem;
-  padding:11px;
-  border:1.5px solid var(--hairline);
-  border-radius:10px;
-  background:transparent;
-  font-size:.9rem;
-  font-weight:500;
-  color: var(--ink);
-  cursor:pointer;
-  transition: border-color var(--t-fast), transform var(--t-fast);
-}
-.social-btn:hover{
-  border-color: var(--sage);
-  transform: translateY(-1px);
+.cta-premium-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-button-focus);
 }
 
-#guest-btn{ text-align:center; margin:0 auto; }
-
-/* ==============================================================
-   Stage 3 — Coming Soon
-   ============================================================== */
-
-#coming-soon{
-  justify-content:center;
-  align-items:center;
+/* ============================================================================
+    STAGE 2: Authentication Screen Architecture & Layout Rules
+============================================================================ */
+.auth-navigation-header {
+    width: 100%;
+    height: 80px;
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
 }
 
-.coming-soon-center{
-  text-align:center;
-  max-width:460px;
-  padding:0 24px;
+.nav-identity-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-.nest-illustration{
-  width:150px;
-  height:150px;
-  margin:0 auto 2rem;
-  overflow:visible;
-}
-.ring{
-  fill:none;
-  stroke-linecap:round;
-  stroke-dashoffset:100;
-  animation: draw-ring 1.6s var(--ease) forwards;
-}
-.ring--a{ stroke:var(--hairline); stroke-width:2; stroke-dasharray:8 5; animation-delay:.1s; }
-.ring--b{ stroke:var(--sage);     stroke-width:2; stroke-dasharray:100; opacity:.7; animation-delay:.3s; }
-.ring--c{ stroke:var(--marigold); stroke-width:2.6; stroke-dasharray:100; animation-delay:.5s; }
-.ring-core{
-  fill:var(--marigold);
-  opacity:0;
-  animation: core-pop .5s var(--ease) forwards .9s;
-}
-@keyframes core-pop{
-  from{ opacity:0; transform:scale(.4); }
-  to{ opacity:1; transform:scale(1); }
+.mini-logo-wrapper {
+    width: 36px;
+    height: 36px;
+    transition: transform var(--t-slow);
 }
 
-.coming-soon-copy{
-  color: var(--ink-soft);
-  font-size:1.02rem;
-  line-height:1.65;
-  margin:1.1rem 0 2rem;
+.mini-logo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
-/* ==============================================================
-   Responsive
-   ============================================================== */
-
-@media (max-width: 860px){
-  .auth-shell{ flex-direction:column; height:auto; max-height:90vh; width:94vw; }
-  .auth-visual{ flex:0 0 auto; padding:2rem 1.5rem; gap:1.25rem; }
-  .auth-watermark{ font-size:6rem; }
-  .auth-visual blockquote p{ font-size:1.05rem; }
-  .auth-form-panel{ padding:2.25rem 1.75rem; }
+.nav-brand-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary-blue);
+    letter-spacing: -0.02em;
 }
 
-@media (max-width: 480px){
-  .wordmark{ font-size:2.1rem; }
-  .tagline-kn{ font-size:1rem; }
-  .intro-line{ font-size:1rem; }
-  .nest-wrap--lg{ width:110px; height:110px; }
-  .primary-btn{ padding:14px 26px; font-size:.92rem; }
-  .app-nav{ top:18px; left:20px; }
-  #brand-logo.logo--dock{ top:18px; left:20px; width:44px; height:44px; }
-  .social-row{ flex-direction:column; }
+.auth-workspace-body {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
 }
 
-/* ==============================================================
-   Reduced motion
-   ============================================================== */
+.auth-card {
+    width: 100%;
+    max-width: 460px;
+    background-color: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--radius-lg);
+    padding: 48px;
+    box-shadow: var(--shadow-premium);
+    transform: translateY(30px);
+    opacity: 0;
+}
 
-@media (prefers-reduced-motion: reduce){
-  .nest-ring, .ring, .ring-core{ animation:none; stroke-dashoffset:0; opacity:1; }
-  .nest-wrap--floating{ animation:none; }
-  .reveal{ transition:none; }
-  .stage--enter{ animation:none; }
-  .primary-btn, .primary-btn svg, .submit-btn, .nest-wrap{ transition:none; }
+.app-viewport[data-state="auth"] .auth-card {
+    animation: authCardEntrance var(--t-slow) 100ms var(--curve-premium) forwards;
+}
+
+.auth-card-header {
+    margin-bottom: 32px;
+    text-align: left;
+}
+
+.auth-card-header h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-dark);
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+}
+
+.auth-card-header p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* Structured Form Controls */
+.form-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.form-row label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+}
+
+.form-row input[type="text"],
+.form-row input[type="password"] {
+    width: 100%;
+    height: 52px;
+    padding: 0 16px;
+    border: 2px solid var(--light-gray);
+    border-radius: var(--radius-md);
+    background-color: var(--white);
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.form-row input:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 4px rgba(21, 101, 192, 0.06);
+}
+
+/* Custom Error Invalidation Form UI States */
+.form-row.invalid-node input {
+    border-color: var(--error-red) !important;
+    background-color: var(--error-bg);
+}
+
+.validation-feedback-node {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--error-red);
+    margin-top: 6px;
+    display: none;
+}
+
+.form-row.invalid-node .validation-feedback-node {
+    display: block;
+}
+
+/* Mask visibility structural configurations */
+.field-mask-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.field-mask-wrapper input {
+    padding-right: 64px !important;
+}
+
+.mask-toggle-action {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary-blue);
+    cursor: pointer;
+    padding: 4px;
+    transition: opacity var(--t-fast);
+}
+
+.mask-toggle-action:hover {
+    opacity: 0.7;
+}
+
+/* Utilities Row & Facade Checkbox Controls */
+.form-utilities-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.custom-checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    gap: 8px;
+}
+
+.custom-checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkbox-facade {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--light-gray);
+    border-radius: 6px;
+    background-color: var(--white);
+    position: relative;
+    transition: background-color var(--t-fast), border-color var(--t-fast);
+}
+
+.custom-checkbox-container input:checked ~ .checkbox-facade {
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
+}
+
+.checkbox-facade::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--white);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.custom-checkbox-container input:checked ~ .checkbox-facade::after {
+    display: block;
+}
+
+.custom-checkbox-container .label-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.recovery-anchor {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--primary-blue);
+    text-decoration: none;
+    transition: color var(--t-fast);
+}
+
+.recovery-anchor:hover {
+    color: #11529C;
+}
+
+/* Authentication Processing Button Configurations */
+.auth-submit-btn {
+    width: 100%;
+    height: 54px;
+    background: var(--primary-blue);
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--white);
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(21, 101, 192, 0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    transition: transform var(--t-fast), box-shadow var(--t-fast), background-color var(--t-fast);
+}
+
+.auth-submit-btn:hover {
+    transform: translateY(-1px);
+    background-color: #11529C;
+    box-shadow: 0 6px 16px rgba(21, 101, 192, 0.22);
+}
+
+.auth-submit-btn:active {
+    transform: translateY(0);
+}
+
+.auth-submit-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-button-focus);
+}
+
+.auth-submit-btn:disabled {
+    background-color: var(--light-gray);
+    color: var(--input-placeholder);
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Secondary Pathway Interface Trigger */
+.auth-guest-btn {
+    width: 100%;
+    height: 54px;
+    background-color: transparent;
+    border: 2px solid var(--light-gray);
+    border-radius: var(--radius-md);
+    color: var(--text-dark);
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--t-fast), border-color var(--t-fast);
+}
+
+.auth-guest-btn:hover {
+    background-color: var(--bg-light);
+    border-color: #D1DDE6;
+}
+
+.auth-guest-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-button-focus);
+}
+
+/* Hardware-Accelerated Micro Hardware Spin Mechanics */
+.btn-loader {
+    width: 20px;
+    height: 20px;
+    border: 2.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--white);
+    animation: hardwareMicroSpin 700ms linear infinite;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ============================================================================
+    STAGE 3: Phase 2 Structural Placeholder Engine Dashboard UI
+============================================================================ */
+#stage-placeholder {
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-light);
+}
+
+.placeholder-centerpiece {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.illustration-canvas {
+    margin-bottom: 32px;
+    width: 100%;
+}
+
+/* Apple-Inspired High Fidelity Blueprint Vector Construction Container */
+.ui-mockup-skeleton {
+    width: 280px;
+    height: 180px;
+    background-color: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: 16px;
+    box-shadow: var(--shadow-premium);
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.skeleton-header {
+    height: 24px;
+    background-color: var(--bg-light);
+    border-bottom: 1px solid var(--light-gray);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 12px;
+}
+
+.skeleton-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #D1DDE6;
+    border-radius: 50%;
+}
+
+.skeleton-body {
+    flex: 1;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.skeleton-bar {
+    height: 8px;
+    background-color: var(--bg-light);
+    border-radius: 4px;
+}
+
+.skeleton-bar.long { width: 70%; }
+.skeleton-bar.short { width: 40%; }
+
+.skeleton-grid {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+    flex: 1;
+}
+
+.skeleton-block {
+    flex: 1;
+    background-color: #F0F4F8;
+    border-radius: 8px;
+}
+
+.placeholder-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-dark);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+}
+
+.placeholder-subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+.fallback-nav-btn {
+    height: 48px;
+    padding: 0 24px;
+    background-color: var(--white);
+    border: 2px solid var(--light-gray);
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: background-color var(--t-fast), border-color var(--t-fast);
+}
+
+.fallback-nav-btn:hover {
+    background-color: var(--bg-light);
+    border-color: #D1DDE6;
+}
+
+/* ============================================================================
+    Application Enterprise Global Toast Notifications Hub Layout
+============================================================================ */
+.toast-hub {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background-color: var(--text-dark);
+    color: var(--white);
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    z-index: 10000;
+    opacity: 0;
+    transition: transform var(--t-medium), opacity var(--t-fast);
+    pointer-events: none;
+}
+
+.toast-hub.toast-active {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================================================
+    Hardware Accelerated Production Animation Target Specifications
+============================================================================ */
+@keyframes hardwareMicroSpin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes logoInitialization {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes textFadeUpInitialization {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes logoFloat {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-8px); }
+}
+
+@keyframes authCardEntrance {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================================================
+    High Fidelity Responsive Device Adapters (Pixel Perfect Normalizations)
+============================================================================ */
+@media (max-width: 768px) {
+    .auth-navigation-header {
+        padding: 0 24px;
+    }
+    
+    .auth-card {
+        padding: 32px 24px;
+        border: none;
+        background-color: transparent;
+        box-shadow: none;
+    }
+    
+    .brand-title { font-size: 36px; }
+    .brand-kannada { font-size: 18px; }
+    .narrative-frame { font-size: 22px; }
+}
+
+@media (max-width: 480px) {
+    .brand-title { font-size: 32px; }
+    .narrative-frame { font-size: 18px; }
+    .form-utilities-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
 }
