@@ -3,144 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CareNest - Premium healthcare workspace ecosystem built for families and designed for care.">
-    <title>CareNest</title>
-    
-    <!-- Premium Typography Base -->
+    <title>CareNest - Your Family Healthcare Workspace</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Unified Master Viewport Switcher Core -->
-    <main class="app-viewport" data-state="onboarding">
+    <!-- Accessibilty Skip Link -->
+    <a href="#main-app-container" class="skip-link">Skip to content</a>
 
-        <!-- ===================================================
-                    STAGE 1: CINEMATIC BRAND ONBOARDING 
-        ==================================================== -->
-        <section class="experience-stage" id="stage-narrative">
-            <div class="narrative-centerpiece">
-                <div class="brand-anchor">
-                    <div class="logo-wrapper">
-                        <img src="logo.png" alt="CareNest Master Brand Silhouette" id="primary-brand-logo">
-                    </div>
-                    <h1 class="brand-title">CareNest</h1>
-                    <h2 class="brand-kannada" lang="kn">ನಿಮ್ಮ ಆರೋಗ್ಯ, ನಮ್ಮ ಕಾಳಜಿ.</h2>
+    <main id="main-app-container" class="app-viewport" data-view="story-onboarding">
+
+        <!-- ==========================================
+            STATE 1: PREMIUM CINEMATIC STORY ONBOARDING
+        =========================================== -->
+        <section id="view-story" class="view-panel" aria-labelledby="story-heading">
+            <h2 id="story-heading" class="sr-only">CareNest Introduction</h2>
+            <div class="story-centerpiece">
+                <div class="story-brand-anchor">
+                    <img src="logo.png" alt="CareNest Master Identity Brand Logo" class="story-logo">
+                    <h1 class="brand-title-text">CareNest</h1>
+                    <p class="brand-tagline-kannada" lang="kn">ನಿಮ್ಮ ಆರೋಗ್ಯ, ನಮ್ಮ ಕಾಳಜಿ.</p>
                 </div>
 
-                <!-- Upgraded Smooth Fluid Text Sequencer -->
-                <div class="narrative-window">
-                    <p class="narrative-frame" data-frame="1">Every family deserves better healthcare.</p>
-                    <p class="narrative-frame" data-frame="2">Technology that cares as much as you do.</p>
-                    <p class="narrative-frame" data-frame="3">Healthcare begins at home.</p>
-                    <p class="narrative-frame" data-frame="4">Built with Care.<br><span class="highlight-green">Designed for Families.</span></p>
-                    <p class="narrative-frame" data-frame="5">One Home.<br><span class="highlight-green">One Health Journey.</span></p>
+                <!-- Animated Fluid Story Sentences Sequencer Wrapper -->
+                <div class="story-sequence-window" aria-live="polite">
+                    <p class="story-node active" data-step="1">❤️ Welcome to CareNest</p>
+                    <p class="story-node" data-step="2">🏡 One Home. <br>One Family. <br>One Healthcare Journey.</p>
+                    <p class="story-node" data-step="3">💙 Technology that cares as much as you do.</p>
+                    <p class="story-node" data-step="4">🌿 Every family deserves better healthcare.</p>
+                    <p class="story-node" data-step="5">🩺 Healthcare begins at home.</p>
+                    <p class="story-node" data-step="6">🏥 Caring Beyond Hospitals.</p>
+                    <p class="story-node" data-step="7">📱 Smart Care for Every Family.</p>
+                    <p class="story-node" data-step="8" lang="kn">💚 ನಿಮ್ಮ ಆರೋಗ್ಯ, <br>ನಮ್ಮ ಕಾಳಜಿ.</p>
+                    <p class="story-node" data-step="9">Let's build a healthier tomorrow together.</p>
                 </div>
 
-                <div class="action-gate">
-                    <button type="button" class="cta-premium-btn" id="gate-trigger">
-                        <span>Get Started</span>
+                <div class="story-gate-action">
+                    <button type="button" class="btn-premium primary" id="btn-gate-start">
+                        <span>GET STARTED</span>
                     </button>
                 </div>
             </div>
         </section>
 
-        <!-- ===================================================
-                    STAGE 2: MULTI-CHOICE WELCOME INTERACTION 
-        ==================================================== -->
-        <section class="experience-stage" id="stage-welcome">
-            <header class="global-stage-header">
-                <div class="nav-identity-block">
-                    <img src="logo.png" alt="CareNest Ecosystem Node" class="mini-brand-logo">
-                    <span class="nav-brand-text">CareNest</span>
+        <!-- ==========================================
+            STATE 2: TRIPLE VALUE PROPOSITION CHOICE SCREEN
+        =========================================== -->
+        <section id="view-welcome" class="view-panel" aria-labelledby="welcome-heading">
+            <!-- Persistent Premium Branding Navigation Bar -->
+            <header class="app-global-navbar">
+                <div class="navbar-brand-block">
+                    <img src="logo.png" alt="CareNest Ecosystem Vector" class="nav-logo">
+                    <div class="nav-text-group">
+                        <span class="nav-title">CareNest</span>
+                        <span class="nav-tagline" lang="kn">ನಿಮ್ಮ ಆರೋಗ್ಯ, ನಮ್ಮ ಕಾಳಜಿ.</span>
+                    </div>
                 </div>
             </header>
 
-            <div class="welcome-workspace-body">
-                <div class="welcome-intro-text">
-                    <h3>Begin Your Healthcare Journey</h3>
-                    <p>Select an option below to interact with the CareNest ecosystem portal layout.</p>
+            <div class="welcome-content-body">
+                <div class="welcome-intro-block">
+                    <h2 id="welcome-heading">Begin Your Experience</h2>
+                    <p>Select a pathway below to interface with the platform layers.</p>
                 </div>
 
-                <!-- Three Premium Elevation Interaction Cards Grid -->
-                <div class="portal-cards-grid">
-                    <div class="portal-option-card" id="card-action-signin">
-                        <div class="portal-card-glow"></div>
-                        <div class="card-icon-avatar">👤</div>
-                        <div class="card-meta-details">
-                            <h4>Sign In</h4>
-                            <p>Already have an account?</p>
-                        </div>
-                    </div>
+                <!-- Strategic Core Brand Pillars Info Blocks -->
+                <div class="brand-pillars-row">
+                    <div class="pillar-item"><span>❤️ Care</span> – "Healthcare designed for every family."</div>
+                    <div class="pillar-item"><span>🔒 Trust</span> – "Your information is protected and respected."</div>
+                    <div class="pillar-item"><span>🌱 Growth</span> – "Built to support healthier lives over time."</div>
+                </div>
 
-                    <div class="portal-option-card highlight" id="card-action-register">
-                        <div class="portal-card-glow"></div>
-                        <div class="card-icon-avatar">✨</div>
-                        <div class="card-meta-details">
-                            <h4>Create Account</h4>
-                            <p>Join the CareNest family.</p>
-                        </div>
-                    </div>
+                <!-- Three Premium Glassmorphism Elevation Cards Grid -->
+                <div class="welcome-cards-grid">
+                    <button type="button" class="portal-choice-card" id="btn-goto-signin" aria-describedby="desc-si">
+                        <div class="card-glow-overlay"></div>
+                        <div class="card-avatar-icon">👤</div>
+                        <h3>Sign In</h3>
+                        <p id="desc-si">Already have an account? Log into your portal space securely.</p>
+                    </button>
 
-                    <div class="portal-option-card" id="card-action-guest">
-                        <div class="portal-card-glow"></div>
-                        <div class="card-icon-avatar">👁</div>
-                        <div class="card-meta-details">
-                            <h4>Continue as Guest</h4>
-                            <p>Explore CareNest without signing in.</p>
-                        </div>
-                    </div>
+                    <button type="button" class="portal-choice-card highlight" id="btn-goto-register" aria-describedby="desc-rg">
+                        <div class="card-glow-overlay"></div>
+                        <div class="card-avatar-icon">✨</div>
+                        <h3>Create Account</h3>
+                        <p id="desc-rg">Join the CareNest family. Create your account vector layout.</p>
+                    </button>
+
+                    <button type="button" class="portal-choice-card" id="btn-goto-guest" aria-describedby="desc-gt">
+                        <div class="card-glow-overlay"></div>
+                        <div class="card-avatar-icon">👁</div>
+                        <h3>Continue as Guest</h3>
+                        <p id="desc-gt">Explore CareNest without signing in. Sandbox read-only mode.</p>
+                    </button>
                 </div>
             </div>
         </section>
 
-        <!-- ===================================================
-                    STAGE 3: SIGN IN ACCESS PANEL WORKSPACE
-        ==================================================== -->
-        <section class="experience-stage" id="stage-signin">
-            <div class="auth-workspace-body">
-                <div class="auth-card">
-                    <div class="auth-card-top-identity">
-                        <img src="logo.png" alt="CareNest Branding Vector" class="auth-card-logo">
-                        <h3>Welcome Back</h3>
-                        <p>Enter your credentials to securely access your care portal.</p>
+        <!-- ==========================================
+            STATE 3: SIGN IN ACCESS PANEL WORKSPACE
+        =========================================== -->
+        <section id="view-signin" class="view-panel" aria-labelledby="signin-heading">
+            <header class="app-global-navbar">
+                <div class="navbar-brand-block">
+                    <img src="logo.png" alt="CareNest Ecosystem Vector" class="nav-logo">
+                    <div class="nav-text-group">
+                        <span class="nav-title">CareNest</span>
+                        <span class="nav-tagline" lang="kn">ನಿಮ್ಮ ಆರೋಗ್ಯ, ನಮ್ಮ ಕಾಳಜಿ.</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="auth-center-container">
+                <div class="auth-workspace-card">
+                    <div class="auth-card-header">
+                        <h2 id="signin-heading">Welcome Back</h2>
+                        <p>Access your centralized workspace ecosystem data inputs.</p>
                     </div>
 
-                    <form id="carenest-login-form" novalidate>
-                        <div class="form-row">
-                            <label for="input-username">Username or Email</label>
-                            <input type="text" id="input-username" placeholder="Enter Username" autocomplete="username" required>
-                            <span class="validation-feedback-node"></span>
+                    <!-- Caps Lock Alert Banner Element -->
+                    <div id="signin-caps-warning" class="caps-warning-banner hidden" role="alert">⚠️ Caps Lock is Active</div>
+
+                    <form id="form-carenest-login" novalidate>
+                        <div class="form-group-row">
+                            <label for="si-email">Email or Username</label>
+                            <input type="text" id="si-email" placeholder="Enter your email" required>
+                            <span class="field-error-message" id="err-si-email"></span>
                         </div>
 
-                        <div class="form-row">
-                            <label for="input-password">Password</label>
-                            <div class="field-mask-wrapper">
-                                <input type="password" id="input-password" placeholder="Enter Password" autocomplete="current-password" required>
-                                <button type="button" class="mask-toggle-action toggle-password-btn">Show</button>
+                        <div class="form-group-row">
+                            <label for="si-password">Password</label>
+                            <div class="password-field-wrapper">
+                                <input type="password" id="si-password" placeholder="••••••••" required>
+                                <button type="button" class="btn-mask-toggle" data-target="si-password">Show</button>
                             </div>
-                            <span class="validation-feedback-node"></span>
+                            <span class="field-error-message" id="err-si-password"></span>
                         </div>
 
-                        <div class="form-utilities-row">
-                            <label class="custom-checkbox-container">
-                                <input type="checkbox" id="check-remember">
-                                <span class="checkbox-facade"></span>
-                                <span class="label-text">Remember Me</span>
+                        <div class="form-utility-flex-row">
+                            <label class="custom-checkbox-lbl">
+                                <input type="checkbox" id="si-remember">
+                                <span class="checkbox-box-facade"></span>
+                                <span class="checkbox-text">Remember Me</span>
                             </label>
-                            <a href="#" class="recovery-anchor">Forgot Password?</a>
+                            <button type="button" class="btn-text-link" id="btn-trigger-forgot">Forgot Password?</button>
                         </div>
 
                         <div class="auth-action-cluster-buttons">
-                            <button type="submit" class="auth-submit-btn">
-                                <span class="submit-btn-text">Sign In</span>
-                                <span class="submit-btn-spinner-node hidden"></span>
+                            <button type="submit" class="btn-premium primary full-width">
+                                <span class="btn-label-text">Sign In</span>
+                                <span class="btn-spinner hidden"></span>
                             </button>
-                            <button type="button" class="back-to-portal-btn">
-                                <span>← Back to Portal Options</span>
+                            <button type="button" class="btn-premium secondary full-width btn-back-to-welcome">
+                                <span>← Back to Pathways</span>
                             </button>
                         </div>
                     </form>
@@ -148,207 +166,288 @@
             </div>
         </section>
 
-        <!-- ===================================================
-                    STAGE 4: ENTERPRISE REGISTRATION WORKSPACE
-        ==================================================== -->
-        <section class="experience-stage" id="stage-register">
-            <div class="auth-workspace-body global-scroll-container">
-                <div class="auth-card registration-wide-card">
-                    <div class="auth-card-top-identity">
-                        <img src="logo.png" alt="CareNest Branding Vector" class="auth-card-logo">
-                        <h3>Create Account</h3>
-                        <p>Join CareNest to start managing your family healthcare layouts.</p>
+        <!-- ==========================================
+            STATE 4: ENTERPRISE REGISTRATION WORKSPACE
+        =========================================== -->
+        <section id="view-register" class="view-panel panel-scrollable" aria-labelledby="register-heading">
+            <header class="app-global-navbar">
+                <div class="navbar-brand-block">
+                    <img src="logo.png" alt="CareNest Ecosystem Vector" class="nav-logo">
+                    <div class="nav-text-group">
+                        <span class="nav-title">CareNest</span>
+                        <span class="nav-tagline" lang="kn">ನಿಮ್ಮ ಆರೋಗ್ಯ, ನಮ್ಮ ಕಾಳಜಿ.</span>
                     </div>
-
-                    <form id="carenest-register-form" novalidate>
-                        <div class="form-split-grid-row">
-                            <div class="form-row">
-                                <label for="reg-name">Full Name</label>
-                                <input type="text" id="reg-name" placeholder="John Doe" required>
-                                <span class="validation-feedback-node"></span>
-                            </div>
-                            <div class="form-row">
-                                <label for="reg-phone">Phone Number</label>
-                                <input type="text" id="reg-phone" placeholder="+91 XXXXX XXXXX" required>
-                                <span class="validation-feedback-node"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-split-grid-row">
-                            <div class="form-row">
-                                <label for="reg-email">Email Address</label>
-                                <input type="email" id="reg-email" placeholder="name@example.com" autocomplete="email" required>
-                                <span class="validation-feedback-node"></span>
-                            </div>
-                            <div class="form-row">
-                                <label for="reg-gender">Gender</label>
-                                <select id="reg-gender" class="premium-form-select-node" required>
-                                    <option value="" disabled selected hidden>Select Gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other / Prefer Not to Say</option>
-                                </select>
-                                <span class="validation-feedback-node"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-split-grid-row">
-                            <div class="form-row">
-                                <label for="reg-dob">Date of Birth</label>
-                                <input type="date" id="reg-dob" required>
-                                <span class="validation-feedback-node"></span>
-                            </div>
-                            <div class="form-row">
-                                <label for="reg-address">Address</label>
-                                <input type="text" id="reg-address" placeholder="City, State" required>
-                                <span class="validation-feedback-node"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-split-grid-row">
-                            <div class="form-row">
-                                <label for="reg-password">Create Password</label>
-                                <div class="field-mask-wrapper">
-                                    <input type="password" id="reg-password" placeholder="••••••••" autocomplete="new-password" required>
-                                    <button type="button" class="mask-toggle-action toggle-password-btn">Show</button>
-                                </div>
-                                <span class="validation-feedback-node"></span>
-                            </div>
-                            <div class="form-row">
-                                <label for="reg-confirm-password">Confirm Password</label>
-                                <div class="field-mask-wrapper">
-                                    <input type="password" id="reg-confirm-password" placeholder="••••••••" autocomplete="new-password" required>
-                                    <button type="button" class="mask-toggle-action toggle-password-btn">Show</button>
-                                </div>
-                                <span class="validation-feedback-node"></span>
-                            </div>
-                        </div>
-
-                        <div class="auth-action-cluster-buttons" style="margin-top: 12px;">
-                            <button type="submit" class="auth-submit-btn">
-                                <span class="submit-btn-text">Create Account</span>
-                                <span class="submit-btn-spinner-node hidden"></span>
-                            </button>
-                            <button type="button" class="back-to-portal-btn">
-                                <span>← Back to Portal Options</span>
-                            </button>
-                        </div>
-                    </form>
                 </div>
-            </div>
-        </section>
-
-        <!-- ===================================================
-                    STAGE 5: LIVE SANDBOX GUEST PREVIEW DASHBOARD 
-        ==================================================== -->
-        <section class="experience-stage" id="stage-dashboard-guest">
-            <header class="dashboard-global-navbar">
-                <div class="nav-identity-block">
-                    <img src="logo.png" alt="CareNest Logo" class="mini-brand-logo">
-                    <span class="nav-brand-text">CareNest <span class="dashboard-badge-pill">Sandbox View</span></span>
-                </div>
-                <button type="button" class="dashboard-exit-action-btn" id="guest-exit-to-portal">
-                    <span>Exit Session</span>
-                </button>
             </header>
 
-            <div class="dashboard-scrollable-workspace-canvas">
-                <div class="dashboard-welcome-banner">
-                    <h3>Welcome, Guest Explorer!</h3>
-                    <p>This sandbox environment outlines the production interface models targeted for CareNest Ecosystem Phase 2 development.</p>
+            <div class="auth-center-container">
+                <div class="auth-workspace-card wide-format">
+                    <div class="auth-card-header">
+                        <h2 id="register-heading">Create Account</h2>
+                        <p>Complete the profile enrollment configuration matrices.</p>
+                    </div>
+
+                    <form id="form-carenest-register" novalidate>
+                        <div class="form-split-grid">
+                            <div class="form-group-row">
+                                <label for="rg-name">Full Name</label>
+                                <input type="text" id="rg-name" placeholder="John Doe" required>
+                                <span class="field-error-message" id="err-rg-name"></span>
+                            </div>
+                            <div class="form-group-row">
+                                <label for="rg-phone">Phone Number (10 Digits)</label>
+                                <input type="tel" id="rg-phone" placeholder="9876543210" maxlength="10" required>
+                                <span class="field-error-message" id="err-rg-phone"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-split-grid">
+                            <div class="form-group-row">
+                                <label for="rg-email">Email Address</label>
+                                <input type="email" id="rg-email" placeholder="name@domain.com" autocomplete="email" required>
+                                <span class="field-error-message" id="err-rg-email"></span>
+                            </div>
+                            <div class="form-group-row">
+                                <label for="rg-gender">Gender Identity</label>
+                                <select id="rg-gender" required>
+                                    <option value="" disabled selected hidden>Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <span class="field-error-message" id="err-rg-gender"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-split-grid">
+                            <div class="form-group-row">
+                                <label for="rg-dob">Date of Birth</label>
+                                <input type="date" id="rg-dob" required>
+                                <span class="field-error-message" id="err-rg-dob"></span>
+                            </div>
+                            <div class="form-group-row">
+                                <label for="rg-address">Residential Address</label>
+                                <input type="text" id="rg-address" placeholder="City, State" required>
+                                <span class="field-error-message" id="err-rg-address"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-split-grid">
+                            <div class="form-group-row">
+                                <label for="rg-password">Password</label>
+                                <div class="password-field-wrapper">
+                                    <input type="password" id="rg-password" placeholder="••••••••" required>
+                                    <button type="button" class="btn-mask-toggle" data-target="rg-password">Show</button>
+                                </div>
+                                <!-- Password Strength Indicator Meter Frame -->
+                                <div class="strength-meter-container">
+                                    <div class="strength-meter-bar" id="strength-bar"></div>
+                                    <span class="strength-meter-label" id="strength-label">Strength: None</span>
+                                </div>
+                                <span class="field-error-message" id="err-rg-password"></span>
+                            </div>
+                            <div class="form-group-row">
+                                <label for="rg-confirm">Confirm Password</label>
+                                <div class="password-field-wrapper">
+                                    <input type="password" id="rg-confirm" placeholder="••••••••" required>
+                                    <button type="button" class="btn-mask-toggle" data-target="rg-confirm">Show</button>
+                                </div>
+                                <span class="field-error-message" id="err-rg-confirm"></span>
+                            </div>
+                        </div>
+
+                        <div class="auth-action-cluster-buttons">
+                            <button type="submit" class="btn-premium primary full-width">
+                                <span>Create Account</span>
+                            </button>
+                            <button type="button" class="btn-premium secondary full-width btn-back-to-welcome">
+                                <span>← Back to Pathways</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+            STATE 5: RECOVERY FORGOT PASSWORD MATRIX WORKSPACE
+        =========================================== -->
+        <section id="view-forgot" class="view-panel" aria-labelledby="forgot-heading">
+            <header class="app-global-navbar">
+                <div class="navbar-brand-block">
+                    <img src="logo.png" alt="CareNest Ecosystem Vector" class="nav-logo">
+                    <div class="nav-text-group">
+                        <span class="nav-title">CareNest</span>
+                        <span class="nav-tagline" lang="kn">ನಿಮ್ಮ ಆರೋಗ್ಯ, ನಮ್ಮ ಕಾಳಜಿ.</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="auth-center-container">
+                <div class="auth-workspace-card">
+                    <!-- Step A: Enter Email -->
+                    <div id="forgot-step-email" class="forgot-step-module">
+                        <div class="auth-card-header">
+                            <h2 id="forgot-heading">Account Recovery</h2>
+                            <p>Verify your registered email mapping node to receive an authorization token.</p>
+                        </div>
+                        <div class="form-group-row">
+                            <label for="fg-email">Registered Email Address</label>
+                            <input type="email" id="fg-email" placeholder="name@domain.com" required>
+                            <span class="field-error-message" id="err-fg-email"></span>
+                        </div>
+                        <div class="auth-action-cluster-buttons">
+                            <button type="button" class="btn-premium primary full-width" id="btn-forgot-send-otp">Send Verification Token</button>
+                            <button type="button" class="btn-premium secondary full-width" id="btn-forgot-back-to-si">← Back to Sign In</button>
+                        </div>
+                    </div>
+
+                    <!-- Step B: Enter Verification OTP Token -->
+                    <div id="forgot-step-otp" class="forgot-step-module hidden">
+                        <div class="auth-card-header">
+                            <h2>Enter Token Code</h2>
+                            <p>A verification sequence has been emitted. Enter it below to authorize resets.</p>
+                            <div class="mock-alert-hint" id="mock-otp-display"></div>
+                        </div>
+                        <div class="form-group-row">
+                            <label for="fg-otp">Verification OTP (4 Digits)</label>
+                            <input type="text" id="fg-otp" placeholder="0000" maxlength="4" style="text-align:center; font-size: 20px; letter-spacing: 0.3em;" required>
+                            <span class="field-error-message" id="err-fg-otp"></span>
+                        </div>
+                        <div class="otp-timer-meta-block">
+                            <span id="otp-countdown-text">Expires in: 05:00</span>
+                            <button type="button" class="btn-text-link hidden" id="btn-forgot-resend-otp" disabled>Resend Code (30s)</button>
+                        </div>
+                        <div class="auth-action-cluster-buttons">
+                            <button type="button" class="btn-premium primary full-width" id="btn-forgot-verify-otp">Verify Token</button>
+                        </div>
+                    </div>
+
+                    <!-- Step C: Establish New Password Parameters -->
+                    <div id="forgot-step-reset" class="forgot-step-module hidden">
+                        <div class="auth-card-header">
+                            <h2>Reset Password</h2>
+                            <p>Establish a brand new access signature below following policy rules.</p>
+                        </div>
+                        <div class="form-group-row">
+                            <label for="fg-new-pass">New Password</label>
+                            <div class="password-field-wrapper">
+                                <input type="password" id="fg-new-pass" placeholder="••••••••" required>
+                                <button type="button" class="btn-mask-toggle" data-target="fg-new-pass">Show</button>
+                            </div>
+                            <span class="field-error-message" id="err-fg-new-pass"></span>
+                        </div>
+                        <div class="form-group-row">
+                            <label for="fg-confirm-pass">Confirm New Password</label>
+                            <div class="password-field-wrapper">
+                                <input type="password" id="fg-confirm-pass" placeholder="••••••••" required>
+                                <button type="button" class="btn-mask-toggle" data-target="fg-confirm-pass">Show</button>
+                            </div>
+                            <span class="field-error-message" id="err-fg-confirm-pass"></span>
+                        </div>
+                        <div class="auth-action-cluster-buttons">
+                            <button type="button" class="btn-premium primary full-width" id="btn-forgot-execute-reset">Commit Password Structural Change</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+            STATE 6: MASTER USER INTERFACE DASHBOARD WORKSPACE
+        =========================================== -->
+        <section id="view-dashboard" class="view-panel panel-scrollable" aria-labelledby="dashboard-heading">
+            <header class="app-global-navbar">
+                <div class="navbar-brand-block">
+                    <img src="logo.png" alt="CareNest Ecosystem Vector" class="nav-logo">
+                    <div class="nav-text-group">
+                        <span class="nav-title">CareNest</span>
+                        <span class="nav-tagline" lang="kn">ನಿಮ್ಮ ಆರೋಗ್ಯ, ನಮ್ಮ ಕಾಳಜಿ.</span>
+                    </div>
+                </div>
+                <div class="navbar-actions-group">
+                    <span class="user-identity-badge" id="dashboard-user-badge">Guest Session</span>
+                    <button type="button" class="btn-premium secondary" id="btn-dashboard-logout" style="height: 40px; padding: 0 16px;">Logout</button>
+                </div>
+            </header>
+
+            <div class="dashboard-workspace-canvas">
+                <div class="dashboard-intro-billboard">
+                    <h2 id="dashboard-heading">Ecosystem Control Module</h2>
+                    <p>Central workspace infrastructure mapping your domestic family medical matrices.</p>
                 </div>
 
-                <!-- Complete Grid of Feature Modules requested -->
-                <div class="dashboard-modules-interactive-grid">
+                <!-- Complete Layout Features Array Matrix Grid -->
+                <div class="dashboard-features-grid">
                     
-                    <!-- 1. Find Doctors -->
-                    <div class="dashboard-feature-card functional-node">
-                        <div class="feature-card-header-icon-row">
-                            <span class="feature-badge-emoji">👨‍⚕️</span>
-                            <span class="active-badge operational">Operational</span>
+                    <!-- Card 1: Find Doctors -->
+                    <div class="dashboard-node-card secure-action" data-action="find-doctors">
+                        <div class="node-icon-row">
+                            <span class="node-emoji">👨‍⚕️</span>
+                            <span class="node-status-pill verified">Operational</span>
                         </div>
-                        <h5>Find Doctors</h5>
-                        <p>Locate specialists and cross-verified general medical practitioners within your residential radius mapping.</p>
+                        <h3>Find Doctors</h3>
+                        <p>Locate medical practitioners and health system specialists within your proximity coordinate tracking points.</p>
                     </div>
 
-                    <!-- 2. Book Appointment -->
-                    <div class="dashboard-feature-card functional-node">
-                        <div class="feature-card-header-icon-row">
-                            <span class="feature-badge-emoji">📅</span>
-                            <span class="active-badge operational">Operational</span>
+                    <!-- Card 2: Book Appointment -->
+                    <div class="dashboard-node-card secure-action" data-action="book-appointment">
+                        <div class="node-icon-row">
+                            <span class="node-emoji">📅</span>
+                            <span class="node-status-pill verified">Operational</span>
                         </div>
-                        <h5>Book Appointment</h5>
-                        <p>Schedule visits or configure digital video consultation matrix points across connected care systems.</p>
+                        <h3>Book Appointment</h3>
+                        <p>Configure digital consultation pipelines or face-to-face physical outpatient calendar events matrix.</p>
                     </div>
 
-                    <!-- 3. Medicine Reminder -->
-                    <div class="dashboard-feature-card functional-node">
-                        <div class="feature-card-header-icon-row">
-                            <span class="feature-badge-emoji">💊</span>
-                            <span class="active-badge operational">Operational</span>
+                    <!-- Card 3: Medicine Reminder -->
+                    <div class="dashboard-node-card secure-action" data-action="medicine-reminder">
+                        <div class="node-icon-row">
+                            <span class="node-emoji">💊</span>
+                            <span class="node-status-pill verified">Operational</span>
                         </div>
-                        <h5>Medicine Reminder</h5>
-                        <p>Configure automated chronobiology tracking schedules and family prescriptions dosage loops.</p>
+                        <h3>Medicine Reminder</h3>
+                        <p>Configure automated family prescription dosage tracking notifications loops.</p>
                     </div>
 
-                    <!-- 4. Health Records -->
-                    <div class="dashboard-feature-card functional-node">
-                        <div class="feature-card-header-icon-row">
-                            <span class="feature-badge-emoji">📂</span>
-                            <span class="active-badge operational">Operational</span>
+                    <!-- Card 4: Health Records -->
+                    <div class="dashboard-node-card secure-action" data-action="health-records">
+                        <div class="node-icon-row">
+                            <span class="node-emoji">📂</span>
+                            <span class="node-status-pill verified">Operational</span>
                         </div>
-                        <h5>Health Records</h5>
-                        <p>Secure end-to-end encrypted storage container for digital health prescriptions and laboratory diagnostics reports.</p>
+                        <h3>Health Records</h3>
+                        <p>Secure vault framework storing certified digital laboratory test results and data diagnostics logs.</p>
                     </div>
 
-                    <!-- 5. Emergency Contacts -->
-                    <div class="dashboard-feature-card functional-node">
-                        <div class="feature-card-header-icon-row">
-                            <span class="feature-badge-emoji">🚑</span>
-                            <span class="active-badge rapid-alert">Instant Access</span>
+                    <!-- Card 5: Emergency Contacts -->
+                    <div class="dashboard-node-card secure-action" data-action="emergency-contacts">
+                        <div class="node-icon-row">
+                            <span class="node-emoji">🚑</span>
+                            <span class="node-status-pill danger">Critical Direct</span>
                         </div>
-                        <h5>Emergency Contacts</h5>
-                        <p>One-tap emergency medical services connection pipeline routing geolocation telemetry vectors directly to hospitals.</p>
+                        <h3>Emergency Contacts</h3>
+                        <p>Instantaneous single-action command line to broadcast dispatch alerts and telemetry tracking data.</p>
                     </div>
 
-                    <!-- 6. Nearby Clinics -->
-                    <div class="dashboard-feature-card functional-node">
-                        <div class="feature-card-header-icon-row">
-                            <span class="feature-badge-emoji">📍</span>
-                            <span class="active-badge operational">Operational</span>
+                    <!-- Card 6: AI Health Assistant -->
+                    <div class="dashboard-node-card secure-action" data-action="ai-assistant">
+                        <div class="node-icon-row">
+                            <span class="node-emoji">🤖</span>
+                            <span class="node-status-pill locked">Coming Soon</span>
                         </div>
-                        <h5>Nearby Clinics</h5>
-                        <p>Real-time proximity directory monitoring for community emergency wards and pharmaceutical distribution desks.</p>
+                        <h3>AI Health Assistant</h3>
+                        <p>Next-generation diagnostic semantic symptom-mapping model designed for preliminary structural family triage analysis.</p>
                     </div>
 
-                    <!-- 7. Health Tips -->
-                    <div class="dashboard-feature-card functional-node">
-                        <div class="feature-card-header-icon-row">
-                            <span class="feature-badge-emoji">💡</span>
-                            <span class="active-badge operational">Operational</span>
+                    <!-- Card 7: Family Health Tracker -->
+                    <div class="dashboard-node-card secure-action" data-action="family-tracker">
+                        <div class="node-icon-row">
+                            <span class="node-emoji">❤️</span>
+                            <span class="node-status-pill locked">Coming Soon</span>
                         </div>
-                        <h5>Health Tips</h5>
-                        <p>Curated stream of lifestyle adjustment articles certified by international medical advisory councils.</p>
-                    </div>
-
-                    <!-- 8. AI Health Assistant (Coming Soon) -->
-                    <div class="dashboard-feature-card locked-node">
-                        <div class="feature-card-header-icon-row">
-                            <span class="feature-badge-emoji">🤖</span>
-                            <span class="active-badge roadmap">Coming Soon</span>
-                        </div>
-                        <h5>AI Health Assistant</h5>
-                        <p>Next-generation diagnostic symptom-mapping model designed for preliminary structural family triage analysis.</p>
-                    </div>
-
-                    <!-- 9. Family Health Tracker (Coming Soon) -->
-                    <div class="dashboard-feature-card locked-node">
-                        <div class="feature-card-header-icon-row">
-                            <span class="feature-badge-emoji">❤️</span>
-                            <span class="active-badge roadmap">Coming Soon</span>
-                        </div>
-                        <h5>Family Health Tracker</h5>
-                        <p>Unified data dashboard linking vitals, fitness metrics, and health progress for all family members.</p>
+                        <h3>Family Health Tracker</h3>
+                        <p>Unified data dashboard linking vitals, fitness metrics, and health progress profiles for all family members.</p>
                     </div>
 
                 </div>
@@ -357,8 +456,37 @@
 
     </main>
 
-    <!-- Global Notification Dispatch Framework -->
-    <div id="carenest-global-toast" class="toast-hub hidden" aria-live="assertive"></div>
+    <!-- ==========================================
+        DYNAMIC LAYOUT MODAL ACCESS INTERFACES
+    =========================================== -->
+    
+    <!-- Premium Global Toast Frame Component -->
+    <div id="carenest-toast-hub" class="toast-hub hidden" role="alert" aria-live="assertive"></div>
+
+    <!-- Restrictive Authorization Prompt Modal Interceptor Box -->
+    <div id="carenest-modal-gate" class="modal-dimmer hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-surface-container">
+            <div class="modal-badge-icon">🔒</div>
+            <h3 id="modal-title">Verification Required</h3>
+            <p id="modal-description">You are operating inside a restricted Read-Only Guest Profile Mode. Registration is required to modify datasets or book functional pipelines.</p>
+            <div class="modal-actions-cluster">
+                <button type="button" class="btn-premium primary" id="btn-modal-auth-redirect">Register Now</button>
+                <button type="button" class="btn-premium secondary" id="btn-modal-dismiss">Dismiss View</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modular Interactive Window for Active Sandbox Actions -->
+    <div id="carenest-feature-modal" class="modal-dimmer hidden" role="dialog" aria-modal="true" aria-labelledby="f-modal-title">
+        <div class="modal-surface-container large-view">
+            <h3 id="f-modal-title">Active Module Environment</h3>
+            <hr style="border: 0; height: 1px; background: #E2EAF1; margin: 16px 0;">
+            <div id="f-modal-content-injection" class="dynamic-injected-workspace-pane"></div>
+            <div class="modal-actions-cluster" style="margin-top: 24px; justify-content: flex-end;">
+                <button type="button" class="btn-premium secondary" id="btn-f-modal-dismiss">Close Module Workspace</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
