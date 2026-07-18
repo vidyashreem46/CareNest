@@ -1,184 +1,219 @@
 // ============================================================================
-// CareNest SaaS Enterprise Core Application System Engine Layout Mechanics
+// CareNest SaaS Enterprise - Full Application Mechanics State Controller Engine
 // ============================================================================
 
 document.addEventListener("DOMContentLoaded", () => {
     
-    // Core Engine Structural DOM Traversal Target Mapping Cache
+    // Core Application Viewport State Switching Nodes
     const appViewport = document.querySelector(".app-viewport");
     const gateTrigger = document.getElementById("gate-trigger");
-    const narrativeFrames = document.querySelectorAll(".narrative-frame");
     const actionGateBlock = document.querySelector(".action-gate");
-    
-    // Interactive Authentication Input Sub-Node Maps
-    const authForm = document.getElementById("carenest-core-auth-form");
-    const inputUsername = document.getElementById("input-username");
-    const inputPassword = document.getElementById("input-password");
-    const toggleMaskAction = document.getElementById("password-visibility-toggle");
-    const submitActionBtn = document.getElementById("auth-submit-action");
-    const guestAccessTrigger = document.getElementById("guest-access-trigger");
-    const rollbackDevTrigger = document.getElementById("rollback-dev-trigger");
-    
-    // Application System Global Component Anchors
-    const toastNotificationNode = document.getElementById("carenest-global-toast");
+    const narrativeFrames = document.querySelectorAll(".narrative-frame");
+    const globalToastNode = document.getElementById("carenest-global-toast");
 
-    // Runtime Engine Structural Flow Timing Configuration States
+    // Welcome Screen Structural Action Targets
+    const cardSignIn = document.getElementById("card-action-signin");
+    const cardRegister = document.getElementById("card-action-register");
+    const cardGuest = document.getElementById("card-action-guest");
+    const backToPortalButtons = document.querySelectorAll(".back-to-portal-btn");
+    const guestExitToPortal = document.getElementById("guest-exit-to-portal");
+
+    // Form Identity Handles
+    const loginForm = document.getElementById("carenest-login-form");
+    const registerForm = document.getElementById("carenest-register-form");
+    const sandboxFeatureCards = document.querySelectorAll(".dashboard-feature-card.functional-node");
+
     let currentFrameIndex = 0;
-    const narrativePresentationIntervalTime = 2500; 
+    const frameIntervalDuration = 2800; // Optimal speed for readable fades
 
     // ============================================================================
-    // STAGE 1: Automated Narrative Animation Sequence Lifecycle Orchestrator
+    // STAGE 1: Cinematic Onboarding Presentation Narrative Sequencer
     // ============================================================================
-    
-    function initializeNarrativeSequenceTimeline() {
+    function advanceNarrativePipeline() {
         if (currentFrameIndex < narrativeFrames.length) {
-            // Check for processing operational cycles on frame pointers
             if (currentFrameIndex > 0) {
                 narrativeFrames[currentFrameIndex - 1].classList.remove("active-frame");
                 narrativeFrames[currentFrameIndex - 1].classList.add("exit-frame");
             }
-            
             narrativeFrames[currentFrameIndex].classList.add("active-frame");
             currentFrameIndex++;
-            
-            // Loop evaluation steps until maximum limit thresholds reached
-            setTimeout(initializeNarrativeSequenceTimeline, narrativePresentationIntervalTime);
+            setTimeout(advanceNarrativePipeline, frameIntervalDuration);
         } else {
-            // Gracefully terminate the textual frame rotation stack
             if (narrativeFrames.length > 0) {
                 narrativeFrames[narrativeFrames.length - 1].classList.remove("active-frame");
                 narrativeFrames[narrativeFrames.length - 1].classList.add("exit-frame");
             }
-            
-            // Render call to action interface element visible
             setTimeout(() => {
                 actionGateBlock.classList.add("visible-gate");
-            }, 300);
+            }, 200);
         }
     }
+    setTimeout(advanceNarrativePipeline, 400);
 
-    // Execute sequence mapping pipeline exactly after a 500ms startup threshold latency delay
-    setTimeout(initializeNarrativeSequenceTimeline, 500);
-
-    // ============================================================================
-    // STAGE 2: Interactive Interface State Machine Transition Maps
-    // ============================================================================
-    
+    // Dynamic State Changes Controls
     gateTrigger.addEventListener("click", () => {
-        // Execute modern state routing variable shifts triggering hardware acceleration curves
-        appViewport.setAttribute("data-state", "auth");
+        appViewport.setAttribute("data-state", "welcome");
     });
 
     // ============================================================================
-    // STAGE 3: Form Validations & Operational UI Feedback Flows
+    // STAGE 2: Multi-Option Greeting Welcome Gateway Interaction Mechanics
     // ============================================================================
+    cardSignIn.addEventListener("click", () => appViewport.setAttribute("data-state", "signin"));
+    cardRegister.addEventListener("click", () => appViewport.setAttribute("data-state", "register"));
     
-    // Form Input Mask Security State Controller
-    toggleMaskAction.addEventListener("click", () => {
-        const activeMaskStateType = inputPassword.getAttribute("type") === "password";
-        inputPassword.setAttribute("type", activeMaskStateType ? "text" : "password");
-        toggleMaskAction.textContent = activeMaskStateType ? "Hide" : "Show";
-    });
-
-    // Integrated Toast Event System Dispatch Interface Component
-    function dispatchToastAlertNotification(notificationStringMessage) {
-        toastNotificationNode.textContent = notificationStringMessage;
-        toastNotificationNode.classList.remove("hidden");
-        
-        // Force rendering architecture calculation layout invalidation to cycle animations
-        toastNotificationNode.offsetHeight;
-        toastNotificationNode.classList.add("toast-active");
-
+    cardGuest.addEventListener("click", () => {
+        triggerGlobalNotificationComponent("Initializing Sandbox Demo Account Workspace...");
         setTimeout(() => {
-            toastNotificationNode.classList.remove("toast-active");
-            setTimeout(() => {
-                toastNotificationNode.classList.add("hidden");
-            }, 300);
-        }, 4000);
-    }
-
-    // High Fidelity Clear Validation Mechanics Node Reset Function
-    function clearFieldValidationInvalidationStatus(targetInputNodeFrame) {
-        const targetedParentRowNodeContainer = targetInputNodeFrame.closest(".form-row");
-        if (targetedParentRowNodeContainer) {
-            targetedParentRowNodeContainer.classList.remove("invalid-node");
-            const feedbackTextNode = targetedParentRowNodeContainer.querySelector(".validation-feedback-node");
-            if (feedbackTextNode) feedbackTextNode.textContent = "";
-        }
-    }
-
-    // Structural Form Field Validity Evaluation Check Block Rule
-    function executeFormFieldValidityInspection(targetInputNodeFrame, validationFailureAlertString) {
-        const targetedParentRowNodeContainer = targetInputNodeFrame.closest(".form-row");
-        if (!targetInputNodeFrame.value.trim()) {
-            if (targetedParentRowNodeContainer) {
-                targetedParentRowNodeContainer.classList.add("invalid-node");
-                const feedbackTextNode = targetedParentRowNodeContainer.querySelector(".validation-feedback-node");
-                if (feedbackTextNode) feedbackTextNode.textContent = validationFailureAlertString;
-            }
-            return false;
-        }
-        clearFieldValidationInvalidationStatus(targetInputNodeFrame);
-        return true;
-    }
-
-    // Real-Time Interactivity Form Field Typing Focus Events Listeners 
-    inputUsername.addEventListener("input", () => clearFieldValidationInvalidationStatus(inputUsername));
-    inputPassword.addEventListener("input", () => clearFieldValidationInvalidationStatus(inputPassword));
-
-    // Form Submission Integration Authentication Verification Router
-    authForm.addEventListener("submit", (submitEventCapturedToken) => {
-        submitEventCapturedToken.preventDefault();
-        
-        // Form field analytical checkpoint sequence loops
-        const usernameVerificationPassStatus = executeFormFieldValidityInspection(inputUsername, "Username or registered email address string is required.");
-        const passwordVerificationPassStatus = executeFormFieldValidityInspection(inputPassword, "Account verification security access hash password string is required.");
-
-        if (!usernameVerificationPassStatus || !passwordVerificationPassStatus) {
-            dispatchToastAlertNotification("Please resolve validation errors before continuing.");
-            return;
-        }
-
-        // Toggle interactive states across processing run loops
-        const interfaceLabelButtonTextNode = submitActionBtn.querySelector(".submit-btn-text");
-        const interfaceSpinnerLoadingNode = submitActionBtn.querySelector(".submit-btn-spinner-node");
-
-        interfaceLabelButtonTextNode.classList.add("hidden");
-        interfaceSpinnerLoadingNode.classList.remove("hidden");
-        interfaceSpinnerLoadingNode.classList.add("btn-loader");
-        submitActionBtn.disabled = true;
-
-        // Mock enterprise API payload network operational dispatch delay
-        setTimeout(() => {
-            // Restore structural interface execution capabilities
-            interfaceLabelButtonTextNode.classList.remove("hidden");
-            interfaceSpinnerLoadingNode.classList.add("hidden");
-            interfaceSpinnerLoadingNode.classList.remove("btn-loader");
-            submitActionBtn.disabled = false;
-            
-            dispatchToastAlertNotification("Authentication verified. Loading secure workspace environment...");
-            
-            // Advance system workflow state parameters cleanly directly into phase 2 component layout paths
-            setTimeout(() => {
-                appViewport.setAttribute("data-state", "placeholder");
-                authForm.reset();
-                toggleMaskAction.textContent = "Show";
-                inputPassword.setAttribute("type", "password");
-            }, 1000);
-
-        }, 2000);
-    });
-
-    // Secondary Ecosystem Access Interface Routing Channels
-    guestAccessTrigger.addEventListener("click", () => {
-        dispatchToastAlertNotification("Initializing sandbox configuration access privileges...");
-        setTimeout(() => {
-            appViewport.setAttribute("data-state", "placeholder");
+            appViewport.setAttribute("data-state", "dashboard-guest");
         }, 800);
     });
 
-    // Interface Fallback Recovery Operational Route Methods Map 
-    rollbackDevTrigger.addEventListener("click", () => {
-        appViewport.setAttribute("data-state", "auth");
+    // Back Buttons Mapping
+    backToPortalButtons.forEach(btn => {
+        btn.addEventListener("click", () => appViewport.setAttribute("data-state", "welcome"));
     });
+
+    guestExitToPortal.addEventListener("click", () => {
+        appViewport.setAttribute("data-state", "welcome");
+    });
+
+    // ============================================================================
+    // STAGE 3: Unified Forms Processing & Error Verification Engines
+    // ============================================================================
+    
+    // Password Mask Toggling Functional Rules
+    document.querySelectorAll(".toggle-password-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            const fieldInput = e.target.previousElementSibling;
+            const isMasked = fieldInput.getAttribute("type") === "password";
+            fieldInput.setAttribute("type", isMasked ? "text" : "password");
+            e.target.textContent = isMasked ? "Hide" : "Show";
+        });
+    });
+
+    function flagInputNodeError(input, alertMsg) {
+        const formRowElement = input.closest(".form-row");
+        if (formRowElement) {
+            formRowElement.classList.add("invalid-node");
+            const feedbackText = formRowElement.querySelector(".validation-feedback-node");
+            if (feedbackText) feedbackText.textContent = alertMsg;
+        }
+        return false;
+    }
+
+    function removeInputNodeError(input) {
+        const formRowElement = input.closest(".form-row");
+        if (formRowElement) {
+            formRowElement.classList.remove("invalid-node");
+            const feedbackText = formRowElement.querySelector(".validation-feedback-node");
+            if (feedbackText) feedbackText.textContent = "";
+        }
+    }
+
+    // Attachment validation listeners clear loops
+    document.querySelectorAll(".form-row input, .form-row select").forEach(node => {
+        node.addEventListener("input", () => removeInputNodeError(node));
+    });
+
+    // 1. Sign In Submissions Pipeline Control
+    loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const userNode = document.getElementById("input-username");
+        const passNode = document.getElementById("input-password");
+        let passesVerification = true;
+
+        if (!userNode.value.trim()) passesVerification = flagInputNodeError(userNode, "Account ID entry credential is required.");
+        if (!passNode.value.trim()) passesVerification = flagInputNodeError(passNode, "Security pass code signature required.");
+
+        if (!passesVerification) return;
+
+        executeSubmitSpinnerAnimation(loginForm, true);
+        setTimeout(() => {
+            executeSubmitSpinnerAnimation(loginForm, false);
+            triggerGlobalNotificationComponent("Sign In successful! Accessing Production Nodes...");
+            loginForm.reset();
+        }, 1500);
+    });
+
+    // 2. Full Account Registration Processing Engine
+    registerForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const regName = document.getElementById("reg-name");
+        const regPhone = document.getElementById("reg-phone");
+        const regEmail = document.getElementById("reg-email");
+        const regGender = document.getElementById("reg-gender");
+        const regDob = document.getElementById("reg-dob");
+        const regAddress = document.getElementById("reg-address");
+        const regPass = document.getElementById("reg-password");
+        const regConfirmPass = document.getElementById("reg-confirm-password");
+
+        let passesVerification = true;
+
+        if (!regName.value.trim()) passesVerification = flagInputNodeError(regName, "Full biological identity reference is required.");
+        if (!regPhone.value.trim()) passesVerification = flagInputNodeError(regPhone, "Contact tracking digits required.");
+        if (!regEmail.value.trim()) passesVerification = flagInputNodeError(regEmail, "Communications address route record required.");
+        if (!regGender.value) passesVerification = flagInputNodeError(regGender, "Demographic reference identification required.");
+        if (!regDob.value) passesVerification = flagInputNodeError(regDob, "Birth metric registry record required.");
+        if (!regAddress.value.trim()) passesVerification = flagInputNodeError(regAddress, "Residential location mapping record required.");
+        
+        if (!regPass.value.trim() || regPass.value.length < 8) {
+            passesVerification = flagInputNodeError(regPass, "Password strength target requires minimum 8 characters.");
+        }
+        if (regPass.value !== regConfirmPass.value) {
+            passesVerification = flagInputNodeError(regConfirmPass, "Security signature match conflict detected.");
+        }
+
+        if (!passesVerification) return;
+
+        executeSubmitSpinnerAnimation(registerForm, true);
+        setTimeout(() => {
+            executeSubmitSpinnerAnimation(registerForm, false);
+            triggerGlobalNotificationComponent(`Registration verified! Welcome to CareNest, ${regName.value}.`);
+            setTimeout(() => {
+                appViewport.setAttribute("data-state", "welcome");
+                registerForm.reset();
+            }, 1000);
+        }, 2000);
+    });
+
+    // ============================================================================
+    // STAGE 4: Sandbox Sandbox Ecosystem Dashboard Click Actions Feedbacks
+    // ============================================================================
+    sandboxFeatureCards.forEach(card => {
+        card.addEventListener("click", () => {
+            const title = card.querySelector("h5").textContent;
+            triggerGlobalNotificationComponent(`Sandbox Event: Initializing module telemetry tracking for "${title}"...`);
+        });
+    });
+
+    // Helper Utility Component Animations Engines
+    function executeSubmitSpinnerAnimation(formTarget, activatingState) {
+        const primaryActionButton = formTarget.querySelector(".auth-submit-btn");
+        const normalTextSpan = primaryActionButton.querySelector(".submit-btn-text");
+        const structuralSpinnerNode = primaryActionButton.querySelector(".submit-btn-spinner-node");
+
+        if (activatingState) {
+            normalTextSpan.classLists.add("hidden");
+            structuralSpinnerNode.classList.remove("hidden");
+            structuralSpinnerNode.classList.add("btn-loader");
+            primaryActionButton.style.pointerEvents = "none";
+        } else {
+            normalTextSpan.classList.remove("hidden");
+            structuralSpinnerNode.classList.add("hidden");
+            structuralSpinnerNode.classList.remove("btn-loader");
+            primaryActionButton.style.pointerEvents = "auto";
+        }
+    }
+
+    function triggerGlobalNotificationComponent(messageString) {
+        globalToastNode.textContent = messageString;
+        globalToastNode.classList.remove("hidden");
+        globalToastNode.offsetHeight; // Reflow browser matrix layer synchronization trigger
+        globalToastNode.classList.add("toast-active");
+
+        setTimeout(() => {
+            globalToastNode.classList.remove("toast-active");
+            setTimeout(() => { globalToastNode.classList.add("hidden"); }, 300);
+        }, 3500);
+    }
 });
