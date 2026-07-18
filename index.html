@@ -1,140 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CareNest</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareNest | Technology that cares as much as you do.</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=Noto+Sans+Kannada:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <main class="app-container">
-        <!-- ===================================================
-                            SPLASH SCREEN
-        ==================================================== -->
-        <section id="splash-screen" class="screen active">
-            <div class="splash-content">
-                <div class="logo-box">
-                    <!-- Pointing to your images folder -->
-                    <img src="images/logo.png" alt="CareNest Logo" id="logo">
-                </div>
-                <h1 class="brand-name">CareNest</h1>
-                <h2 class="kannada" lang="kn">ನಿಮ್ಮ ಆರೋಗ್ಯ, ನಮ್ಮ ಕಾಳಜಿ.</h2>
-                <p class="brand-line">Technology that cares as much as you do.</p>
-                
-                <!-- Brand New Unique Heartbeat SVG Loader -->
-                <div class="heartbeat-loader-container">
-                    <svg class="heartbeat-svg" viewBox="0 0 300 100">
-                        <path class="heartbeat-bg-track" d="M0,50 L80,50 L95,20 L110,80 L125,50 L140,50 L150,35 L160,65 L170,50 L300,50" />
-                        <path class="heartbeat-pulse" d="M0,50 L80,50 L95,20 L110,80 L125,50 L140,50 L150,35 L160,65 L170,50 L300,50" />
-                    </svg>
-                    <p class="loading-text">Connecting to CareNest Network...</p>
-                </div>
-            </div>
-        </section>
+<!-- ===========================================================
+     NEST MARK — brand signature, two colorways via <use>
+============================================================ -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <g id="nest-mark">
+      <circle class="nest-ring nest-ring--ink"      cx="60" cy="60" r="52" pathLength="100" />
+      <circle class="nest-ring nest-ring--sage"     cx="60" cy="60" r="40" pathLength="100" />
+      <circle class="nest-ring nest-ring--marigold" cx="60" cy="60" r="27" pathLength="100" />
+    </g>
+    <g id="nest-mark-light">
+      <circle class="nest-ring nest-ring--parchment" cx="60" cy="60" r="52" pathLength="100" />
+      <circle class="nest-ring nest-ring--sage-light" cx="60" cy="60" r="40" pathLength="100" />
+      <circle class="nest-ring nest-ring--marigold"   cx="60" cy="60" r="27" pathLength="100" />
+    </g>
+  </defs>
+</svg>
 
-        <!-- ===================================================
-                        AUTH SCREEN (LOGIN / REGISTER)
-        ==================================================== -->
-        <section id="login-screen" class="screen">
-            <div class="top-logo">
-                <img src="images/logo.png" alt="CareNest Logo">
-            </div>
-            
-            <div class="auth-card">
-                <!-- Toggle Navigation Tabs -->
-                <div class="auth-toggle-headers">
-                    <button type="button" id="tab-login" class="tab-btn active">Sign In</button>
-                    <button type="button" id="tab-signup" class="tab-btn">Register</button>
-                </div>
+<div id="app">
 
-                <div class="form-container">
-                    <!-- 1. SIGN IN FORM -->
-                    <form id="login-form" class="auth-form active-form">
-                        <h3>Welcome Back</h3>
-                        <p class="form-sub">Enter your credentials to access your portal.</p>
-                        
-                        <div class="input-group">
-                            <label for="login-username">Username</label>
-                            <input type="text" id="login-username" autocomplete="username" placeholder="Enter Username" required>
-                        </div>
-                        
-                        <div class="input-group">
-                            <label for="login-password">Password</label>
-                            <div class="password-wrapper">
-                                <input type="password" id="login-password" autocomplete="current-password" placeholder="Enter Password" required>
-                                <button type="button" class="toggle-password-btn" aria-label="Toggle password visibility">Show</button>
-                            </div>
-                        </div>
+  <!-- =========================================================
+       STAGE 1 — INTRO (brand moment: logo, name, sentences)
+  ========================================================== -->
+  <section id="intro" class="stage stage--active">
 
-                        <div class="form-actions">
-                            <a href="#" class="forgot-link" id="forgot-password-trigger">Forgot password?</a>
-                        </div>
-                        
-                        <button type="submit" class="submit-btn">
-                            <span class="btn-text">Sign In</span>
-                            <span class="btn-loader hidden"></span>
-                        </button>
-                    </form>
+    <div class="intro-center">
 
-                    <!-- 2. REGISTER FORM (For First-Time Users) -->
-                    <form id="signup-form" class="auth-form hidden-form">
-                        <h3>Create Nest Account</h3>
-                        <p class="form-sub">Register as a clinical or administrative staff member.</p>
-                        
-                        <div class="input-group">
-                            <label for="signup-name">Full Name</label>
-                            <input type="text" id="signup-name" placeholder="Dr. Sarah Alva" required>
-                        </div>
+      <div class="nest-wrap nest-wrap--lg" id="brand-logo">
+        <svg viewBox="0 0 120 120" class="nest-svg"><use href="#nest-mark"/></svg>
+        <img src="assets/images/logo.png" alt="CareNest" class="nest-logo">
+      </div>
 
-                        <div class="input-group">
-                            <label for="signup-email">Official Email</label>
-                            <input type="email" id="signup-email" autocomplete="email" placeholder="sarah.alva@hospital.com" required>
-                        </div>
-                        
-                        <div class="input-group">
-                            <label for="signup-password">Create Password</label>
-                            <div class="password-wrapper">
-                                <input type="password" id="signup-password" autocomplete="new-password" placeholder="At least 8 characters" required>
-                                <button type="button" class="toggle-password-btn" aria-label="Toggle password visibility">Show</button>
-                            </div>
-                        </div>
+      <h1 class="wordmark reveal" id="reveal-word">CareNest</h1>
+      <p class="tagline-kn reveal" id="reveal-kn">ನಿಮ್ಮ ಆರೋಗ್ಯ, ನಮ್ಮ ಕಾಳಜಿ</p>
 
-                        <div class="input-group">
-                            <label for="signup-role">Your Medical Role</label>
-                            <select id="signup-role" required>
-                                <option value="" disabled selected>Select your role...</option>
-                                <option value="doctor">Medical Specialist / Doctor</option>
-                                <option value="nurse">Nursing Staff</option>
-                                <option value="admin">Desk Administration</option>
-                            </select>
-                        </div>
-                        
-                        <button type="submit" class="submit-btn">
-                            <span class="btn-text">Register Account</span>
-                            <span class="btn-loader hidden"></span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
+      <p class="intro-line" id="intro-line" aria-live="polite">&nbsp;</p>
 
-    <!-- Custom Notification/Toast Pop-up -->
-    <div id="toast" class="toast hidden"></div>
+      <button type="button" id="get-started-btn" class="primary-btn reveal" aria-label="Get started with CareNest">
+        <span>Get Started</span>
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9h10M9 4l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
 
-    <!-- Background Decorative Blobs -->
-    <div class="circle one" aria-hidden="true"></div>
-    <div class="circle two" aria-hidden="true"></div>
-    <div class="circle three" aria-hidden="true"></div>
+    </div>
+  </section>
 
-    <script src="script.js"></script>
+  <!-- =========================================================
+       STAGE 2 — AUTH (sign in / sign up / other options)
+  ========================================================== -->
+  <section id="auth" class="stage">
+
+    <nav class="app-nav">
+      <div class="nest-wrap nest-wrap--sm">
+        <svg viewBox="0 0 120 120" class="nest-svg"><use href="#nest-mark"/></svg>
+        <img src="assets/images/logo.png" alt="" class="nest-logo">
+      </div>
+      <span class="nav-word">CareNest</span>
+    </nav>
+
+    <div class="auth-shell">
+
+      <aside class="auth-visual">
+        <span class="auth-watermark" aria-hidden="true">ಕಾಳಜಿ</span>
+        <div class="nest-wrap nest-wrap--sm">
+          <svg viewBox="0 0 120 120" class="nest-svg"><use href="#nest-mark-light"/></svg>
+          <img src="assets/images/logo.png" alt="" class="nest-logo">
+        </div>
+        <blockquote>
+          <p>&ldquo;Every family deserves care that remembers them.&rdquo;</p>
+          <cite>&mdash; CareNest</cite>
+        </blockquote>
+      </aside>
+
+      <div class="auth-form-panel">
+
+        <div class="auth-tabs" role="tablist">
+          <button class="tab-btn tab-btn--active" id="tab-signin" role="tab" aria-selected="true" aria-controls="signin-form" data-tab="signin">Sign In</button>
+          <button class="tab-btn" id="tab-signup" role="tab" aria-selected="false" aria-controls="signup-form" data-tab="signup">Sign Up</button>
+          <span class="tab-indicator" id="tab-indicator"></span>
+        </div>
+
+        <!-- Sign In -->
+        <form id="signin-form" class="auth-form auth-form--active" role="tabpanel" aria-labelledby="tab-signin" novalidate>
+          <div class="input-box">
+            <label for="signin-username">Username</label>
+            <input id="signin-username" name="username" type="text" autocomplete="username" placeholder=" ">
+          </div>
+          <div class="input-box">
+            <label for="signin-password">Password</label>
+            <input id="signin-password" name="password" type="password" autocomplete="current-password" placeholder=" ">
+          </div>
+
+          <div class="form-row">
+            <label class="checkbox-label">
+              <input type="checkbox" id="remember-me" name="remember">
+              <span class="checkbox-box" aria-hidden="true"></span>
+              Remember me
+            </label>
+            <button type="button" class="text-link text-link--small" id="forgot-password">Forgot password?</button>
+          </div>
+
+          <button type="submit" class="submit-btn">Sign in</button>
+        </form>
+
+        <!-- Sign Up -->
+        <form id="signup-form" class="auth-form" role="tabpanel" aria-labelledby="tab-signup" novalidate>
+          <div class="input-box">
+            <label for="signup-name">Full name</label>
+            <input id="signup-name" name="name" type="text" autocomplete="name" placeholder=" ">
+          </div>
+          <div class="input-box">
+            <label for="signup-username">Username</label>
+            <input id="signup-username" name="username" type="text" autocomplete="username" placeholder=" ">
+          </div>
+          <div class="input-box">
+            <label for="signup-password">Password</label>
+            <input id="signup-password" name="password" type="password" autocomplete="new-password" placeholder=" ">
+          </div>
+          <div class="input-box">
+            <label for="signup-confirm">Confirm password</label>
+            <input id="signup-confirm" name="confirm" type="password" autocomplete="new-password" placeholder=" ">
+          </div>
+          <button type="submit" class="submit-btn">Create account</button>
+        </form>
+
+        <div class="divider"><span>or continue with</span></div>
+
+        <div class="social-row">
+          <button type="button" class="social-btn" data-provider="Google">
+            <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.92c1.7-1.57 2.68-3.88 2.68-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.92-2.26c-.81.54-1.84.86-3.04.86-2.34 0-4.32-1.58-5.03-3.7H.95v2.33A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.72A5.4 5.4 0 0 1 3.68 9c0-.6.1-1.18.29-1.72V4.95H.95A9 9 0 0 0 0 9c0 1.45.35 2.83.95 4.05l3.02-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .95 4.95l3.02 2.33C4.68 5.16 6.66 3.58 9 3.58z"/></svg>
+            Google
+          </button>
+          <button type="button" class="social-btn" data-provider="Phone">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2z" stroke="#1E2E29" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Phone
+          </button>
+        </div>
+
+        <button type="button" id="guest-btn" class="text-link">Continue as guest &rarr;</button>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       STAGE 3 — COMING SOON (post-auth placeholder)
+  ========================================================== -->
+  <section id="coming-soon" class="stage">
+    <div class="coming-soon-center">
+
+      <svg viewBox="0 0 160 160" class="nest-illustration" aria-hidden="true">
+        <circle class="ring ring--a" cx="80" cy="80" r="70" pathLength="100"/>
+        <circle class="ring ring--b" cx="80" cy="80" r="54" pathLength="100"/>
+        <circle class="ring ring--c" cx="80" cy="80" r="38" pathLength="100"/>
+        <circle class="ring-core" cx="80" cy="80" r="10"/>
+      </svg>
+
+      <h1 class="wordmark">Dashboard coming soon</h1>
+      <p class="coming-soon-copy">We&rsquo;re building your family&rsquo;s care space &mdash; records, reminders, and appointments in one calm view. Phase&nbsp;2 launches soon.</p>
+
+      <button type="button" id="back-home-btn" class="text-link">&larr; Back to home</button>
+    </div>
+  </section>
+
+</div>
+
+<script src="js/script.js"></script>
 </body>
 </html>
 
