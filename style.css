@@ -1,504 +1,590 @@
-/* =====================================================
-               CareNest Custom Aesthetic Stylesheet
-===================================================== */
+/* ==============================================================
+   CareNest — Design System
+   Fonts: Fraunces (display) / Work Sans (body) / Noto Sans Kannada
+   ============================================================== */
 
-:root {
-    /* Exact colors sampled directly from the Logo */
-    --primary-blue: #0b4275;
-    --primary-blue-light: #1664a3;
-    --accent-green: #1e824c;
-    --accent-green-light: #2e8b57;
-    --text-dark: #121d28;
-    --text-muted: #627282;
-    --bg-light: #f3f7fa;
-    --white: #ffffff;
-    
-    /* Gradients */
-    --brand-gradient: linear-gradient(135deg, var(--accent-green-light), var(--primary-blue));
-    
-    /* Layout Elements */
-    --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    --border-radius-lg: 32px;
-    --border-radius-md: 16px;
-    --glass-shadow: 0 20px 50px rgba(11, 66, 117, 0.08);
+:root{
+  --ink:          #1E2E29;
+  --ink-soft:     #4B5D57;
+  --parchment:    #FBF7EF;
+  --parchment-2:  #F3EDE0;
+  --hairline:     #E4DCC8;
+  --marigold:     #C97A3D;
+  --marigold-d:   #A85F2A;
+  --sage:         #4F7869;
+  --sage-light:   #A9C7B8;
+
+  --font-display: 'Fraunces', serif;
+  --font-body:    'Work Sans', sans-serif;
+  --font-kn:      'Noto Sans Kannada', sans-serif;
+
+  --ease: cubic-bezier(.22,.68,.32,1);
+  --t-fast: .25s;
+  --t-med:  .5s;
+  --t-slow: .65s;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  font-family: var(--font-body);
+  background: var(--parchment);
+  color: var(--ink);
+  min-height:100vh;
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+  transition: background var(--t-slow) var(--ease);
 }
 
-body {
-    background: var(--bg-light);
-    overflow: hidden;
-    color: var(--text-dark);
-    min-height: 100vh;
+body.body--auth,
+body.body--coming-soon{ background: var(--parchment-2); }
+
+img{ user-select:none; -webkit-user-drag:none; }
+::selection{ background:var(--marigold); color:var(--parchment); }
+button{ font-family:inherit; }
+
+:focus-visible{ outline:2px solid var(--marigold); outline-offset:3px; }
+
+/* ==============================================================
+   Stage system — one active full-viewport section at a time
+   ============================================================== */
+
+#app{ position:relative; width:100%; height:100vh; }
+
+.stage{
+  position:absolute;
+  inset:0;
+  display:none;
+  width:100%;
+  height:100%;
+}
+.stage--active{ display:flex; }
+
+.stage--enter{
+  animation: stage-in var(--t-slow) var(--ease) both;
+}
+@keyframes stage-in{
+  from{ opacity:0; transform:translateY(14px); }
+  to{ opacity:1; transform:translateY(0); }
 }
 
-/* ===========================================
-            Floating Soft-Glow Backgrounds
-=========================================== */
-.circle {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(90px);
-    z-index: -1;
-    opacity: 0.45;
-    pointer-events: none;
-    animation: slowDrift 15s ease-in-out infinite alternate;
+/* ==============================================================
+   Nest mark (signature brand element)
+   ============================================================== */
+
+.nest-wrap{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  transition: width var(--t-slow) var(--ease), height var(--t-slow) var(--ease);
+}
+.nest-wrap--lg{ width:150px; height:150px; }
+.nest-wrap--sm{ width:56px; height:56px; }
+
+.nest-wrap--floating{ animation: float-y 4s ease-in-out infinite; }
+@keyframes float-y{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-6px); }
 }
 
-.one {
-    width: 400px;
-    height: 400px;
-    background: #e1f5eb;
-    top: -120px;
-    left: -100px;
+.nest-svg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  transform: rotate(-8deg);
 }
 
-.two {
-    width: 350px;
-    height: 350px;
-    background: #daf0ff;
-    bottom: -100px;
-    right: -80px;
-    animation-delay: -3s;
+.nest-logo{
+  position:relative;
+  width:44%;
+  border-radius:50%;
+  z-index:1;
 }
 
-.three {
-    width: 250px;
-    height: 250px;
-    background: #e8f9e2;
-    top: 40%;
-    right: 15%;
-    animation-delay: -6s;
+.nest-ring{
+  fill:none;
+  stroke-linecap:round;
+  stroke-dashoffset: 100;
+  animation: draw-ring 1.4s var(--ease) forwards;
+}
+.nest-ring--ink{       stroke:var(--ink);        stroke-width:1.4; stroke-dasharray:6 3;  opacity:.55; animation-delay:.5s; }
+.nest-ring--sage{      stroke:var(--sage);       stroke-width:2;   stroke-dasharray:10 4; opacity:.8;  animation-delay:.65s; }
+.nest-ring--marigold{  stroke:var(--marigold);   stroke-width:2.4; stroke-dasharray:100;  opacity:1;   animation-delay:.8s; }
+.nest-ring--parchment{ stroke:var(--parchment);  stroke-width:1.4; stroke-dasharray:6 3;  opacity:.6;  animation-delay:.1s; }
+.nest-ring--sage-light{stroke:var(--sage-light); stroke-width:2;   stroke-dasharray:10 4; opacity:.85; animation-delay:.25s; }
+
+@keyframes draw-ring{ to{ stroke-dashoffset:0; } }
+
+/* Brand logo shrinking + gliding into nav position on Get Started */
+#brand-logo.logo--dock{
+  position:fixed;
+  top:28px;
+  left:44px;
+  width:56px;
+  height:56px;
+  transform:none;
+  z-index:1200;
 }
 
-@keyframes slowDrift {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(30px, 20px) scale(1.1); }
+/* ==============================================================
+   Type
+   ============================================================== */
+
+.wordmark{
+  font-family: var(--font-display);
+  font-weight:600;
+  font-optical-sizing:auto;
+  color: var(--ink);
+  letter-spacing:-0.01em;
+  font-size:2.75rem;
+  text-align:center;
 }
 
-/* ===========================================
-            Page-Transition Engine
-=========================================== */
-.screen {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 1;
+.tagline-kn{
+  font-family: var(--font-kn);
+  font-weight:500;
+  color: var(--sage);
+  font-size:1.15rem;
+  text-align:center;
+  margin-top:.4rem;
 }
 
-.screen.active {
-    opacity: 1;
-    visibility: visible;
-    z-index: 10;
+/* ==============================================================
+   Reveal sequence utility (fade + rise in, one at a time via JS)
+   ============================================================== */
+
+.reveal{
+  opacity:0;
+  transform:translateY(10px);
+  transition: opacity var(--t-med) var(--ease), transform var(--t-med) var(--ease);
+}
+.reveal--shown{ opacity:1; transform:translateY(0); }
+
+/* ==============================================================
+   Stage 1 — Intro
+   ============================================================== */
+
+#intro{
+  justify-content:center;
+  align-items:center;
 }
 
-/* ===========================================
-              Splash Screen
-=========================================== */
-#splash-screen {
-    background: var(--white);
+.intro-center{
+  text-align:center;
+  width:90%;
+  max-width:560px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
-.splash-content {
-    text-align: center;
-    width: 90%;
-    max-width: 650px;
+.intro-center .nest-wrap{ margin-bottom:1.75rem; }
+
+.intro-line{
+  font-size:1.15rem;
+  color: var(--ink-soft);
+  min-height:2.6rem;
+  max-width:440px;
+  line-height:1.5;
+  margin:2rem 0 2.25rem;
+  opacity:0;
+  transition: opacity .6s var(--ease);
+}
+.intro-line.intro-line--shown{ opacity:1; }
+
+.primary-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
+  padding:16px 32px;
+  border:none;
+  border-radius:100px;
+  background: var(--ink);
+  color: var(--parchment);
+  font-size:1rem;
+  font-weight:600;
+  cursor:pointer;
+  transition: transform var(--t-fast) var(--ease), background var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+.primary-btn svg{ transition: transform var(--t-fast) var(--ease); }
+
+.primary-btn:hover{
+  background: var(--marigold-d);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -10px rgba(169,95,42,.45);
+}
+.primary-btn:hover svg{ transform: translateX(3px); }
+.primary-btn:active{ transform: translateY(0) scale(.98); }
+
+/* ==============================================================
+   Stage 2 — Auth
+   ============================================================== */
+
+#auth{
+  justify-content:center;
+  align-items:center;
 }
 
-.logo-box {
-    width: 200px;
-    height: 200px;
-    margin: 0 auto 20px auto;
-    animation: logoFloat 4s ease-in-out infinite;
+.app-nav{
+  position:absolute;
+  top:24px;
+  left:44px;
+  display:flex;
+  align-items:center;
+  gap:.65rem;
+  z-index:5;
+}
+.nav-word{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:1.1rem;
+  color:var(--ink);
 }
 
-.logo-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+.auth-shell{
+  display:flex;
+  width:min(920px, 92vw);
+  height:min(600px, 84vh);
+  background: var(--parchment);
+  border:1px solid var(--hairline);
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow: 0 40px 80px -30px rgba(30,46,41,.2);
 }
 
-.brand-name {
-    font-size: 60px;
-    font-weight: 700;
-    color: var(--primary-blue);
-    letter-spacing: 0.5px;
-    margin-bottom: 6px;
-    animation: fadeUp 1s ease forwards;
+.auth-visual{
+  position:relative;
+  flex:0 0 38%;
+  background: var(--ink);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2rem;
+  padding:2.5rem;
+  overflow:hidden;
 }
 
-.kannada {
-    font-size: 26px;
-    font-weight: 500;
-    color: var(--accent-green);
-    margin-bottom: 20px;
-    animation: fadeUp 1.3s ease forwards;
+.auth-watermark{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-family: var(--font-kn);
+  font-weight:600;
+  font-size:9rem;
+  color: rgba(251,247,239,.05);
+  white-space:nowrap;
+  pointer-events:none;
+  user-select:none;
 }
 
-.brand-line {
-    font-size: 18px;
-    color: var(--text-muted);
-    margin-bottom: 40px;
-    animation: fadeUp 1.6s ease forwards;
+.auth-visual blockquote{
+  position:relative;
+  text-align:center;
+  max-width:260px;
+}
+.auth-visual blockquote p{
+  font-family: var(--font-display);
+  font-style:italic;
+  font-weight:500;
+  font-size:1.2rem;
+  line-height:1.5;
+  color: var(--parchment);
+}
+.auth-visual blockquote cite{
+  display:block;
+  margin-top:.75rem;
+  font-style:normal;
+  font-size:.8rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color: var(--sage-light);
 }
 
-/* ===========================================
-        Heartbeat (ECG Pulse Loader)
-=========================================== */
-.heartbeat-loader-container {
-    width: 100%;
-    max-width: 320px;
-    margin: 0 auto;
-    animation: fadeUp 2s ease forwards;
+.auth-form-panel{
+  position:relative;
+  flex:1;
+  padding:3rem 3.25rem;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
 }
 
-.heartbeat-svg {
-    width: 100%;
-    height: auto;
-    overflow: visible;
+/* Tabs */
+
+.auth-tabs{
+  position:relative;
+  display:flex;
+  gap:1.75rem;
+  border-bottom:1.5px solid var(--hairline);
+  margin-bottom:2rem;
 }
 
-.heartbeat-bg-track {
-    stroke: rgba(46, 139, 87, 0.1);
-    stroke-width: 3;
-    fill: none;
+.tab-btn{
+  background:none;
+  border:none;
+  padding:0 0 .85rem;
+  font-size:.98rem;
+  font-weight:600;
+  color: var(--ink-soft);
+  cursor:pointer;
+  transition: color var(--t-fast);
+}
+.tab-btn--active{ color: var(--ink); }
+
+.tab-indicator{
+  position:absolute;
+  bottom:-1.5px;
+  height:2px;
+  background: var(--marigold);
+  border-radius:2px;
+  transition: left var(--t-fast) var(--ease), width var(--t-fast) var(--ease);
 }
 
-.heartbeat-pulse {
-    stroke: var(--accent-green-light);
-    stroke-width: 3.5;
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: drawHeartbeat 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    filter: drop-shadow(0px 0px 5px rgba(46, 139, 87, 0.6));
+/* Forms */
+
+.auth-form{
+  display:none;
+  flex-direction:column;
+}
+.auth-form--active{
+  display:flex;
+  animation: form-fade var(--t-fast) var(--ease);
+}
+@keyframes form-fade{
+  from{ opacity:0; transform:translateY(6px); }
+  to{ opacity:1; transform:translateY(0); }
 }
 
-@keyframes drawHeartbeat {
-    0% {
-        stroke-dashoffset: 1000;
-    }
-    60%, 100% {
-        stroke-dashoffset: 0;
-    }
+.input-box{ margin-bottom:1.35rem; }
+
+.input-box label{
+  display:block;
+  font-size:.72rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color: var(--sage);
+  font-weight:600;
+  margin-bottom:.5rem;
 }
 
-.loading-text {
-    margin-top: 15px;
-    font-size: 14px;
-    color: var(--text-muted);
-    font-weight: 500;
-    letter-spacing: 0.5px;
+.input-box input{
+  width:100%;
+  padding:.5rem 2px .65rem;
+  border:none;
+  border-bottom:1.5px solid var(--hairline);
+  outline:none;
+  background:transparent;
+  font-size:1rem;
+  font-family:inherit;
+  color: var(--ink);
+  transition: border-color var(--t-fast);
+}
+.input-box input::placeholder{ color:transparent; }
+.input-box input:focus{ border-bottom-color: var(--marigold); }
+
+.form-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:1.5rem;
+  font-size:.85rem;
 }
 
-/* ===========================================
-               Auth Container
-=========================================== */
-#login-screen {
-    background: var(--bg-light);
+.checkbox-label{
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  color: var(--ink-soft);
+  cursor:pointer;
+  user-select:none;
+}
+.checkbox-label input{ position:absolute; opacity:0; width:0; height:0; }
+
+.checkbox-box{
+  width:16px;
+  height:16px;
+  border:1.5px solid var(--hairline);
+  border-radius:5px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  transition: background var(--t-fast), border-color var(--t-fast);
+  flex-shrink:0;
+}
+.checkbox-label input:checked + .checkbox-box{
+  background: var(--marigold);
+  border-color: var(--marigold);
+}
+.checkbox-label input:checked + .checkbox-box::after{
+  content:"";
+  width:4px;
+  height:8px;
+  border:solid var(--parchment);
+  border-width:0 2px 2px 0;
+  transform: rotate(45deg) translate(-1px,-1px);
 }
 
-.top-logo {
-    margin-bottom: 25px;
+.text-link{
+  background:none;
+  border:none;
+  color: var(--marigold-d);
+  font-weight:600;
+  font-size:.9rem;
+  cursor:pointer;
+  padding:0;
+}
+.text-link:hover{ text-decoration:underline; }
+.text-link--small{ font-size:.85rem; }
+
+.submit-btn{
+  width:100%;
+  margin-top:.4rem;
+  padding:15px;
+  border:none;
+  border-radius:12px;
+  background: var(--ink);
+  color: var(--parchment);
+  font-size:1rem;
+  font-weight:600;
+  cursor:pointer;
+  transition: background var(--t-fast), transform var(--t-fast);
+}
+.submit-btn:hover{ background: var(--marigold-d); }
+.submit-btn:active{ transform: scale(.98); }
+
+/* Divider + social + guest */
+
+.divider{
+  display:flex;
+  align-items:center;
+  gap:.85rem;
+  margin:1.75rem 0 1.25rem;
+  color: var(--ink-soft);
+  font-size:.78rem;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.divider::before,
+.divider::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background: var(--hairline);
 }
 
-.top-logo img {
-    width: 100px;
-    filter: drop-shadow(0 8px 16px rgba(11, 66, 117, 0.05));
+.social-row{
+  display:flex;
+  gap:.85rem;
+  margin-bottom:1.5rem;
 }
 
-.auth-card {
-    width: 100%;
-    max-width: 480px;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: var(--border-radius-lg);
-    padding: 40px;
-    box-shadow: var(--glass-shadow);
-    animation: cardUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    overflow: hidden;
+.social-btn{
+  flex:1;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  padding:11px;
+  border:1.5px solid var(--hairline);
+  border-radius:10px;
+  background:transparent;
+  font-size:.9rem;
+  font-weight:500;
+  color: var(--ink);
+  cursor:pointer;
+  transition: border-color var(--t-fast), transform var(--t-fast);
+}
+.social-btn:hover{
+  border-color: var(--sage);
+  transform: translateY(-1px);
 }
 
-/* Tab Switching Header */
-.auth-toggle-headers {
-    display: flex;
-    background: rgba(230, 240, 248, 0.6);
-    padding: 6px;
-    border-radius: 14px;
-    margin-bottom: 30px;
+#guest-btn{ text-align:center; margin:0 auto; }
+
+/* ==============================================================
+   Stage 3 — Coming Soon
+   ============================================================== */
+
+#coming-soon{
+  justify-content:center;
+  align-items:center;
 }
 
-.tab-btn {
-    flex: 1;
-    background: none;
-    border: none;
-    padding: 12px;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text-muted);
-    cursor: pointer;
-    border-radius: 10px;
-    transition: var(--transition-smooth);
+.coming-soon-center{
+  text-align:center;
+  max-width:460px;
+  padding:0 24px;
 }
 
-.tab-btn.active {
-    background: var(--white);
-    color: var(--primary-blue);
-    box-shadow: 0 4px 15px rgba(11, 66, 117, 0.05);
+.nest-illustration{
+  width:150px;
+  height:150px;
+  margin:0 auto 2rem;
+  overflow:visible;
+}
+.ring{
+  fill:none;
+  stroke-linecap:round;
+  stroke-dashoffset:100;
+  animation: draw-ring 1.6s var(--ease) forwards;
+}
+.ring--a{ stroke:var(--hairline); stroke-width:2; stroke-dasharray:8 5; animation-delay:.1s; }
+.ring--b{ stroke:var(--sage);     stroke-width:2; stroke-dasharray:100; opacity:.7; animation-delay:.3s; }
+.ring--c{ stroke:var(--marigold); stroke-width:2.6; stroke-dasharray:100; animation-delay:.5s; }
+.ring-core{
+  fill:var(--marigold);
+  opacity:0;
+  animation: core-pop .5s var(--ease) forwards .9s;
+}
+@keyframes core-pop{
+  from{ opacity:0; transform:scale(.4); }
+  to{ opacity:1; transform:scale(1); }
 }
 
-/* Form Swapping Elements */
-.form-container {
-    position: relative;
+.coming-soon-copy{
+  color: var(--ink-soft);
+  font-size:1.02rem;
+  line-height:1.65;
+  margin:1.1rem 0 2rem;
 }
 
-.auth-form {
-    transition: opacity 0.4s ease, transform 0.4s ease;
+/* ==============================================================
+   Responsive
+   ============================================================== */
+
+@media (max-width: 860px){
+  .auth-shell{ flex-direction:column; height:auto; max-height:90vh; width:94vw; }
+  .auth-visual{ flex:0 0 auto; padding:2rem 1.5rem; gap:1.25rem; }
+  .auth-watermark{ font-size:6rem; }
+  .auth-visual blockquote p{ font-size:1.05rem; }
+  .auth-form-panel{ padding:2.25rem 1.75rem; }
 }
 
-.auth-form h3 {
-    font-size: 26px;
-    color: var(--primary-blue);
-    margin-bottom: 6px;
+@media (max-width: 480px){
+  .wordmark{ font-size:2.1rem; }
+  .tagline-kn{ font-size:1rem; }
+  .intro-line{ font-size:1rem; }
+  .nest-wrap--lg{ width:110px; height:110px; }
+  .primary-btn{ padding:14px 26px; font-size:.92rem; }
+  .app-nav{ top:18px; left:20px; }
+  #brand-logo.logo--dock{ top:18px; left:20px; width:44px; height:44px; }
+  .social-row{ flex-direction:column; }
 }
 
-.form-sub {
-    font-size: 14px;
-    color: var(--text-muted);
-    margin-bottom: 25px;
-}
+/* ==============================================================
+   Reduced motion
+   ============================================================== */
 
-.hidden-form {
-    display: none;
-    opacity: 0;
-    transform: translateY(15px);
-}
-
-.active-form {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* ===========================================
-            Inputs and Custom Selects
-=========================================== */
-.input-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.input-group label {
-    display: block;
-    font-weight: 600;
-    font-size: 13px;
-    color: var(--primary-blue);
-    margin-bottom: 8px;
-    letter-spacing: 0.3px;
-    text-transform: uppercase;
-}
-
-.password-wrapper {
-    position: relative;
-}
-
-.input-group input, 
-.input-group select {
-    width: 100%;
-    padding: 14px 18px;
-    border-radius: var(--border-radius-md);
-    border: 2px solid #e1e9ef;
-    background: rgba(255, 255, 255, 0.9);
-    outline: none;
-    font-size: 15px;
-    color: var(--text-dark);
-    transition: var(--transition-smooth);
-}
-
-.input-group select {
-    cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b4275' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 18px center;
-    background-size: 15px;
-    padding-right: 45px;
-}
-
-.input-group input:focus, 
-.input-group select:focus {
-    border-color: var(--accent-green-light);
-    box-shadow: 0 0 0 5px rgba(46, 139, 87, 0.12);
-    background: var(--white);
-}
-
-.password-wrapper input {
-    padding-right: 75px;
-}
-
-.toggle-password-btn {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: var(--primary-blue-light);
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    width: auto;
-    padding: 5px;
-    transition: opacity 0.2s;
-}
-
-.toggle-password-btn:hover {
-    opacity: 0.8;
-}
-
-/* ===========================================
-               Action Mechanics
-=========================================== */
-.form-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: -10px;
-    margin-bottom: 20px;
-}
-
-.forgot-link {
-    font-size: 13px;
-    color: var(--text-muted);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s;
-}
-
-.forgot-link:hover {
-    color: var(--primary-blue);
-}
-
-/* ===========================================
-         Action Submit Button & Toast
-=========================================== */
-.submit-btn {
-    position: relative;
-    width: 100%;
-    padding: 16px;
-    border: none;
-    border-radius: var(--border-radius-md);
-    background: var(--brand-gradient);
-    color: var(--white);
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition-smooth);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 10px 25px rgba(11, 66, 117, 0.15);
-}
-
-.submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 15px 30px rgba(11, 66, 117, 0.25);
-}
-
-.submit-btn:active {
-    transform: scale(0.98);
-}
-
-.btn-loader {
-    width: 20px;
-    height: 20px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    border-top-color: var(--white);
-    animation: spin 0.8s linear infinite;
-    position: absolute;
-}
-
-.hidden {
-    display: none !important;
-}
-
-/* Pop-up Toast Notifications */
-.toast {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: var(--text-dark);
-    color: var(--white);
-    padding: 14px 28px;
-    border-radius: 30px;
-    font-size: 14px;
-    font-weight: 500;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-    z-index: 1000;
-    opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
-}
-
-.toast.show {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
-}
-
-/* ===========================================
-         Animations & Microinteractions
-=========================================== */
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes logoFloat {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-12px) rotate(1deg); }
-}
-
-@keyframes cardUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Responsive Scaling */
-@media(max-width: 768px) {
-    .brand-name { font-size: 44px; }
-    .kannada { font-size: 20px; }
-    .brand-line { font-size: 15px; }
-    .auth-card { width: 92%; padding: 30px; }
-    .top-logo img { width: 80px; }
+@media (prefers-reduced-motion: reduce){
+  .nest-ring, .ring, .ring-core{ animation:none; stroke-dashoffset:0; opacity:1; }
+  .nest-wrap--floating{ animation:none; }
+  .reveal{ transition:none; }
+  .stage--enter{ animation:none; }
+  .primary-btn, .primary-btn svg, .submit-btn, .nest-wrap{ transition:none; }
 }
