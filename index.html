@@ -11,7 +11,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- LINE 14: CORRECTED PATH FOR STYLE.CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,7 +27,6 @@
                 <!-- Core Logo Anchor Block -->
                 <div class="brand-anchor">
                     <div class="logo-wrapper">
-                        <!-- LINE 29: CORRECTED PATH FOR LOGO.PNG -->
                         <img src="logo.png" alt="CareNest Master Brand Silhouette" id="primary-brand-logo">
                     </div>
                     <h1 class="brand-title">CareNest</h1>
@@ -60,7 +58,6 @@
             <header class="auth-navigation-header">
                 <div class="nav-identity-block">
                     <div class="mini-logo-wrapper">
-                        <!-- LINE 63: CORRECTED PATH FOR LOGO.PNG -->
                         <img src="logo.png" alt="CareNest Ecosystem Dynamic Node">
                     </div>
                     <span class="nav-brand-text">CareNest</span>
@@ -70,50 +67,103 @@
             <!-- Centered Minimalist Authentication Core -->
             <div class="auth-workspace-body">
                 <div class="auth-card">
-                    <div class="auth-card-header">
-                        <h3>Welcome Back</h3>
-                        <p>Enter your credentials to securely access your care portal.</p>
+                    
+                    <!-- Premium Option Switcher Header -->
+                    <div class="auth-tabs">
+                        <button type="button" class="auth-tab-btn active" id="tab-signin-btn">Sign In</button>
+                        <button type="button" class="auth-tab-btn" id="tab-register-btn">Register</button>
+                        <button type="button" class="auth-tab-btn" id="tab-guest-btn">Watch as Guest</button>
                     </div>
 
-                    <form id="carenest-core-auth-form" novalidate>
-                        <!-- Username Data String Entry Node -->
-                        <div class="form-row">
-                            <label for="input-username">Username or Email</label>
-                            <input type="text" id="input-username" placeholder="Enter Username" autocomplete="username" required>
-                            <span class="validation-feedback-node" aria-live="polite"></span>
+                    <!-- CONTAINER 1: SIGN IN FORM -->
+                    <div class="auth-form-view active" id="view-signin">
+                        <div class="auth-card-header">
+                            <h3>Welcome Back</h3>
+                            <p>Enter your credentials to securely access your care portal.</p>
                         </div>
 
-                        <!-- Password Protected Hash Field Node -->
-                        <div class="form-row">
-                            <label for="input-password">Password</label>
-                            <div class="field-mask-wrapper">
-                                <input type="password" id="input-password" placeholder="Enter Password" autocomplete="current-password" required>
-                                <button type="button" class="mask-toggle-action" id="password-visibility-toggle" aria-label="Toggle password text mask visibility">Show</button>
+                        <form id="carenest-login-form" novalidate>
+                            <div class="form-row">
+                                <label for="input-username">Username or Email</label>
+                                <input type="text" id="input-username" placeholder="Enter Username" autocomplete="username" required>
+                                <span class="validation-feedback-node"></span>
                             </div>
-                            <span class="validation-feedback-node" aria-live="polite"></span>
+
+                            <div class="form-row">
+                                <label for="input-password">Password</label>
+                                <div class="field-mask-wrapper">
+                                    <input type="password" id="input-password" placeholder="Enter Password" autocomplete="current-password" required>
+                                    <button type="button" class="mask-toggle-action toggle-password-btn">Show</button>
+                                </div>
+                                <span class="validation-feedback-node"></span>
+                            </div>
+
+                            <div class="form-utilities-row">
+                                <label class="custom-checkbox-container">
+                                    <input type="checkbox" id="check-remember">
+                                    <span class="checkbox-facade"></span>
+                                    <span class="label-text">Remember Me</span>
+                                </label>
+                                <a href="#" class="recovery-anchor" id="account-recovery-trigger">Forgot Password?</a>
+                            </div>
+
+                            <button type="submit" class="auth-submit-btn">
+                                <span class="submit-btn-text">Sign In to Dashboard</span>
+                                <span class="submit-btn-spinner-node hidden"></span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- CONTAINER 2: REGISTER FORM -->
+                    <div class="auth-form-view" id="view-register">
+                        <div class="auth-card-header">
+                            <h3>Create Account</h3>
+                            <p>Join CareNest to start managing your family or clinic healthcare layout.</p>
                         </div>
 
-                        <!-- Micro Layout Utility Operations Row -->
-                        <div class="form-utilities-row">
-                            <label class="custom-checkbox-container">
-                                <input type="checkbox" id="check-remember">
-                                <span class="checkbox-facade"></span>
-                                <span class="label-text">Remember Me</span>
-                            </label>
-                            <a href="#" class="recovery-anchor" id="account-recovery-trigger">Forgot Password?</a>
+                        <form id="carenest-register-form" novalidate>
+                            <div class="form-row">
+                                <label for="reg-name">Full Name</label>
+                                <input type="text" id="reg-name" placeholder="Enter your full name" required>
+                                <span class="validation-feedback-node"></span>
+                            </div>
+
+                            <div class="form-row">
+                                <label for="reg-email">Email Address</label>
+                                <input type="email" id="reg-email" placeholder="name@example.com" autocomplete="email" required>
+                                <span class="validation-feedback-node"></span>
+                            </div>
+
+                            <div class="form-row">
+                                <label for="reg-password">Create Password</label>
+                                <div class="field-mask-wrapper">
+                                    <input type="password" id="reg-password" placeholder="At least 8 characters" autocomplete="new-password" required>
+                                    <button type="button" class="mask-toggle-action toggle-password-btn">Show</button>
+                                </div>
+                                <span class="validation-feedback-node"></span>
+                            </div>
+
+                            <button type="submit" class="auth-submit-btn">
+                                <span class="submit-btn-text">Create Free Account</span>
+                                <span class="submit-btn-spinner-node hidden"></span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- CONTAINER 3: WATCH AS GUEST VIEW -->
+                    <div class="auth-form-view" id="view-guest">
+                        <div class="auth-card-header">
+                            <h3>Continue as Guest</h3>
+                            <p>Explore CareNest workspace features in a limited sandbox demo session.</p>
                         </div>
-
-                        <!-- Submit Verification Sequence Trigger Button -->
-                        <button type="submit" class="auth-submit-btn" id="auth-submit-action">
-                            <span class="submit-btn-text">Sign In</span>
-                            <span class="submit-btn-spinner-node hidden"></span>
+                        <div class="guest-info-box">
+                            <p>✨ No account required. You will have temporary access to view the UI structures, layout systems, and clinic samples setup.</p>
+                        </div>
+                        <button type="button" class="auth-submit-btn" id="guest-submit-action">
+                            <span>Launch Guest Workspace</span>
                         </button>
+                    </div>
 
-                        <!-- Secondary Identity Vector Pathway -->
-                        <button type="button" class="auth-guest-btn" id="guest-access-trigger">
-                            <span>Continue as Guest</span>
-                        </button>
-                    </form>
                 </div>
             </div>
         </section>
@@ -142,7 +192,7 @@
                 </div>
                 <h3 class="placeholder-title">Dashboard Coming Soon</h3>
                 <p class="placeholder-subtitle">Phase 2 of your digital healthcare workspace ecosystem is currently being initialized.</p>
-                <button type="button" class="fallback-nav-btn" id="rollback-dev-trigger">Return to Login</button>
+                <button type="button" class="fallback-nav-btn" id="rollback-dev-trigger">Return to Portal</button>
             </div>
         </section>
 
@@ -151,7 +201,6 @@
     <!-- Unified Global Notification Dispatch Hub (Toast Alerts) -->
     <div id="carenest-global-toast" class="toast-hub hidden" aria-live="assertive"></div>
 
-    <!-- LINE 164: CORRECTED PATH FOR SCRIPT.JS -->
     <script src="script.js"></script>
 </body>
 </html>
