@@ -1,189 +1,184 @@
-/* ==============================================================
-   CareNest — Application Script
-   No inline JS, no inline CSS — everything lives here.
-   ============================================================== */
+// ============================================================================
+// CareNest SaaS Enterprise Core Application System Engine Layout Mechanics
+// ============================================================================
 
 document.addEventListener("DOMContentLoaded", () => {
+    
+    // Core Engine Structural DOM Traversal Target Mapping Cache
+    const appViewport = document.querySelector(".app-viewport");
+    const gateTrigger = document.getElementById("gate-trigger");
+    const narrativeFrames = document.querySelectorAll(".narrative-frame");
+    const actionGateBlock = document.querySelector(".action-gate");
+    
+    // Interactive Authentication Input Sub-Node Maps
+    const authForm = document.getElementById("carenest-core-auth-form");
+    const inputUsername = document.getElementById("input-username");
+    const inputPassword = document.getElementById("input-password");
+    const toggleMaskAction = document.getElementById("password-visibility-toggle");
+    const submitActionBtn = document.getElementById("auth-submit-action");
+    const guestAccessTrigger = document.getElementById("guest-access-trigger");
+    const rollbackDevTrigger = document.getElementById("rollback-dev-trigger");
+    
+    // Application System Global Component Anchors
+    const toastNotificationNode = document.getElementById("carenest-global-toast");
 
-  /* ------------------------------------------------------------
-     Element references
-  ------------------------------------------------------------ */
-  const body           = document.body;
+    // Runtime Engine Structural Flow Timing Configuration States
+    let currentFrameIndex = 0;
+    const narrativePresentationIntervalTime = 2500; 
 
-  const introStage      = document.getElementById("intro");
-  const authStage       = document.getElementById("auth");
-  const comingSoonStage = document.getElementById("coming-soon");
-
-  const brandLogo      = document.getElementById("brand-logo");
-  const revealWord      = document.getElementById("reveal-word");
-  const revealKn        = document.getElementById("reveal-kn");
-  const introLine       = document.getElementById("intro-line");
-  const getStartedBtn   = document.getElementById("get-started-btn");
-
-  const tabSignIn       = document.getElementById("tab-signin");
-  const tabSignUp       = document.getElementById("tab-signup");
-  const tabIndicator    = document.getElementById("tab-indicator");
-  const signInForm      = document.getElementById("signin-form");
-  const signUpForm      = document.getElementById("signup-form");
-
-  const forgotPasswordBtn = document.getElementById("forgot-password");
-  const guestBtn        = document.getElementById("guest-btn");
-  const backHomeBtn      = document.getElementById("back-home-btn");
-  const socialButtons   = document.querySelectorAll(".social-btn");
-
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  /* ------------------------------------------------------------
-     Stage switching helper
-  ------------------------------------------------------------ */
-  function showStage(stageEl, bodyClass){
-    [introStage, authStage, comingSoonStage].forEach(section => {
-      section.classList.remove("stage--active", "stage--enter");
-    });
-
-    body.classList.remove("body--auth", "body--coming-soon");
-    if (bodyClass) body.classList.add(bodyClass);
-
-    stageEl.classList.add("stage--active");
-    // trigger enter animation on next frame
-    requestAnimationFrame(() => stageEl.classList.add("stage--enter"));
-  }
-
-  /* ------------------------------------------------------------
-     Stage 1 — Intro reveal sequence
-  ------------------------------------------------------------ */
-  const sentences = [
-    "Every family deserves better healthcare.",
-    "Technology that cares as much as you do.",
-    "Built for families. Designed for care."
-  ];
-
-  function runIntroSequence(){
-    if (prefersReducedMotion){
-      revealWord.classList.add("reveal--shown");
-      revealKn.classList.add("reveal--shown");
-      introLine.textContent = sentences[sentences.length - 1];
-      introLine.classList.add("intro-line--shown");
-      getStartedBtn.classList.add("reveal--shown");
-      brandLogo.classList.add("nest-wrap--floating");
-      return;
+    // ============================================================================
+    // STAGE 1: Automated Narrative Animation Sequence Lifecycle Orchestrator
+    // ============================================================================
+    
+    function initializeNarrativeSequenceTimeline() {
+        if (currentFrameIndex < narrativeFrames.length) {
+            // Check for processing operational cycles on frame pointers
+            if (currentFrameIndex > 0) {
+                narrativeFrames[currentFrameIndex - 1].classList.remove("active-frame");
+                narrativeFrames[currentFrameIndex - 1].classList.add("exit-frame");
+            }
+            
+            narrativeFrames[currentFrameIndex].classList.add("active-frame");
+            currentFrameIndex++;
+            
+            // Loop evaluation steps until maximum limit thresholds reached
+            setTimeout(initializeNarrativeSequenceTimeline, narrativePresentationIntervalTime);
+        } else {
+            // Gracefully terminate the textual frame rotation stack
+            if (narrativeFrames.length > 0) {
+                narrativeFrames[narrativeFrames.length - 1].classList.remove("active-frame");
+                narrativeFrames[narrativeFrames.length - 1].classList.add("exit-frame");
+            }
+            
+            // Render call to action interface element visible
+            setTimeout(() => {
+                actionGateBlock.classList.add("visible-gate");
+            }, 300);
+        }
     }
 
-    const timers = [];
+    // Execute sequence mapping pipeline exactly after a 500ms startup threshold latency delay
+    setTimeout(initializeNarrativeSequenceTimeline, 500);
 
-    timers.push(setTimeout(() => revealWord.classList.add("reveal--shown"), 600));
-    timers.push(setTimeout(() => revealKn.classList.add("reveal--shown"), 1200));
-    timers.push(setTimeout(() => brandLogo.classList.add("nest-wrap--floating"), 1200));
-
-    let cursor = 2400;
-    const holdTime = 1500;
-    const fadeTime = 600;
-
-    sentences.forEach((sentence) => {
-      const showAt = cursor;
-      const hideAt = showAt + fadeTime + holdTime;
-
-      timers.push(setTimeout(() => {
-        introLine.textContent = sentence;
-        introLine.classList.add("intro-line--shown");
-      }, showAt));
-
-      timers.push(setTimeout(() => {
-        introLine.classList.remove("intro-line--shown");
-      }, hideAt));
-
-      cursor = hideAt + fadeTime;
+    // ============================================================================
+    // STAGE 2: Interactive Interface State Machine Transition Maps
+    // ============================================================================
+    
+    gateTrigger.addEventListener("click", () => {
+        // Execute modern state routing variable shifts triggering hardware acceleration curves
+        appViewport.setAttribute("data-state", "auth");
     });
 
-    timers.push(setTimeout(() => {
-      getStartedBtn.classList.add("reveal--shown");
-    }, cursor + 200));
-  }
-
-  runIntroSequence();
-
-  /* ------------------------------------------------------------
-     Intro → Auth (logo docks into nav position, card slides up)
-  ------------------------------------------------------------ */
-  getStartedBtn.addEventListener("click", () => {
-    brandLogo.classList.remove("nest-wrap--floating");
-    brandLogo.classList.add("logo--dock");
-
-    const dockDelay = prefersReducedMotion ? 0 : 550;
-
-    setTimeout(() => {
-      showStage(authStage, "body--auth");
-      brandLogo.classList.remove("logo--dock");
-    }, dockDelay);
-  });
-
-  /* ------------------------------------------------------------
-     Auth tabs — Sign In / Sign Up with sliding indicator
-  ------------------------------------------------------------ */
-  function positionIndicator(tabEl){
-    tabIndicator.style.width = `${tabEl.offsetWidth}px`;
-    tabIndicator.style.left  = `${tabEl.offsetLeft}px`;
-  }
-
-  function activateTab(name){
-    const isSignIn = name === "signin";
-
-    tabSignIn.classList.toggle("tab-btn--active", isSignIn);
-    tabSignUp.classList.toggle("tab-btn--active", !isSignIn);
-    tabSignIn.setAttribute("aria-selected", String(isSignIn));
-    tabSignUp.setAttribute("aria-selected", String(!isSignIn));
-
-    signInForm.classList.toggle("auth-form--active", isSignIn);
-    signUpForm.classList.toggle("auth-form--active", !isSignIn);
-
-    positionIndicator(isSignIn ? tabSignIn : tabSignUp);
-  }
-
-  tabSignIn.addEventListener("click", () => activateTab("signin"));
-  tabSignUp.addEventListener("click", () => activateTab("signup"));
-
-  // position indicator once layout is ready and on resize
-  window.addEventListener("load", () => positionIndicator(tabSignIn));
-  window.addEventListener("resize", () => {
-    const active = tabSignIn.classList.contains("tab-btn--active") ? tabSignIn : tabSignUp;
-    positionIndicator(active);
-  });
-
-  /* ------------------------------------------------------------
-     Auth → Coming Soon
-  ------------------------------------------------------------ */
-  function goToComingSoon(){
-    showStage(comingSoonStage, "body--coming-soon");
-  }
-
-  signInForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    goToComingSoon();
-  });
-
-  signUpForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    goToComingSoon();
-  });
-
-  guestBtn.addEventListener("click", goToComingSoon);
-
-  socialButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const provider = btn.dataset.provider;
-      window.alert(`${provider} sign-in will be available in a future update.`);
+    // ============================================================================
+    // STAGE 3: Form Validations & Operational UI Feedback Flows
+    // ============================================================================
+    
+    // Form Input Mask Security State Controller
+    toggleMaskAction.addEventListener("click", () => {
+        const activeMaskStateType = inputPassword.getAttribute("type") === "password";
+        inputPassword.setAttribute("type", activeMaskStateType ? "text" : "password");
+        toggleMaskAction.textContent = activeMaskStateType ? "Hide" : "Show";
     });
-  });
 
-  forgotPasswordBtn.addEventListener("click", () => {
-    window.alert("Password recovery is coming soon. Please contact your clinic administrator for now.");
-  });
+    // Integrated Toast Event System Dispatch Interface Component
+    function dispatchToastAlertNotification(notificationStringMessage) {
+        toastNotificationNode.textContent = notificationStringMessage;
+        toastNotificationNode.classList.remove("hidden");
+        
+        // Force rendering architecture calculation layout invalidation to cycle animations
+        toastNotificationNode.offsetHeight;
+        toastNotificationNode.classList.add("toast-active");
 
-  /* ------------------------------------------------------------
-     Coming Soon → back to Intro
-  ------------------------------------------------------------ */
-  backHomeBtn.addEventListener("click", () => {
-    showStage(introStage, null);
-  });
+        setTimeout(() => {
+            toastNotificationNode.classList.remove("toast-active");
+            setTimeout(() => {
+                toastNotificationNode.classList.add("hidden");
+            }, 300);
+        }, 4000);
+    }
 
+    // High Fidelity Clear Validation Mechanics Node Reset Function
+    function clearFieldValidationInvalidationStatus(targetInputNodeFrame) {
+        const targetedParentRowNodeContainer = targetInputNodeFrame.closest(".form-row");
+        if (targetedParentRowNodeContainer) {
+            targetedParentRowNodeContainer.classList.remove("invalid-node");
+            const feedbackTextNode = targetedParentRowNodeContainer.querySelector(".validation-feedback-node");
+            if (feedbackTextNode) feedbackTextNode.textContent = "";
+        }
+    }
+
+    // Structural Form Field Validity Evaluation Check Block Rule
+    function executeFormFieldValidityInspection(targetInputNodeFrame, validationFailureAlertString) {
+        const targetedParentRowNodeContainer = targetInputNodeFrame.closest(".form-row");
+        if (!targetInputNodeFrame.value.trim()) {
+            if (targetedParentRowNodeContainer) {
+                targetedParentRowNodeContainer.classList.add("invalid-node");
+                const feedbackTextNode = targetedParentRowNodeContainer.querySelector(".validation-feedback-node");
+                if (feedbackTextNode) feedbackTextNode.textContent = validationFailureAlertString;
+            }
+            return false;
+        }
+        clearFieldValidationInvalidationStatus(targetInputNodeFrame);
+        return true;
+    }
+
+    // Real-Time Interactivity Form Field Typing Focus Events Listeners 
+    inputUsername.addEventListener("input", () => clearFieldValidationInvalidationStatus(inputUsername));
+    inputPassword.addEventListener("input", () => clearFieldValidationInvalidationStatus(inputPassword));
+
+    // Form Submission Integration Authentication Verification Router
+    authForm.addEventListener("submit", (submitEventCapturedToken) => {
+        submitEventCapturedToken.preventDefault();
+        
+        // Form field analytical checkpoint sequence loops
+        const usernameVerificationPassStatus = executeFormFieldValidityInspection(inputUsername, "Username or registered email address string is required.");
+        const passwordVerificationPassStatus = executeFormFieldValidityInspection(inputPassword, "Account verification security access hash password string is required.");
+
+        if (!usernameVerificationPassStatus || !passwordVerificationPassStatus) {
+            dispatchToastAlertNotification("Please resolve validation errors before continuing.");
+            return;
+        }
+
+        // Toggle interactive states across processing run loops
+        const interfaceLabelButtonTextNode = submitActionBtn.querySelector(".submit-btn-text");
+        const interfaceSpinnerLoadingNode = submitActionBtn.querySelector(".submit-btn-spinner-node");
+
+        interfaceLabelButtonTextNode.classList.add("hidden");
+        interfaceSpinnerLoadingNode.classList.remove("hidden");
+        interfaceSpinnerLoadingNode.classList.add("btn-loader");
+        submitActionBtn.disabled = true;
+
+        // Mock enterprise API payload network operational dispatch delay
+        setTimeout(() => {
+            // Restore structural interface execution capabilities
+            interfaceLabelButtonTextNode.classList.remove("hidden");
+            interfaceSpinnerLoadingNode.classList.add("hidden");
+            interfaceSpinnerLoadingNode.classList.remove("btn-loader");
+            submitActionBtn.disabled = false;
+            
+            dispatchToastAlertNotification("Authentication verified. Loading secure workspace environment...");
+            
+            // Advance system workflow state parameters cleanly directly into phase 2 component layout paths
+            setTimeout(() => {
+                appViewport.setAttribute("data-state", "placeholder");
+                authForm.reset();
+                toggleMaskAction.textContent = "Show";
+                inputPassword.setAttribute("type", "password");
+            }, 1000);
+
+        }, 2000);
+    });
+
+    // Secondary Ecosystem Access Interface Routing Channels
+    guestAccessTrigger.addEventListener("click", () => {
+        dispatchToastAlertNotification("Initializing sandbox configuration access privileges...");
+        setTimeout(() => {
+            appViewport.setAttribute("data-state", "placeholder");
+        }, 800);
+    });
+
+    // Interface Fallback Recovery Operational Route Methods Map 
+    rollbackDevTrigger.addEventListener("click", () => {
+        appViewport.setAttribute("data-state", "auth");
+    });
 });
